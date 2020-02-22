@@ -366,7 +366,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectToFollow: {fileID: 1032204436}
-  cameraSpeed: 0.01
+  cameraSpeed: 0.02
   cameraGap: {x: 0.02, y: 0.02}
 --- !u!1 &1032204436
 GameObject:
@@ -404,7 +404,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jumpForce: 250
   moveSpeed: 500
-  gravityMultiplyer: 2
+  maxMoveSpeed: 1000
+  gravityMultiplyer: 1.5
   layer:
     serializedVersion: 2
     m_Bits: 256
@@ -521,7 +522,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 701214024}
-  recoilForce: 200
+  recoilForce: 500
 --- !u!70 &1032204443
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

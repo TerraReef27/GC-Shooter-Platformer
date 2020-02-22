@@ -4,12 +4,13 @@ public class PlayerMovement : MonoBehaviour
 {
     private Rigidbody2D rb = null;
 
-    private Vector3 movement; //The direction the player is inputing
+    private Vector2 movement; //The direction the player is inputing
 
     [Tooltip("Amount of force to the object's jump")]
     [SerializeField] private float jumpForce = 10f;
     [Tooltip("Amount of force for object's input movement")]
     [SerializeField] private float moveSpeed = 5f;
+    [SerializeField] private float maxMoveSpeed = 10f;
     [Tooltip("How much the gravity is multiplied by when the object is falling")]
     [SerializeField] private float gravityMultiplyer = 2.5f;
     private float baseGravity;
@@ -53,21 +54,25 @@ public class PlayerMovement : MonoBehaviour
             //Possibly change to simply adjust rigidbody's gravity
             //rb.AddForce(Vector2.up * Physics2D.gravity.y * (gravityMultiplyer - 1) * Time.fixedDeltaTime);
             //rb.gravityScale = gravityMultiplyer;
-            gravityMultiplyer *= 2f;
+            rb.gravityScale = gravityMultiplyer;
         }
         else
             rb.gravityScale = baseGravity;
 
         //possible new move system
+        //if(movement != Vector3.zero)
         //rb.MovePosition(transform.position + movement * moveSpeed * Time.fixedDeltaTime);
 
         //rb.AddForce(-transform.up * gravityMultiplyer);
 
-        
+        Vector2 moveTo = new Vector2(Mathf.Clamp(movement.normalized.x * moveSpeed, -maxMoveSpeed, maxMoveSpeed), 0);
         if(isGounded)
-            rb.AddForce(movement.normalized * moveSpeed * Time.fixedDeltaTime); //Applies a force relative to the world coordinates in the direction of the current input
+
+            //rb.AddForce(movement.normalized * moveSpeed * Time.fixedDeltaTime); //Applies a force relative to the world coordinates in the direction of the current input
+            rb.AddForce(moveTo* Time.fixedDeltaTime);
         else
             rb.AddForce(movement.normalized * moveSpeed * airSpeedMultiplier * Time.fixedDeltaTime); //If in the air, limit mobility
+            
     }
 
     private void Jump()

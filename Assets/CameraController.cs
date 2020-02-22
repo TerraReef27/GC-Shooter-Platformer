@@ -24,12 +24,8 @@ public class CameraController : MonoBehaviour
         if (objectToFollow != null)
         {
             moveTo = objectToFollow.transform.position - transform.position; //Gets the direction that the camera should move towards
-            if (moveTo.x > cameraGap.x || moveTo.x < -cameraGap.x)  //Checks if the objectToFollow is outside of the follow range. If it is, the camera will begin to follow the object relative to the cameraSpeed
-                if (moveTo.y > cameraGap.y || moveTo.y < -cameraGap.y)
-                {
-                    transform.position += new Vector3(moveTo.x, moveTo.y) * cameraSpeed;
-                }
-                    
+            if (moveTo.x > cameraGap.x || moveTo.x < -cameraGap.x || moveTo.y > cameraGap.y || moveTo.y < -cameraGap.y)  //Checks if the objectToFollow is outside of the follow range. If it is, the camera will begin to follow the object relative to the cameraSpeed
+                transform.position += new Vector3(moveTo.x, moveTo.y) * cameraSpeed;   
         }
     }
 }
