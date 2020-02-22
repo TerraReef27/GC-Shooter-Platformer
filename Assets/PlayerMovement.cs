@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float jumpForce = 10f;
     [Tooltip("Amount of force for object's input movement")]
     [SerializeField] private float moveSpeed = 5f;
+    [Tooltip("The maximum force that the object can achive using inputs")]
     [SerializeField] private float maxMoveSpeed = 10f;
     [Tooltip("How much the gravity is multiplied by when the object is falling")]
     [SerializeField] private float gravityMultiplyer = 2.5f;
@@ -50,26 +51,14 @@ public class PlayerMovement : MonoBehaviour
         isGounded = Physics2D.OverlapArea(new Vector2(transform.position.x - .3f, transform.position.y - .5f), new Vector2(transform.position.x + .3f, transform.position.y - .5f - groundCheckSize), layer);
 
         if (rb.velocity.y < 0) //Checks if the player is falling. If they are, increase they speed at which they fall for a smoother feel
-        {
-            //Possibly change to simply adjust rigidbody's gravity
-            //rb.AddForce(Vector2.up * Physics2D.gravity.y * (gravityMultiplyer - 1) * Time.fixedDeltaTime);
-            //rb.gravityScale = gravityMultiplyer;
             rb.gravityScale = gravityMultiplyer;
-        }
         else
             rb.gravityScale = baseGravity;
 
-        //possible new move system
-        //if(movement != Vector3.zero)
-        //rb.MovePosition(transform.position + movement * moveSpeed * Time.fixedDeltaTime);
-
-        //rb.AddForce(-transform.up * gravityMultiplyer);
-
-        Vector2 moveTo = new Vector2(Mathf.Clamp(movement.normalized.x * moveSpeed, -maxMoveSpeed, maxMoveSpeed), 0);
+        rb.drag = moveSpeed / maxMoveSpeed; //Adds drag to the rigidbody so that it will not grow exponetially fast
         if(isGounded)
 
-            //rb.AddForce(movement.normalized * moveSpeed * Time.fixedDeltaTime); //Applies a force relative to the world coordinates in the direction of the current input
-            rb.AddForce(moveTo* Time.fixedDeltaTime);
+            rb.AddForce(movement.normalized * moveSpeed * Time.fixedDeltaTime); //Applies a force relative to the world coordinates in the direction of the current input
         else
             rb.AddForce(movement.normalized * moveSpeed * airSpeedMultiplier * Time.fixedDeltaTime); //If in the air, limit mobility
             
