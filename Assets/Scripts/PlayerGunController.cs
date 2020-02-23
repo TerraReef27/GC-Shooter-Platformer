@@ -21,12 +21,17 @@ public class PlayerGunController : MonoBehaviour
     {
         mousePos = cam.ScreenToWorldPoint(Input.mousePosition); //Gets the mouse position relative to world space
 
-        if(Input.GetButtonDown("Fire1") && gun != null) //Gets the mouse postion and adds a force to the player in the opposite direction of the mouse relative to the player. Amount of force is determined by the recoilForce
+        if(Input.GetButtonDown("Fire1") && gun != null && gun.CurrentClip > 0) //Gets the mouse postion and adds a force to the player in the opposite direction of the mouse relative to the player. Amount of force is determined by the recoilForce
         {
             Debug.DrawLine(transform.position, mousePos, Color.red, 1f);
             Vector2 forceTo = new Vector2(transform.position.x - mousePos.x, transform.position.y - mousePos.y);
             rb.AddRelativeForce(forceTo.normalized * gun.RecoilForce);
             gun.Shoot();
+        }
+
+        if(Input.GetKeyDown(KeyCode.R))
+        {
+            gun.Reload();
         }
     }
 }

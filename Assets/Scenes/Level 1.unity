@@ -223,6 +223,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetObject: {fileID: 1032204436}
+  objectGun: {fileID: 706556293}
 --- !u!4 &281648486
 Transform:
   m_ObjectHideFlags: 0
@@ -411,8 +412,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6bcf8870c403164eab1f68e1fe3f20b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxAmmo: 1
+  maxAmmo: 12
+  clipSize: 6
   recoilForce: 300
+  gunName: Revolver
 --- !u!1 &1032204436
 GameObject:
   m_ObjectHideFlags: 0
@@ -447,7 +450,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d377027139216d438592cadd789ca33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpForce: 250
+  jumpForce: 3
   moveSpeed: 500
   maxMoveSpeed: 1000
   gravityMultiplyer: 1.5

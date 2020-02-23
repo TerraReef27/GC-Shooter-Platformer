@@ -6,8 +6,8 @@ public class PlayerMovement : MonoBehaviour
 
     private Vector2 movement; //The direction the player is inputing
 
-    [Tooltip("Amount of force to the object's jump")]
-    [SerializeField] private float jumpForce = 10f;
+    [Tooltip("Amount of velocity to the object's jump")]
+    [SerializeField] private float jumpVelocity = 10f;
     [Tooltip("Amount of force for object's input movement")]
     [SerializeField] private float moveSpeed = 5f;
     [Tooltip("The maximum force that the object can achive using inputs")]
@@ -25,6 +25,11 @@ public class PlayerMovement : MonoBehaviour
     [Tooltip("The amout the the object's input control is multiplied by in the air")]
     [SerializeField] private float airSpeedMultiplier = .5f;
 
+    private bool inJump = false; //Check to see if the player is jumping or not
+    [Tooltip("The time that the player can get extra height on their jump")]
+    [SerializeField] private float extraJumpTime = .2f;
+    private float currentJumpTime = .2f; //Time to check for extra height while jumping
+
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -39,10 +44,7 @@ public class PlayerMovement : MonoBehaviour
     {
         movement = new Vector2(Input.GetAxisRaw("Horizontal"), 0); //Set the movement vector to the horizontal inputs
 
-        if (Input.GetButtonDown("Jump") && isGounded)
-        {
-            Jump();
-        }
+        HandleJumping();
     }
 
     void FixedUpdate()
@@ -64,8 +66,27 @@ public class PlayerMovement : MonoBehaviour
             
     }
 
-    private void Jump()
+    private void HandleJumping()
     {
-        rb.AddForce(Vector2.up * jumpForce); //Makes the player jump directly up. Jump height is relative to the jumpForce value
+        //LEGACY (here for safe keeping): rb.AddForce(Vector2.up * jumpForce); //Makes the player jump directly up. Jump height is relative to the jumpForce value
+
+        if (Input.GetButtonDown("Jump") && isGounded) //Applyes velocity once the jump button is pressed. Also prepares for the rest of the method with booleans
+        {
+            rb.velocity += Vector2.up * jumpVelocity;
+            inJump = true;
+            currentJumpTime = extraJumpTime;
+            Debug.Log("Pressed button");
+        }
+        if (Input.GetButton("Jump") && inJump) //If the jump button is held, the player will jump higher. The player can jump as high as the the extraJumpTime var allows
+        {
+            Debug.Log("Holding button");
+            if (currentJumpTime > 0)
+            {
+                rb.velocity += Vector2.up * jumpVelocity;
+                currentJumpTime -= Time.deltaTime;
+            }
+            else
+                inJump = false;
+        }
     }
 }

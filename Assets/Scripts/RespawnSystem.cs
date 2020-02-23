@@ -6,6 +6,8 @@ public class RespawnSystem : MonoBehaviour
     [Tooltip("The object to respawn when called")]
     [SerializeField] GameObject targetObject;
 
+    [SerializeField] private Gun objectGun; //TODO implement a better system for this
+
     void Start()
     {
         baseRespawnPoint = targetObject.transform.position;
@@ -15,6 +17,7 @@ public class RespawnSystem : MonoBehaviour
     public void Respawn()
     {
         targetObject.transform.position = baseRespawnPoint;
+        objectGun.RefillAmmo(); //TODO implement a better system for this
     }
     //Respawns the object at the designated position
     public void Respawn(Vector3 respawnPosition)
