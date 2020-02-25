@@ -18,9 +18,11 @@ public class PlayerMovement : MonoBehaviour
 
     [Tooltip("The layermask that the object will recognize as ground")]
     [SerializeField] LayerMask layer;
-    private bool isGounded;
+    private bool isGrounded; //Boolean to check if the object is touching the ground
     [Tooltip("The size of the box below the object that checks if it is touching the ground")]
     [SerializeField] private float groundCheckSize = 1f;
+    [Tooltip("The amount less than the sprite that the ground check will register. Reduce to prevent jumping up walls")]
+    [SerializeField] private float groundCheckXSizeReduction = .3f;
 
     [Tooltip("The amout the the object's input control is multiplied by in the air")]
     [SerializeField] private float airSpeedMultiplier = .5f;
@@ -63,7 +65,7 @@ public class PlayerMovement : MonoBehaviour
     void FixedUpdate()
     {
         //Check if the player is touching the ground. The surface it is overlaping must be on the "Ground" layer mask layer
-        isGounded = Physics2D.OverlapArea(new Vector2(transform.position.x - .3f, transform.position.y - .5f), new Vector2(transform.position.x + .3f, transform.position.y - .5f - groundCheckSize), layer);
+        isGrounded = Physics2D.OverlapArea(new Vector2(transform.position.x - .5f + groundCheckXSizeReduction, transform.position.y - .5f), new Vector2(transform.position.x + .5f - groundCheckXSizeReduction, transform.position.y - .5f - groundCheckSize), layer);
 
         if (rb.velocity.y < 0) //Checks if the player is falling. If they are, increase they speed at which they fall for a smoother feel
             rb.gravityScale = gravityMultiplyer;
@@ -71,7 +73,7 @@ public class PlayerMovement : MonoBehaviour
             rb.gravityScale = baseGravity;
 
         rb.drag = moveSpeed / maxMoveSpeed; //Adds drag to the rigidbody so that it will not grow exponetially fast
-        if(isGounded)
+        if(isGrounded)
 
             rb.AddForce(movement.normalized * moveSpeed * Time.fixedDeltaTime); //Applies a force relative to the world coordinates in the direction of the current input
         else
@@ -83,7 +85,7 @@ public class PlayerMovement : MonoBehaviour
     {
         //LEGACY (here for safe keeping): rb.AddForce(Vector2.up * jumpForce); //Makes the player jump directly up. Jump height is relative to the jumpForce value
 
-        if (Input.GetButtonDown("Jump") && isGounded) //Applyes velocity once the jump button is pressed. Also prepares for the rest of the method with booleans
+        if (Input.GetButtonDown("Jump") && isGrounded) //Applyes velocity once the jump button is pressed. Also prepares for the rest of the method with booleans
         {
             rb.velocity += Vector2.up * jumpVelocity;
             inJump = true;
