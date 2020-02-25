@@ -7,7 +7,7 @@ public class PlayerGunController : MonoBehaviour
     private Rigidbody2D rb;
 
     [Tooltip("The gun the object is to use")]
-    [SerializeField] private Gun gun;
+    [SerializeField] private Gun gun = null;
 
     private RespawnSystem respawn = null; //Reference to the respawn system in the scene
 

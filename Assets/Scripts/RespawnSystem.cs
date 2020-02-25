@@ -5,7 +5,7 @@ public class RespawnSystem : MonoBehaviour
 {
     private Vector3 baseRespawnPoint;
     [Tooltip("The object to respawn when called")]
-    [SerializeField] GameObject targetObject;
+    [SerializeField] GameObject targetObject = null;
     
     public event OnPlayerRespawnDelegate OnPlayerRespawn; //Create an event for when the player dies
     public delegate void OnPlayerRespawnDelegate(Vector3 respawnPos); //Delegate to pass on respawn information

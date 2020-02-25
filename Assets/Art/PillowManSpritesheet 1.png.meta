@@ -1,13 +1,19 @@
 fileFormatVersion: 2
-guid: b4594336dabf34f43bb86db808a0cf21
+guid: a5b73235ac74b4f46bf77e014c633883
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7633966619175009477
-    second: PillowManSpritesheet_0
+      213: -6511191613511718198
+    second: PillowManSpritesheet 1_0
   - first:
-      213: -5397488573632530913
-    second: PillowManSpritesheet_1
+      213: -3763164038382262876
+    second: PillowManSpritesheet 1_1
+  - first:
+      213: -405065238907596243
+    second: PillowManSpritesheet 1_2
+  - first:
+      213: -516926893741002478
+    second: PillowManSpritesheet 1_3
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -116,7 +122,49 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: PillowManSpritesheet_0
+      name: PillowManSpritesheet 1_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: acaa12ca9b993a5a0800000000000000
+      internalID: -6511191613511718198
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PillowManSpritesheet 1_1
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4a563b4ce3e86cbc0800000000000000
+      internalID: -3763164038382262876
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PillowManSpritesheet 1_2
       rect:
         serializedVersion: 2
         x: 0
@@ -130,14 +178,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b3342ec6ec3be0690800000000000000
-      internalID: -7633966619175009477
+      spriteID: d22dd04bf4be06af0800000000000000
+      internalID: -405065238907596243
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PillowManSpritesheet_1
+      name: PillowManSpritesheet 1_3
       rect:
         serializedVersion: 2
         x: 16
@@ -151,8 +199,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f1637694db44815b0800000000000000
-      internalID: -5397488573632530913
+      spriteID: 211b8bb9ab183d8f0800000000000000
+      internalID: -516926893741002478
       vertices: []
       indices: 
       edges: []

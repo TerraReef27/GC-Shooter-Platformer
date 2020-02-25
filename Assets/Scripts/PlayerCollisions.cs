@@ -4,7 +4,7 @@ public class PlayerCollisions : MonoBehaviour
 {
     BoxCollider2D bCollider;
     [Tooltip("The respawn system to call when colliding")]
-    [SerializeField] RespawnSystem respawner;
+    [SerializeField] RespawnSystem respawner = null;
 
     void Awake()
     {

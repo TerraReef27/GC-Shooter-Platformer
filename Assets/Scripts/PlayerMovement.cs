@@ -34,11 +34,15 @@ public class PlayerMovement : MonoBehaviour
 
     private RespawnSystem respawn = null; //Reference to the respawn system in the scene
 
+    private Animator animator = null; //TODO place elsewhere
+
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         respawn = FindObjectOfType<RespawnSystem>();
         respawn.OnPlayerRespawn += Respawn_OnPlayerRespawn; ; //Subscribe object to the OnPlayerRespawn event
+
+        animator = GetComponent<Animator>();//TODO place elsewhere
     }
 
     private void Respawn_OnPlayerRespawn(Vector3 respawnPos) //Sets position to respawn point and velocity to 0
@@ -55,6 +59,8 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         movement = new Vector2(Input.GetAxisRaw("Horizontal"), 0); //Set the movement vector to the horizontal inputs
+
+        animator.SetFloat("horizontalMove", movement.x); //TODO place elsewhere
 
         HandleJumping();
 
