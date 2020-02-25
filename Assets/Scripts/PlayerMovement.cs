@@ -30,9 +30,19 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float extraJumpTime = .2f;
     private float currentJumpTime = .2f; //Time to check for extra height while jumping
 
+    private RespawnSystem respawn = null; //Reference to the respawn system in the scene
+
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        respawn = FindObjectOfType<RespawnSystem>();
+        respawn.OnPlayerRespawn += Respawn_OnPlayerRespawn; ; //Subscribe object to the OnPlayerRespawn event
+    }
+
+    private void Respawn_OnPlayerRespawn(Vector3 respawnPos) //Sets position to respawn point and velocity to 0
+    {
+        transform.position = respawnPos;
+        rb.velocity = Vector2.zero;
     }
 
     void Start()
@@ -45,6 +55,9 @@ public class PlayerMovement : MonoBehaviour
         movement = new Vector2(Input.GetAxisRaw("Horizontal"), 0); //Set the movement vector to the horizontal inputs
 
         HandleJumping();
+
+        if (Input.GetKeyDown(KeyCode.Q))
+            respawn.Respawn();
     }
 
     void FixedUpdate()
@@ -75,11 +88,9 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity += Vector2.up * jumpVelocity;
             inJump = true;
             currentJumpTime = extraJumpTime;
-            Debug.Log("Pressed button");
         }
         if (Input.GetButton("Jump") && inJump) //If the jump button is held, the player will jump higher. The player can jump as high as the the extraJumpTime var allows
         {
-            Debug.Log("Holding button");
             if (currentJumpTime > 0)
             {
                 rb.velocity += Vector2.up * jumpVelocity;

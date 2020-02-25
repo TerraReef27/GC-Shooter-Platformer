@@ -9,14 +9,21 @@ public class PlayerGunController : MonoBehaviour
     [Tooltip("The gun the object is to use")]
     [SerializeField] private Gun gun;
 
+    private RespawnSystem respawn = null; //Reference to the respawn system in the scene
+
     void Awake()
     {
-        if (cam == null)
-            cam = FindObjectOfType<Camera>();
-        if (rb == null)
-            rb = GetComponent<Rigidbody2D>();
+        if (cam == null) cam = FindObjectOfType<Camera>();
+        if (rb == null) rb = GetComponent<Rigidbody2D>();
+        if(respawn == null) respawn = FindObjectOfType<RespawnSystem>();
+        respawn.OnPlayerRespawn += Respawn_OnPlayerRespawn;
     }
-    
+
+    private void Respawn_OnPlayerRespawn(Vector3 respawnPos) //Called when player dies
+    {
+        gun.RefillAmmo();
+    }
+
     void Update()
     {
         mousePos = cam.ScreenToWorldPoint(Input.mousePosition); //Gets the mouse position relative to world space
@@ -29,7 +36,7 @@ public class PlayerGunController : MonoBehaviour
             gun.Shoot();
         }
 
-        if(Input.GetKeyDown(KeyCode.R))
+        if(Input.GetKeyDown(KeyCode.R)) //For reloading gun
         {
             gun.Reload();
         }
