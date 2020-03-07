@@ -3,13 +3,16 @@
 public class PlayerGunController : MonoBehaviour
 {
     [SerializeField] Camera cam;
-    private Vector2 mousePos;
+    private Vector3 mousePos;
     private Rigidbody2D rb;
 
     [Tooltip("The gun the object is to use")]
     [SerializeField] private Gun gun = null;
 
     private RespawnSystem respawn = null; //Reference to the respawn system in the scene
+    private PlayerMovement playerMove = null; //Reference to the playerMovement script
+
+    private float angle = 0f;
 
     void Awake()
     {
@@ -17,6 +20,7 @@ public class PlayerGunController : MonoBehaviour
         if (rb == null) rb = GetComponent<Rigidbody2D>();
         if(respawn == null) respawn = FindObjectOfType<RespawnSystem>();
         respawn.OnPlayerRespawn += Respawn_OnPlayerRespawn;
+        playerMove = GetComponent<PlayerMovement>();
     }
 
     private void Respawn_OnPlayerRespawn(Vector3 respawnPos) //Called when player dies
@@ -36,9 +40,14 @@ public class PlayerGunController : MonoBehaviour
             gun.Shoot();
         }
 
-        if(Input.GetKeyDown(KeyCode.R)) //For reloading gun
+        if(Input.GetKeyDown(KeyCode.R) && playerMove.IsGrounded) //For reloading gun
         {
             gun.Reload();
         }
+        /*
+        Vector3 facing = mousePos - transform.position;
+        angle = Mathf.Atan2(facing.y, facing.x) * Mathf.Rad2Deg - 90f;
+        gun.transform.rotation = Quaternion.Euler(0, 0, angle);
+        */
     }
 }

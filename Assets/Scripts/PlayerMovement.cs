@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
 
+[DisallowMultipleComponent]
 public class PlayerMovement : MonoBehaviour
 {
     private Rigidbody2D rb = null;
 
     private Vector2 movement; //The direction the player is inputing
+    public Vector2 Movement { get { return movement; } private set { movement = value; } }
 
     [Tooltip("Amount of velocity to the object's jump")]
     [SerializeField] private float jumpVelocity = 10f;
@@ -19,6 +21,7 @@ public class PlayerMovement : MonoBehaviour
     [Tooltip("The layermask that the object will recognize as ground")]
     [SerializeField] LayerMask layer;
     private bool isGrounded; //Boolean to check if the object is touching the ground
+    public bool IsGrounded { get; }
     [Tooltip("The size of the box below the object that checks if it is touching the ground")]
     [SerializeField] private float groundCheckSize = 1f;
     [Tooltip("The amount less than the sprite that the ground check will register. Reduce to prevent jumping up walls")]
@@ -34,15 +37,14 @@ public class PlayerMovement : MonoBehaviour
 
     private RespawnSystem respawn = null; //Reference to the respawn system in the scene
 
-    private Animator animator = null; //TODO place elsewhere
+    [SerializeField] PhysicsMaterial2D playerPhysMaterial = null;
 
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         respawn = FindObjectOfType<RespawnSystem>();
-        respawn.OnPlayerRespawn += Respawn_OnPlayerRespawn; ; //Subscribe object to the OnPlayerRespawn event
-
-        animator = GetComponent<Animator>();//TODO place elsewhere
+        playerPhysMaterial = GetComponent<BoxCollider2D>().sharedMaterial;
+        respawn.OnPlayerRespawn += Respawn_OnPlayerRespawn; //Subscribe object to the OnPlayerRespawn event
     }
 
     private void Respawn_OnPlayerRespawn(Vector3 respawnPos) //Sets position to respawn point and velocity to 0
@@ -59,10 +61,8 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         movement = new Vector2(Input.GetAxisRaw("Horizontal"), 0); //Set the movement vector to the horizontal inputs
-
-        animator.SetFloat("horizontalMove", movement.x); //TODO place elsewhere
-
         HandleJumping();
+        HandleSlide();
 
         if (Input.GetKeyDown(KeyCode.Q))
             respawn.Respawn();
@@ -80,7 +80,6 @@ public class PlayerMovement : MonoBehaviour
 
         rb.drag = moveSpeed / maxMoveSpeed; //Adds drag to the rigidbody so that it will not grow exponetially fast
         if(isGrounded)
-
             rb.AddForce(movement.normalized * moveSpeed * Time.fixedDeltaTime); //Applies a force relative to the world coordinates in the direction of the current input
         else
             rb.AddForce(movement.normalized * moveSpeed * airSpeedMultiplier * Time.fixedDeltaTime); //If in the air, limit mobility
@@ -106,6 +105,19 @@ public class PlayerMovement : MonoBehaviour
             }
             else
                 inJump = false;
+        }
+    }
+
+    private void HandleSlide()
+    {
+        if(Input.GetButton("Slide") && isGrounded)
+        {
+            playerPhysMaterial.friction = 0f;
+            Debug.Log(playerPhysMaterial.friction);
+        }
+        else
+        {
+            playerPhysMaterial.friction = 1f;
         }
     }
 }
