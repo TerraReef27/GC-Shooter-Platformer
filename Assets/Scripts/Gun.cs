@@ -19,14 +19,22 @@ public class Gun : MonoBehaviour
     [Tooltip("The name of the gun")]
     [SerializeField] private string gunName = "gun";
 
+    [SerializeField] private GameObject bullet = null;
+    [SerializeField] private float projectileSpeed = 3f;
+
+    [SerializeField] private GameObject bulletCollecter = null;
+
     void Start()
     {
         currentAmmo = maxAmmo;
         currentClip = clipSize;
     }
 
-    public void Shoot() //Should be called when the object fires the gun. Handles ammo and effects
+    public void Shoot(float shootDir) //Should be called when the object fires the gun. Handles ammo and effects
     {
+        //Debug.Log(shootDir);
+        //GameObject bull = Instantiate(bullet, gameObject.transform.position, Quaternion.Euler(0, 0, shootDir), bulletCollecter.transform);
+        //bull.GetComponent<Projectile>().Shot(projectileSpeed);
         currentAmmo--;
         currentClip--;
     }

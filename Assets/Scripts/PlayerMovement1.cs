@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 [DisallowMultipleComponent]
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement1 : MonoBehaviour
 {
     private Rigidbody2D rb = null;
 
@@ -16,7 +16,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float maxMoveSpeed = 10f;
     [Tooltip("How much the gravity is multiplied by when the object is falling")]
     [SerializeField] private float gravityMultiplyer = 2.5f;
-    private float baseGravity;
+    [SerializeField] private float baseGravity = 1f;
 
     [Tooltip("The layermask that the object will recognize as ground")]
     [SerializeField] LayerMask layer;
@@ -55,14 +55,14 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
-        baseGravity = rb.gravityScale; //Get the starting gravity so that it can be reset if needed
+        //baseGravity = rb.gravityScale; //Get the starting gravity so that it can be reset if needed
     }
 
     void Update()
     {
         movement = new Vector2(Input.GetAxisRaw("Horizontal"), 0); //Set the movement vector to the horizontal inputs
         HandleJumping();
-        //HandleSlide();
+        HandleSlide();
 
         if (Input.GetKeyDown(KeyCode.Q))
             respawn.Respawn();
@@ -70,6 +70,9 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
+        //rb.velocity += Vector2.down * baseGravity;
+        rb.AddForce(Vector2.down * baseGravity);
+
         //Check if the player is touching the ground. The surface it is overlaping must be on the "Ground" layer mask layer
         isGrounded = Physics2D.OverlapArea(new Vector2(transform.position.x - .5f + groundCheckXSizeReduction, transform.position.y - .5f), new Vector2(transform.position.x + .5f - groundCheckXSizeReduction, transform.position.y - .5f - groundCheckSize), layer);
 
@@ -108,7 +111,6 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    /*
     private void HandleSlide()
     {
         if(Input.GetButton("Slide") && isGrounded)
@@ -121,5 +123,4 @@ public class PlayerMovement : MonoBehaviour
             playerPhysMaterial.friction = 1f;
         }
     }
-    */
 }
