@@ -15,12 +15,15 @@ public class CharacterGunController : MonoBehaviour
 
     private float angle = 0f;
 
+    private SpriteRenderer sprite;
+
     void Awake()
     {
         if (cam == null) cam = FindObjectOfType<Camera>();
         if (respawn == null) respawn = FindObjectOfType<RespawnSystem>();
         respawn.OnPlayerRespawn += Respawn_OnPlayerRespawn;
         playerMove = GetComponent<PlayerController>();
+        sprite = GetComponent<SpriteRenderer>();
     }
 
     private void Respawn_OnPlayerRespawn(Vector3 respawnPos) //Called when player dies
@@ -45,10 +48,27 @@ public class CharacterGunController : MonoBehaviour
             gun.Reload();
         }
 
-        /*
+        RotateSprites();
+
+    }
+
+    private void RotateSprites() //Rotate the player and gun sprites according to the mouse position
+    {
         Vector3 facing = mousePos - transform.position;
-        angle = Mathf.Atan2(facing.y, facing.x) * Mathf.Rad2Deg - 90f;
+        angle = Mathf.Atan2(facing.y, facing.x) * Mathf.Rad2Deg;
+
+        if (angle > 90 || angle < -90)
+        {
+            sprite.flipX = true;
+            gun.Sprite.flipX = true;
+            angle -= 180;
+        }
+        else
+        {
+            sprite.flipX = false;
+            gun.Sprite.flipX = false;
+        }
+
         gun.transform.rotation = Quaternion.Euler(0, 0, angle);
-        */
     }
 }

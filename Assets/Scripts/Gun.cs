@@ -24,6 +24,13 @@ public class Gun : MonoBehaviour
 
     [SerializeField] private GameObject bulletCollecter = null;
 
+    private SpriteRenderer sprite;
+    public SpriteRenderer Sprite { get { return sprite; } private set { sprite = value; } }
+    void Awake()
+    {
+        sprite = GetComponent<SpriteRenderer>();
+    }
+
     void Start()
     {
         currentAmmo = maxAmmo;

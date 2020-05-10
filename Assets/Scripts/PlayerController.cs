@@ -14,11 +14,14 @@ public class PlayerController : PhysicsObject
     private float currentJumpTime = 0f;
     private bool inJump;
 
+    public float animationXMovement; //Seperate variable so changes do not affect movement
+
     protected override void ComputeVelocity()
     {
         Vector2 moveTo = Vector2.zero;
 
         float moveInputDirection = Input.GetAxisRaw("Horizontal");
+        animationXMovement = moveInputDirection; //Used for the animator to determine input direction
 
         if (moveInputDirection != 0) //Move by values when inputing on the x-axis (change acceleration when in the air vs on the ground)
         {
