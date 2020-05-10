@@ -36,7 +36,7 @@ public class CharacterGunController : MonoBehaviour
         {
             Debug.DrawLine(transform.position, mousePos, Color.red, 1f);
             Vector2 forceTo = new Vector2(transform.position.x - mousePos.x, transform.position.y - mousePos.y);
-            playerMove.ChangeMoveDirection(forceTo.normalized * gun.RecoilForce);
+            playerMove.AddForce(forceTo.normalized * gun.RecoilForce);
             gun.Shoot(Vector2.SignedAngle(mousePos, transform.position) + 90);
         }
 
@@ -44,6 +44,7 @@ public class CharacterGunController : MonoBehaviour
         {
             gun.Reload();
         }
+
         /*
         Vector3 facing = mousePos - transform.position;
         angle = Mathf.Atan2(facing.y, facing.x) * Mathf.Rad2Deg - 90f;

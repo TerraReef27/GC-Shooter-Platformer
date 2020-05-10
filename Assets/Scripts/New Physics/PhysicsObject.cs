@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class PhysicsObject : MonoBehaviour
@@ -13,7 +11,7 @@ public class PhysicsObject : MonoBehaviour
     public bool Grounded { get { return grounded; } private set { grounded = value; } }
     private float minGroundNormalY = .75f; //The min amount of slope until considered too steep
     private Vector2 groundNormal;
-    public Vector2 targetVelocity; //Where we want the object to move
+    protected Vector2 targetVelocity; //Where we want the object to move
     private const float minMoveDist = .001f; //If the object does not move farther than this, do not check collisions (Prevents collision checks when standing still)
     private const float shellRadius = .01f; //Radius that is used for when a collision happens to check in front of itself
     private ContactFilter2D contactFilter;
@@ -35,16 +33,16 @@ public class PhysicsObject : MonoBehaviour
 
     void Update()
     {
-        targetVelocity = Vector2.zero;
         ComputeVelocity();
+        velocity += targetVelocity;
     }
 
-    protected virtual void ComputeVelocity()
+    protected virtual void ComputeVelocity()    
     { }
 
     void FixedUpdate()
     {
-        velocity += targetVelocity;
+        //velocity += targetVelocity;
 
         velocity += gravityMultiplyer * Physics2D.gravity * Time.fixedDeltaTime; //Apply gravity to the object
 
@@ -100,9 +98,7 @@ public class PhysicsObject : MonoBehaviour
                 float modifiedDist = hitsList[i].distance - shellRadius;
                 distance = modifiedDist < distance ? modifiedDist : distance;
             }
-
         }
-
         rb.position += moveTo.normalized * distance; //Move the rigidbody and gameObject to the future position
     }
 }

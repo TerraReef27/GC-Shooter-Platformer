@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerController : PhysicsObject
 {
@@ -8,17 +7,12 @@ public class PlayerController : PhysicsObject
     [SerializeField] private float runDecelerationRate = .5f;
     [SerializeField] private float airMovementMultiplyer = .5f;
 
-    public Vector2 outsideMoveInfluence; //Force coming from outside influences
+    private Vector2 outsideMoveInfluence; //Force coming from outside influences
 
     [SerializeField] private float jumpVelocity = 1f;
     [SerializeField] private float jumpTime = .5f;
     private float currentJumpTime = 0f;
     private bool inJump;
-
-    void Start()
-    {
-        
-    }
 
     protected override void ComputeVelocity()
     {
@@ -38,16 +32,14 @@ public class PlayerController : PhysicsObject
             velocity.x = Mathf.MoveTowards(velocity.x, 0, runDecelerationRate * Time.deltaTime);
         }
 
-        //moveTo.x += Input.GetAxis("Horizontal") * runSpeed;
-
         HandleJumping();
 
+        ApplyForce(ref moveTo, ref outsideMoveInfluence);
 
-        moveTo += outsideMoveInfluence;
+        //moveTo += outsideMoveInfluence;
 
         targetVelocity = moveTo;
-        
-        outsideMoveInfluence = Vector2.zero;
+        //outsideMoveInfluence = Vector2.zero;
     }
 
     private void HandleJumping()
@@ -70,9 +62,16 @@ public class PlayerController : PhysicsObject
         }
     }
     
-    public Vector2 ChangeMoveDirection(Vector2 newDirection)
+    public void AddForce(Vector2 newForce)
     {
-        Debug.Log("Influencing");
-        return outsideMoveInfluence += newDirection;
+        outsideMoveInfluence += newForce;
+        return;
+    }
+
+    private void ApplyForce(ref Vector2 applyTo, ref Vector2 applicant)
+    {
+        applyTo += applicant;
+        applicant = Vector2.zero;
+        return;
     }
 }
