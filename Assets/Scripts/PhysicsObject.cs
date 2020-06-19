@@ -4,8 +4,10 @@ using UnityEngine;
 public class PhysicsObject : MonoBehaviour
 {
     protected Vector2 velocity;
-    [SerializeField] private float gravityMultiplyer = 1f; //How much more should gravity be applied to this over the default gravity amount
-    [SerializeField] protected float frictionMultiplier = 1f; //How much faster or slower should object decelerate on ground
+    [Tooltip("How much more should gravity be applied to this over the default gravity amount")]
+    [SerializeField] private float gravityMultiplyer = 1f;
+    [Tooltip("How much faster or slower should object decelerate on ground")]
+    [SerializeField] protected float frictionMultiplier = 1f;
 
     protected bool grounded;
     public bool Grounded { get { return grounded; } private set { grounded = value; } }
@@ -19,11 +21,18 @@ public class PhysicsObject : MonoBehaviour
     private List<RaycastHit2D> hitsList = new List<RaycastHit2D>(16); //List to act off of collisions
     private Rigidbody2D rb; //Rigidbody2D to use in order to change position. Must be kinematic
 
+    private RespawnSystem respawn = null; //Reference to the respawn system in the scene
+
+    private CollisionResponses collisionResponses = null;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        respawn = FindObjectOfType<RespawnSystem>();
+        respawn.OnPlayerRespawn += Respawn_OnPlayerRespawn; //Subscribe object to the OnPlayerRespawn event
+        collisionResponses = GetComponent<CollisionResponses>();
     }
-    
+
     void Start()
     {
         contactFilter.useTriggers = false; //Dissallow object to respond to trigger set colliders
@@ -35,6 +44,12 @@ public class PhysicsObject : MonoBehaviour
     {
         ComputeVelocity();
         velocity += targetVelocity;
+    }
+
+    private void Respawn_OnPlayerRespawn(Vector3 respawnPos) //Sets position to respawn point and velocity to 0
+    {
+        transform.position = respawnPos;
+        velocity = Vector2.zero;
     }
 
     protected virtual void ComputeVelocity()    
@@ -79,6 +94,10 @@ public class PhysicsObject : MonoBehaviour
             for(int i = 0; i < hitsList.Count; i++)
             {
                 Vector2 currentNormal = hitsList[i].normal; //Get the normal of the collision
+                if (collisionResponses)
+                    if (!collisionResponses.CheckIfIgnore(hitsList[i].collider.tag))
+                        continue;
+
                 if(currentNormal.y > minGroundNormalY) //Check if collision is considered "ground" based off the minGroundNormalY
                 {
                     grounded = true;

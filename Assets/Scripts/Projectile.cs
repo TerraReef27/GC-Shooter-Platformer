@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Projectile : MonoBehaviour
@@ -16,9 +15,9 @@ public class Projectile : MonoBehaviour
         StartCoroutine(Despawn());
     }
 
-    public void Shot(float speed)
+    public void Shot(float speed, Vector2 direction)
     {
-        rb.velocity = Vector2.up * speed;
+        rb.AddForce(direction * speed * Time.fixedDeltaTime, ForceMode2D.Impulse);
     }
 
     IEnumerator Despawn()
@@ -27,9 +26,9 @@ public class Projectile : MonoBehaviour
         Destroy(gameObject);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.tag != "Player" && collision.gameObject.tag != "Projectile")
+        if (collision.gameObject.tag != "Player" && collision.gameObject.tag != "Projectile")
         {
             Destroy(gameObject);
         }

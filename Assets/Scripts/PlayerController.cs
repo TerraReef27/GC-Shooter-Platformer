@@ -2,9 +2,16 @@
 
 public class PlayerController : PhysicsObject
 {
+    [Tooltip("The top run speed the player can obtain")] 
     [SerializeField] private float moveSpeed = 5f;
+    [Tooltip("The rate that the player can accelerate when running")]
     [SerializeField] private float runAccelerationRate = 1f;
-    [SerializeField] private float runDecelerationRate = .5f;
+    [Tooltip("The rate that the player slows down when not inputing movement")]
+    [SerializeField] private float baseRunDecelerationRate = 10f;
+    [Tooltip("The rate that the player slows down when sliding")]
+    [SerializeField] private float slideDeceleration = 1f;
+    private float runDecelerationRate = .5f; //Current deceleration
+    [Tooltip("How much less the movement inputs affect the player when in the air")]
     [SerializeField] private float airMovementMultiplyer = .5f;
 
     private Vector2 outsideMoveInfluence; //Force coming from outside influences
@@ -15,6 +22,9 @@ public class PlayerController : PhysicsObject
     private bool inJump;
 
     public float animationXMovement; //Seperate variable so changes do not affect movement
+
+    public enum playerState { neutral, sliding, airborne };
+    public playerState state = playerState.neutral;
 
     protected override void ComputeVelocity()
     {
@@ -36,13 +46,11 @@ public class PlayerController : PhysicsObject
         }
 
         HandleJumping();
+        HandleInput();
 
         ApplyForce(ref moveTo, ref outsideMoveInfluence);
 
-        //moveTo += outsideMoveInfluence;
-
         targetVelocity = moveTo;
-        //outsideMoveInfluence = Vector2.zero;
     }
 
     private void HandleJumping()
@@ -65,16 +73,30 @@ public class PlayerController : PhysicsObject
         }
     }
     
-    public void AddForce(Vector2 newForce)
+    public void AddForce(Vector2 newForce) //Used to add a force to the object from outside of the script
     {
         outsideMoveInfluence += newForce;
         return;
     }
 
-    private void ApplyForce(ref Vector2 applyTo, ref Vector2 applicant)
+    private void ApplyForce(ref Vector2 applyTo, ref Vector2 applicant) //Applies the outside forces to this object
     {
         applyTo += applicant;
         applicant = Vector2.zero;
         return;
+    }
+
+    private void HandleInput() //Recives and reacts to inputs
+    {
+        if(Input.GetButton("Slide") && grounded) //Slide
+        {
+            runDecelerationRate = slideDeceleration;
+            state = playerState.sliding;
+        }
+        else if(runDecelerationRate <= 1)
+        {
+            runDecelerationRate = baseRunDecelerationRate;
+            state = playerState.neutral;
+        }
     }
 }

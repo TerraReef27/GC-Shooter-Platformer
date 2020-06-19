@@ -1,0 +1,74 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Bunker Atlas
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 0
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: DefaultTexturePlatform
+      m_MaxTextureSize: 2048
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: -1
+      m_TextureCompression: 0
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 0
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 1
+    variantMultiplier: 1
+    packables:
+    - {fileID: 2800000, guid: d59a1cd8f0dc29848855da736a82e40b, type: 3}
+    totalSpriteSurfaceArea: 2816
+    bindAsDefault: 1
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 7975279735263239122, guid: d59a1cd8f0dc29848855da736a82e40b, type: 3}
+  - {fileID: -6336065128353289947, guid: d59a1cd8f0dc29848855da736a82e40b, type: 3}
+  - {fileID: 5065157277688358540, guid: d59a1cd8f0dc29848855da736a82e40b, type: 3}
+  - {fileID: -8864738248673311753, guid: d59a1cd8f0dc29848855da736a82e40b, type: 3}
+  - {fileID: -9110672303344480613, guid: d59a1cd8f0dc29848855da736a82e40b, type: 3}
+  - {fileID: 1112639672209723249, guid: d59a1cd8f0dc29848855da736a82e40b, type: 3}
+  - {fileID: 7582891128262842771, guid: d59a1cd8f0dc29848855da736a82e40b, type: 3}
+  - {fileID: -4554851527132754335, guid: d59a1cd8f0dc29848855da736a82e40b, type: 3}
+  - {fileID: -7272985489443947058, guid: d59a1cd8f0dc29848855da736a82e40b, type: 3}
+  - {fileID: 3064709836110180015, guid: d59a1cd8f0dc29848855da736a82e40b, type: 3}
+  - {fileID: 3928880479668594386, guid: d59a1cd8f0dc29848855da736a82e40b, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - BunkerTileset_10
+  - BunkerTileset_9
+  - BunkerTileset_8
+  - BunkerTileset_1
+  - BunkerTileset_0
+  - BunkerTileset_3
+  - BunkerTileset_2
+  - BunkerTileset_5
+  - BunkerTileset_4
+  - BunkerTileset_7
+  - BunkerTileset_6
+  m_Tag: Bunker Atlas
+  m_IsVariant: 0

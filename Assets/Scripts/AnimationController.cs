@@ -31,6 +31,15 @@ public class AnimationController : MonoBehaviour
             else
                 spriteRend.flipX = true;
         }
+
+        if (player.state == PlayerController.playerState.sliding)
+        {
+            animator.SetBool("isSliding", true);
+        }
+        else
+        {
+            animator.SetBool("isSliding", false);
+        }
     }
     
 }

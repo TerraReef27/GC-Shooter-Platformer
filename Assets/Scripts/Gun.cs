@@ -24,11 +24,16 @@ public class Gun : MonoBehaviour
 
     [SerializeField] private GameObject bulletCollecter = null;
 
+    public bool isInverted = false;
+    [SerializeField] private Transform firePoint = null;
+
     private SpriteRenderer sprite;
     public SpriteRenderer Sprite { get { return sprite; } private set { sprite = value; } }
     void Awake()
     {
         sprite = GetComponent<SpriteRenderer>();
+        if(bulletCollecter == null)
+            bulletCollecter = GameObject.FindGameObjectWithTag("Collecter");
     }
 
     void Start()
@@ -37,11 +42,10 @@ public class Gun : MonoBehaviour
         currentClip = clipSize;
     }
 
-    public void Shoot(float shootDir) //Should be called when the object fires the gun. Handles ammo and effects
+    public void Shoot(Vector2 shootDir) //Should be called when the object fires the gun. Handles ammo and effects
     {
-        //Debug.Log(shootDir);
-        //GameObject bull = Instantiate(bullet, gameObject.transform.position, Quaternion.Euler(0, 0, shootDir), bulletCollecter.transform);
-        //bull.GetComponent<Projectile>().Shot(projectileSpeed);
+        GameObject bull = Instantiate(bullet, firePoint.position, Quaternion.Euler(0, 0, 0), bulletCollecter.transform);
+        bull.GetComponent<Projectile>().Shot(projectileSpeed, shootDir.normalized);
         currentAmmo--;
         currentClip--;
     }
@@ -58,5 +62,10 @@ public class Gun : MonoBehaviour
     {
         currentAmmo = maxAmmo;
         currentClip = clipSize;
+    }
+
+    public void InvertFirePoint()
+    {
+        firePoint.localPosition = new Vector2(-firePoint.localPosition.x, firePoint.localPosition.y);
     }
 }
