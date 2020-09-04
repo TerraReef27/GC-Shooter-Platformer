@@ -1,8 +1,9 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class PlayerController : PhysicsObject
 {
-    [Tooltip("The top run speed the player can obtain")] 
+    [Tooltip("The top run speed the player can obtain")]
     [SerializeField] private float moveSpeed = 5f;
     [Tooltip("The rate that the player can accelerate when running")]
     [SerializeField] private float runAccelerationRate = 1f;
@@ -13,6 +14,9 @@ public class PlayerController : PhysicsObject
     private float runDecelerationRate = .5f; //Current deceleration
     [Tooltip("How much less the movement inputs affect the player when in the air")]
     [SerializeField] private float airMovementMultiplyer = .5f;
+
+    [SerializeField] private CapsuleCollider2D playerCollider = null;
+    [SerializeField] private BoxCollider2D slideCollider = null;
 
     private Vector2 outsideMoveInfluence; //Force coming from outside influences
 
@@ -33,7 +37,7 @@ public class PlayerController : PhysicsObject
         float moveInputDirection = Input.GetAxisRaw("Horizontal");
         animationXMovement = moveInputDirection; //Used for the animator to determine input direction
 
-        if (moveInputDirection != 0) //Move by values when inputing on the x-axis (change acceleration when in the air vs on the ground)
+        if (moveInputDirection != 0 && state != playerState.sliding) //Move by values when inputing on the x-axis (change acceleration when in the air vs on the ground)
         {
             if (grounded)
                 moveTo.x = Mathf.MoveTowards(moveTo.x, moveSpeed * moveInputDirection, runAccelerationRate * Time.deltaTime);
@@ -92,11 +96,29 @@ public class PlayerController : PhysicsObject
         {
             runDecelerationRate = slideDeceleration;
             state = playerState.sliding;
+            //ToggleActiveHitbox(slideCollider, playerCollider);
         }
-        else if(runDecelerationRate <= 1)
+        else if(runDecelerationRate <= 1 && state == playerState.sliding)
         {
+            //ToggleActiveHitbox(playerCollider, slideCollider);
+
             runDecelerationRate = baseRunDecelerationRate;
-            state = playerState.neutral;
+            state = playerState.neutral;             
         }
     }
+
+    /*
+     * TODO: Fix this!
+    private void ToggleActiveHitbox(Collider2D activate, Collider2D disable)
+    {
+        
+        float activateSize = activate.bounds.size.y;
+        float disableSize = disable.bounds.size.y;
+        float offset = (activateSize - disableSize)/2;
+        Debug.Log(offset);
+        gameObject.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + offset, gameObject.transform.position.z);
+        disable.enabled = false;
+        activate.enabled = true;
+    }
+    */
 }

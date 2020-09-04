@@ -95,8 +95,18 @@ public class PhysicsObject : MonoBehaviour
             {
                 Vector2 currentNormal = hitsList[i].normal; //Get the normal of the collision
                 if (collisionResponses)
+                {
+                    //Ignore collision if tag is on the ignore list
                     if (!collisionResponses.CheckIfIgnore(hitsList[i].collider.tag))
+                    {
                         continue;
+                    }
+                    //Kill the player if it interacts with a killer tagged collider 
+                    else if (!collisionResponses.CheckIfKill(hitsList[i].collider.tag))
+                    {
+                        respawn.Respawn();
+                    }
+                }
 
                 if(currentNormal.y > minGroundNormalY) //Check if collision is considered "ground" based off the minGroundNormalY
                 {

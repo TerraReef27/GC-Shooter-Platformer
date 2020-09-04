@@ -19,7 +19,7 @@ public class PlayerMovement : MonoBehaviour
     private float baseGravity;
 
     [Tooltip("The layermask that the object will recognize as ground")]
-    [SerializeField] LayerMask layer;
+    [SerializeField] LayerMask layer = 0;
     private bool isGrounded; //Boolean to check if the object is touching the ground
     public bool IsGrounded { get; }
     [Tooltip("The size of the box below the object that checks if it is touching the ground")]
