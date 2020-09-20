@@ -4,9 +4,9 @@ using UnityEngine;
 public class TimedLaser : MonoBehaviour
 {
     [Tooltip("The amount of the time that the laser beam stays active and on")]
-    [SerializeField] private float activeDuration = 1f;
+    [SerializeField] private float activeDuration = 3;
     [Tooltip("The amount of time that the laser beam is off before the next activation")]
-    [SerializeField] private float pauseDuration = 1f;
+    [SerializeField] private float pauseDuration = 20;
 
     [Tooltip("The physics for the obsticle. For things like colliders")]
     [SerializeField] private GameObject physics = null;
