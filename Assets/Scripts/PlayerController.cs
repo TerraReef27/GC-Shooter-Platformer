@@ -61,7 +61,7 @@ public class PlayerController : PhysicsObject
     {
         if (Input.GetButtonDown("Jump") && grounded) //Applyes velocity once the jump button is pressed. Also prepares for the rest of the method with booleans
         {
-            velocity.y += jumpVelocity;
+            velocity.y += jumpVelocity * Time.deltaTime;
             inJump = true;
             currentJumpTime = jumpTime;
         }
@@ -69,7 +69,7 @@ public class PlayerController : PhysicsObject
         {
             if (currentJumpTime > 0)
             {
-                velocity.y += jumpVelocity;
+                velocity.y += jumpVelocity * Time.deltaTime;
                 currentJumpTime -= Time.deltaTime;
             }
             else
