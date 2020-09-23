@@ -11,8 +11,14 @@ public class TimedLaser : MonoBehaviour
     [Tooltip("The physics for the obsticle. For things like colliders")]
     [SerializeField] private GameObject physics = null;
     [Tooltip("The visuals for the obsticle")]
-    [SerializeField] private GameObject visuals = null;
+    [SerializeField] private GameObject visuals = null; //TODO: Remove
 
+    private Animator animator;
+
+    private void Awake()
+    {
+        animator = GetComponent<Animator>();
+    }
 
     void Start()
     {
@@ -22,6 +28,7 @@ public class TimedLaser : MonoBehaviour
     IEnumerator activateBeam() //Sets the components of the laser beam to be active and begins a countdown to call disableBeam
     {
         visuals.SetActive(true);
+        animator.SetBool("IsActive", true);
         physics.SetActive(true);
         yield return new WaitForSeconds(activeDuration);
         StartCoroutine(disableBeam());
@@ -29,6 +36,7 @@ public class TimedLaser : MonoBehaviour
     IEnumerator disableBeam() //Sets the components of the laser beam to be disabled and begins a countdown to call activateBeam
     {
         visuals.SetActive(false);
+        animator.SetBool("IsActive", false);
         physics.SetActive(false);
         yield return new WaitForSeconds(pauseDuration);
         StartCoroutine(activateBeam());
