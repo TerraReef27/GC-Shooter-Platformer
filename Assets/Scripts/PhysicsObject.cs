@@ -38,6 +38,7 @@ public class PhysicsObject : MonoBehaviour
         contactFilter.useTriggers = false; //Dissallow object to respond to trigger set colliders
         contactFilter.SetLayerMask(Physics2D.GetLayerCollisionMask(gameObject.layer)); //Set up the collisions to follow the Unity collision matrix
         contactFilter.useLayerMask = true; //Enable the use of layer masks
+        SetStartValues();
     }
 
     void Update()
@@ -45,6 +46,9 @@ public class PhysicsObject : MonoBehaviour
         ComputeVelocity();
         velocity += targetVelocity;
     }
+
+    protected virtual void SetStartValues()
+    { }
 
     private void Respawn_OnPlayerRespawn(Vector3 respawnPos) //Sets position to respawn point and velocity to 0
     {

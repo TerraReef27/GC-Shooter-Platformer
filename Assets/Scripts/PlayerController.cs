@@ -29,6 +29,12 @@ public class PlayerController : PhysicsObject
 
     public enum playerState { neutral, sliding, airborne };
     public playerState state = playerState.neutral;
+    
+    protected override void SetStartValues()
+    {
+        runDecelerationRate = baseRunDecelerationRate;
+        state = playerState.neutral;
+    }
 
     protected override void ComputeVelocity()
     {
