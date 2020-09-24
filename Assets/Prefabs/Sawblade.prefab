@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8542089375606608350}
   - component: {fileID: 8542089375606608349}
   m_Layer: 0
-  m_Name: Sawblade (1)
+  m_Name: Sawblade
   m_TagString: Killer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
