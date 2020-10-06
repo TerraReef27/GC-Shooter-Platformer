@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class PlayerController : PhysicsObject
 {
+    #region Variables
     [Tooltip("The top run speed the player can obtain")]
     [SerializeField] private float moveSpeed = 5f;
     [Tooltip("The rate that the player can accelerate when running")]
@@ -29,7 +30,9 @@ public class PlayerController : PhysicsObject
 
     public enum playerState { neutral, sliding, airborne };
     public playerState state = playerState.neutral;
-    
+
+    #endregion Variables
+
     protected override void SetStartValues()
     {
         runDecelerationRate = baseRunDecelerationRate;

@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class CharacterGunController : MonoBehaviour
 {
+    #region Variables
+
     private Camera cam;
     private Vector3 mousePos;
 
-    [Tooltip("The gun the object is to use")]
-    [SerializeField] private Gun gun = null;
+    private GunHolder holder;
+    private GameObject gunObject = null;
+    private Gun gun = null;
 
     private RespawnSystem respawn = null; //Reference to the respawn system in the scene
     private PlayerController playerMove = null; //Reference to the playerMovement script
@@ -18,13 +21,30 @@ public class CharacterGunController : MonoBehaviour
     private SpriteRenderer sprite;
     private bool isFlipped = false;
 
+    #endregion Variables
+
     void Awake()
     {
         if (cam == null) cam = FindObjectOfType<Camera>();
         if (respawn == null) respawn = FindObjectOfType<RespawnSystem>();
-        respawn.OnPlayerRespawn += Respawn_OnPlayerRespawn;
         playerMove = GetComponent<PlayerController>();
         sprite = GetComponent<SpriteRenderer>();
+        holder = FindObjectOfType<GunHolder>();
+
+        respawn.OnPlayerRespawn += Respawn_OnPlayerRespawn;
+        holder.OnWeaponSwitch += Holder_OnWeaponChange;
+    }
+
+    void Start()
+    {
+        if (holder.activeGun != null)
+            gunObject = holder.activeGun;
+    }
+
+    private void Holder_OnWeaponChange(int gunNumber, GameObject gunObj)
+    {
+        gunObject = gunObj;
+        gun = gunObj.GetComponent<Gun>();
     }
 
     private void Respawn_OnPlayerRespawn(Vector3 respawnPos) //Called when player dies
@@ -36,7 +56,20 @@ public class CharacterGunController : MonoBehaviour
     {
         mousePos = cam.ScreenToWorldPoint(Input.mousePosition); //Gets the mouse position relative to world space
 
-        if (Input.GetButtonDown("Fire1") && gun != null && gun.CurrentClip > 0) //Gets the mouse postion and adds a force to the player in the opposite direction of the mouse relative to the player. Amount of force is determined by the recoilForce
+        HandleFiring();
+        RotateSprites();
+
+
+        if (Input.GetKeyDown(KeyCode.F)) //For respawning. I didn't know where else to put this but this will do for now
+        {
+            respawn.Respawn();
+            Debug.Log("Respawning");
+        }
+    }
+
+    private void HandleFiring()
+    {
+        if (Input.GetButtonDown("Fire1") && gun != null && gun.CurrentAmmo > 0) //Gets the mouse postion and adds a force to the player in the opposite direction of the mouse relative to the player. Amount of force is determined by the recoilForce
         {
             //Debug.DrawLine(transform.position, mousePos, Color.red, 1f);
             Vector2 forceTo = new Vector2(transform.position.x - mousePos.x, transform.position.y - mousePos.y);
@@ -47,20 +80,6 @@ public class CharacterGunController : MonoBehaviour
             angle = Mathf.Atan2(facing.y, facing.x) * Mathf.Rad2Deg;
             gun.Shoot(-forceTo);
         }
-
-        if (Input.GetKeyDown(KeyCode.R) && playerMove.Grounded) //For reloading gun
-        {
-            gun.Reload();
-        }
-
-        if(Input.GetKeyDown(KeyCode.F)) //For respawning. I didn't know where else to put this but this will do for now
-        {
-            respawn.Respawn();
-            Debug.Log("Respawning");
-        }
-
-        RotateSprites();
-
     }
 
     private void RotateSprites() //Rotate the player and gun sprites according to the mouse position
