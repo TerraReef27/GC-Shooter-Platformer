@@ -32,7 +32,14 @@ public class GunHolder : MonoBehaviour
     {
         GetGuns();
         if (guns[0] != null)
+        {
+            foreach(GameObject gun in guns)
+            {
+                gun.SetActive(false);
+            }
+
             SwitchGuns(0);
+        }
     }
 
     void Update()
