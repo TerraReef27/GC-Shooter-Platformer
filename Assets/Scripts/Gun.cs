@@ -4,6 +4,7 @@ public class Gun : MonoBehaviour
 {
     [Tooltip("Amount of ammo the player starts with")]
     [SerializeField] private int startAmmo = 1;
+    public int StartAmmo { get { return startAmmo; } }
 
     private int currentAmmo = 1; //The amount ofammo that the gun currently has
     public int CurrentAmmo { get { return currentAmmo; } set { value = currentAmmo; } }
@@ -14,6 +15,7 @@ public class Gun : MonoBehaviour
 
     [Tooltip("The name of the gun")]
     [SerializeField] private string gunName = "gun";
+    public string GunName { get { return gunName; } }
 
     [SerializeField] private GameObject bullet = null;
     [SerializeField] private float projectileSpeed = 3f;

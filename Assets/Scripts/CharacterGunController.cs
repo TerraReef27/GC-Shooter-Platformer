@@ -21,6 +21,8 @@ public class CharacterGunController : MonoBehaviour
     private SpriteRenderer sprite;
     private bool isFlipped = false;
 
+    public event OnWeaponFireDelegate OnWeaponFire; //Create an event for when the player dies
+    public delegate void OnWeaponFireDelegate(); //Delegate to pass on respawn information
     #endregion Variables
 
     void Awake()
@@ -31,7 +33,7 @@ public class CharacterGunController : MonoBehaviour
         sprite = GetComponent<SpriteRenderer>();
         holder = FindObjectOfType<GunHolder>();
 
-        respawn.OnPlayerRespawn += Respawn_OnPlayerRespawn;
+        //respawn.OnPlayerRespawn += Respawn_OnPlayerRespawn;
         holder.OnWeaponSwitch += Holder_OnWeaponChange;
     }
 
@@ -47,10 +49,12 @@ public class CharacterGunController : MonoBehaviour
         gun = gunObj.GetComponent<Gun>();
     }
 
+    /*
     private void Respawn_OnPlayerRespawn(Vector3 respawnPos) //Called when player dies
     {
         gun.RefillAmmo();
     }
+    */
 
     void Update()
     {
@@ -79,6 +83,8 @@ public class CharacterGunController : MonoBehaviour
             Vector3 facing = mousePos - transform.position;
             angle = Mathf.Atan2(facing.y, facing.x) * Mathf.Rad2Deg;
             gun.Shoot(-forceTo);
+
+            OnWeaponFire?.Invoke();
         }
     }
 
