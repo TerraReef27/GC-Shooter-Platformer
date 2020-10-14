@@ -33,7 +33,7 @@ public class CharacterGunController : MonoBehaviour
         sprite = GetComponent<SpriteRenderer>();
         holder = FindObjectOfType<GunHolder>();
 
-        respawn.OnPlayerRespawn += Respawn_OnPlayerRespawn;
+        //respawn.OnPlayerRespawn += Respawn_OnPlayerRespawn;
         holder.OnWeaponSwitch += Holder_OnWeaponChange;
     }
 
@@ -49,10 +49,12 @@ public class CharacterGunController : MonoBehaviour
         gun = gunObj.GetComponent<Gun>();
     }
 
+    /*
     private void Respawn_OnPlayerRespawn(Vector3 respawnPos) //Called when player dies
     {
         gun.RefillAmmo();
     }
+    */
 
     void Update()
     {

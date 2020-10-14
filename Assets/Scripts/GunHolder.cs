@@ -6,6 +6,8 @@ using UnityEngine;
 public class GunHolder : MonoBehaviour
 {
     #region Variables
+    private RespawnSystem respawn = null;
+
     [SerializeField] private List<GameObject> guns = new List<GameObject>();
     public GameObject activeGun;
 
@@ -28,9 +30,15 @@ public class GunHolder : MonoBehaviour
 
     #endregion Variables
 
+    void Awake()
+    {
+        respawn = FindObjectOfType<RespawnSystem>();
+        respawn.OnPlayerRespawn += Respawn_OnPlayerRespawn;
+    }
+
     void Start()
     {
-        GetGuns();
+        GetGunsInChild();
         if (guns[0] != null)
         {
             foreach(GameObject gun in guns)
@@ -91,5 +99,13 @@ public class GunHolder : MonoBehaviour
             gunArray[i] = guns[i].GetComponent<Gun>();
         }
         return gunArray;
+    }
+
+    private void Respawn_OnPlayerRespawn(Vector3 respawnPos) //Called when player dies
+    {
+        foreach(GameObject gun in guns)
+        {
+            gun.GetComponent<Gun>().RefillAmmo();
+        }
     }
 }
