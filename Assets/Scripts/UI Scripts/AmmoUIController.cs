@@ -22,7 +22,6 @@ public class AmmoUI : MonoBehaviour
     void Start()
     {
         PopulateAmmoArray(gunHolder.GetGuns());
-
     }
 
     private void PopulateAmmoArray(Gun[] guns)
