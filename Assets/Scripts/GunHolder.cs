@@ -74,12 +74,22 @@ public class GunHolder : MonoBehaviour
         }
     }
 
-    private void GetGuns()
+    private void GetGunsInChild()
     {
         foreach (Transform child in transform)
         {
             if (child.gameObject.GetComponent<Gun>())
                 guns.Add(child.gameObject);
         }
+    }
+
+    public Gun[] GetGuns()
+    {
+        Gun[] gunArray = new Gun[guns.Count];
+        for(int i=0; i<gunArray.Length; i++)
+        {
+            gunArray[i] = guns[i].GetComponent<Gun>();
+        }
+        return gunArray;
     }
 }
