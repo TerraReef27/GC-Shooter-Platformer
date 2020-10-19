@@ -11,6 +11,9 @@ public class RespawnSystem : MonoBehaviour
     public event OnPlayerRespawnDelegate OnPlayerRespawn; //Create an event for when the player dies
     public delegate void OnPlayerRespawnDelegate(Vector3 respawnPos); //Delegate to pass on respawn information
 
+    public event OnActivateNewCheckpointDelegate HandleNewCheckpoint; //Create an event for when the player dies
+    public delegate void OnActivateNewCheckpointDelegate(); //Delegate to pass on respawn information
+
     void Start()
     {
         //resapwnPoints = FindObjectsOfType<Checkpoint>();
@@ -26,5 +29,6 @@ public class RespawnSystem : MonoBehaviour
     public void SetNewSpawnpoint(Vector3 newRespawnPos)
     {
         currentRespawnPoint = newRespawnPos;
+        HandleNewCheckpoint?.Invoke();
     }
 }
