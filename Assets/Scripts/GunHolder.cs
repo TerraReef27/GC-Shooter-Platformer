@@ -107,9 +107,27 @@ public class GunHolder : MonoBehaviour
         ReloadGuns();
     }
 
-    private void Respawn_OnPlayerSetSpawn()
+    private void Respawn_OnPlayerSetSpawn(GameObject[] newGuns)
     {
-        ReloadGuns();
+        LoadNewGuns(newGuns);
+    }
+
+    private void LoadNewGuns(GameObject[] newGuns)
+    {
+        foreach(GameObject gun in guns)
+        {
+            Destroy(gun);
+        }
+
+        GameObject[] checkpointGuns = new GameObject[newGuns.Length];
+
+        for(int i=0; i<checkpointGuns.Length; i++)
+        {
+            checkpointGuns[i] = Instantiate(newGuns[i], this.transform, false);
+        }
+
+        guns = new List<GameObject>(checkpointGuns);
+        SwitchGuns(0);
     }
 
     private void ReloadGuns()

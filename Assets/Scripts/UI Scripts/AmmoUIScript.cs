@@ -69,7 +69,7 @@ public class AmmoUIScript : MonoBehaviour
         ResetAmmo();
     }
 
-    private void Respawn_OnPlayerSetSpawn()
+    private void Respawn_OnPlayerSetSpawn(GameObject[] guns)
     {
         ResetAmmo();
     }

@@ -12,7 +12,7 @@ public class RespawnSystem : MonoBehaviour
     public delegate void OnPlayerRespawnDelegate(Vector3 respawnPos); //Delegate to pass on respawn information
 
     public event OnActivateNewCheckpointDelegate HandleNewCheckpoint; //Create an event for when the player dies
-    public delegate void OnActivateNewCheckpointDelegate(); //Delegate to pass on respawn information
+    public delegate void OnActivateNewCheckpointDelegate(GameObject[] guns); //Delegate to pass on respawn information
 
     void Start()
     {
@@ -26,9 +26,9 @@ public class RespawnSystem : MonoBehaviour
         OnPlayerRespawn?.Invoke(currentRespawnPoint); //Send out event to all subscribers
     }
 
-    public void SetNewSpawnpoint(Vector3 newRespawnPos)
+    public void SetNewSpawnpoint(Vector3 newRespawnPos, GameObject[] newGuns)
     {
         currentRespawnPoint = newRespawnPos;
-        HandleNewCheckpoint?.Invoke();
+        HandleNewCheckpoint?.Invoke(newGuns);
     }
 }
