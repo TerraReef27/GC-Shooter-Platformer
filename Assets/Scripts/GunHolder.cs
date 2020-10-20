@@ -34,6 +34,7 @@ public class GunHolder : MonoBehaviour
     {
         respawn = FindObjectOfType<RespawnSystem>();
         respawn.OnPlayerRespawn += Respawn_OnPlayerRespawn;
+        respawn.HandleNewCheckpoint += Respawn_OnPlayerSetSpawn;
     }
 
     void Start()
@@ -103,7 +104,17 @@ public class GunHolder : MonoBehaviour
 
     private void Respawn_OnPlayerRespawn(Vector3 respawnPos) //Called when player dies
     {
-        foreach(GameObject gun in guns)
+        ReloadGuns();
+    }
+
+    private void Respawn_OnPlayerSetSpawn()
+    {
+        ReloadGuns();
+    }
+
+    private void ReloadGuns()
+    {
+        foreach (GameObject gun in guns)
         {
             gun.GetComponent<Gun>().RefillAmmo();
         }

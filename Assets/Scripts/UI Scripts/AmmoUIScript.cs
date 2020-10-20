@@ -22,6 +22,7 @@ public class AmmoUIScript : MonoBehaviour
         gunController.OnWeaponFire += Controller_OnWeaponFire;
         gunHolder.OnWeaponSwitch += Controller_OnWeaponSwitch;
         respawn.OnPlayerRespawn += Respawn_OnPlayerRespawn;
+        respawn.HandleNewCheckpoint += Respawn_OnPlayerSetSpawn;
     }
 
     void Start()
@@ -64,6 +65,16 @@ public class AmmoUIScript : MonoBehaviour
     }
 
     private void Respawn_OnPlayerRespawn(Vector3 respawnPoint)
+    {
+        ResetAmmo();
+    }
+
+    private void Respawn_OnPlayerSetSpawn()
+    {
+        ResetAmmo();
+    }
+
+    private void ResetAmmo()
     {
         foreach (GameObject ammoObject in ammoUIObjects)
         {
