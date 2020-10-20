@@ -35,6 +35,7 @@ public class GunHolder : MonoBehaviour
         respawn = FindObjectOfType<RespawnSystem>();
         respawn.OnPlayerRespawn += Respawn_OnPlayerRespawn;
         respawn.HandleNewCheckpoint += Respawn_OnPlayerSetSpawn;
+        respawn.HandleOldCheckpoint += Respawn_OnPlayerResetAmmo;
     }
 
     void Start()
@@ -136,5 +137,10 @@ public class GunHolder : MonoBehaviour
     private void Respawn_OnPlayerSetSpawn(GameObject[] newGuns)
     {
         LoadNewGuns(newGuns);
+    }
+
+    private void Respawn_OnPlayerResetAmmo()
+    {
+        ReloadGuns();
     }
 }

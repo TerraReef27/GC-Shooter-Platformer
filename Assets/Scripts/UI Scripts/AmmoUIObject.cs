@@ -37,7 +37,7 @@ public class AmmoUIObject : MonoBehaviour
     {
         ammoArray[ammoLeft].GetComponent<Image>().color = new Color(1f, 1f, 1f, .2f);
 
-        if (ammoLeft > 0)
+        if (ammoLeft >= 0)
             ammoLeft--;
         else
             Debug.Log("UI Ammo Attempts to go under 0");

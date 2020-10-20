@@ -32,10 +32,12 @@ public class Checkpoint : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == "Player" && newTrigger)
+        if(collision.tag == "Player")
         {
-            if(newTrigger)
+            if (newTrigger)
                 ActivateCheckpoint(guns);
+            else
+                RefillAmmo();
         }
     }
 
@@ -43,5 +45,10 @@ public class Checkpoint : MonoBehaviour
     {
         newTrigger = false;
         respawner.SetNewSpawnpoint(this.transform.position, guns);
+    }
+
+    private void RefillAmmo()
+    {
+        respawner.ResetAmmo();
     }
 }

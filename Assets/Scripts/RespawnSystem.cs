@@ -14,6 +14,9 @@ public class RespawnSystem : MonoBehaviour
     public event OnActivateNewCheckpointDelegate HandleNewCheckpoint; //Create an event for when the player dies
     public delegate void OnActivateNewCheckpointDelegate(GameObject[] guns); //Delegate to pass on respawn information
 
+    public event OnActivateOldCheckpointDelegate HandleOldCheckpoint; //Create an event for when the player dies
+    public delegate void OnActivateOldCheckpointDelegate(); //Delegate to pass on respawn information
+
     void Start()
     {
         //resapwnPoints = FindObjectsOfType<Checkpoint>();
@@ -30,5 +33,10 @@ public class RespawnSystem : MonoBehaviour
     {
         currentRespawnPoint = newRespawnPos;
         HandleNewCheckpoint?.Invoke(newGuns);
+    }
+
+    public void ResetAmmo()
+    {
+        HandleOldCheckpoint?.Invoke();
     }
 }
