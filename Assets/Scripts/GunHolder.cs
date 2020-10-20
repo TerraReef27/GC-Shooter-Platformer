@@ -101,17 +101,7 @@ public class GunHolder : MonoBehaviour
         }
         return gunArray;
     }
-
-    private void Respawn_OnPlayerRespawn(Vector3 respawnPos) //Called when player dies
-    {
-        ReloadGuns();
-    }
-
-    private void Respawn_OnPlayerSetSpawn(GameObject[] newGuns)
-    {
-        LoadNewGuns(newGuns);
-    }
-
+    
     private void LoadNewGuns(GameObject[] newGuns)
     {
         foreach(GameObject gun in guns)
@@ -136,5 +126,15 @@ public class GunHolder : MonoBehaviour
         {
             gun.GetComponent<Gun>().RefillAmmo();
         }
+    }
+
+    private void Respawn_OnPlayerRespawn(Vector3 respawnPos) //Called when player dies
+    {
+        ReloadGuns();
+    }
+
+    private void Respawn_OnPlayerSetSpawn(GameObject[] newGuns)
+    {
+        LoadNewGuns(newGuns);
     }
 }

@@ -71,7 +71,20 @@ public class AmmoUIScript : MonoBehaviour
 
     private void Respawn_OnPlayerSetSpawn(GameObject[] guns)
     {
+        for(int i=0; i<ammoUIObjects.Length; i++)
+        {
+            Destroy(ammoUIObjects[i]);
+        }
+
+        Gun[] gunComponenets = new Gun[guns.Length];
+        for(int i=0; i<guns.Length; i++)
+        {
+            gunComponenets[i] = guns[i].GetComponent<Gun>();
+        }
+
+        PopulateAmmoArray(gunComponenets);
         ResetAmmo();
+        SetActiveAmmo(0);
     }
 
     private void ResetAmmo()
