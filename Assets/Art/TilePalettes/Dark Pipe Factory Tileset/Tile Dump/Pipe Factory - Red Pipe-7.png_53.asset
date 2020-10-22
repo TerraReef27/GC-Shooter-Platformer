@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: Pipe Factory - Red Pipe-7.png_53
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 7318148417533531516, guid: 3d524f64471c1174bb4e398a3350df03,
+  m_Sprite: {fileID: 7318148417533531516, guid: 976a168e507e6e34580d90c713fdd051,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
