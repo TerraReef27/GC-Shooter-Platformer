@@ -49,7 +49,12 @@ public class PlayerController : PhysicsObject
         if (moveInputDirection != 0 && state != playerState.sliding) //Move by values when inputing on the x-axis (change acceleration when in the air vs on the ground)
         {
             if (grounded)
-                moveTo.x = Mathf.MoveTowards(moveTo.x, moveSpeed * moveInputDirection, runAccelerationRate * Time.deltaTime);
+            {
+                if (Math.Sign(velocity.x) != Math.Sign(moveInputDirection))
+                    moveTo.x = Mathf.MoveTowards(moveTo.x, moveSpeed * moveInputDirection, (runDecelerationRate + runAccelerationRate) * Time.deltaTime);
+                else
+                    moveTo.x = Mathf.MoveTowards(moveTo.x, moveSpeed * moveInputDirection, runAccelerationRate * Time.deltaTime);
+            }
             else
                 moveTo.x = Mathf.MoveTowards(moveTo.x * airMovementMultiplyer, moveSpeed * moveInputDirection, runAccelerationRate * Time.deltaTime);
         }
@@ -68,13 +73,31 @@ public class PlayerController : PhysicsObject
 
     private void HandleJumping()
     {
+        {
+            if (Input.GetButtonDown("Jump") && grounded) //Applies velocity once the jump button is pressed. Also prepares for the rest of the method with booleans
+            {
+                velocity.y += jumpVelocity * Time.deltaTime;
+                inJump = true;
+                currentJumpTime = jumpTime - Time.deltaTime;
+                while (Input.GetButton("Jump") && currentJumpTime > 0 && (currentJumpTime - Time.deltaTime) > 0) //Keeps applying the velocity for as long as the "jump" button is being pressed
+                {
+                    velocity.y += jumpVelocity * Time.deltaTime;
+                    currentJumpTime -= Time.deltaTime;
+                }
+                if (Input.GetButtonDown("Jump"))
+                    velocity.y += jumpVelocity * currentJumpTime;
+                inJump = false;
+            }
+
+        }
+        /**
         if (Input.GetButtonDown("Jump") && grounded) //Applyes velocity once the jump button is pressed. Also prepares for the rest of the method with booleans
         {
             velocity.y += jumpVelocity * Time.deltaTime;
             inJump = true;
             currentJumpTime = jumpTime;
         }
-        if (Input.GetButton("Jump") && inJump) //If the jump button is held, the player will jump higher. The player can jump as high as the the extraJumpTime var allows
+        else if (Input.GetButton("Jump") && inJump) //If the jump button is held, the player will jump higher. The player can jump as high as the the extraJumpTime var allows
         {
             if (currentJumpTime > 0)
             {
@@ -84,6 +107,7 @@ public class PlayerController : PhysicsObject
             else
                 inJump = false;
         }
+        */
     }
     
     public void AddForce(Vector2 newForce) //Used to add a force to the object from outside of the script
