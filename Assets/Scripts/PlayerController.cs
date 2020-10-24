@@ -73,23 +73,27 @@ public class PlayerController : PhysicsObject
 
     private void HandleJumping()
     {
+        if (Input.GetButtonDown("Jump") && grounded) //Applyes velocity once the jump button is pressed. Also prepares for the rest of the method with booleans
         {
-            if (Input.GetButtonDown("Jump") && grounded) //Applies velocity once the jump button is pressed. Also prepares for the rest of the method with booleans
-            {
-                velocity.y += jumpVelocity * Time.deltaTime;
-                inJump = true;
-                currentJumpTime = jumpTime - Time.deltaTime;
-                while (Input.GetButton("Jump") && currentJumpTime > 0 && (currentJumpTime - Time.deltaTime) > 0) //Keeps applying the velocity for as long as the "jump" button is being pressed
-                {
-                    velocity.y += jumpVelocity * Time.deltaTime;
-                    currentJumpTime -= Time.deltaTime;
-                }
-                if (Input.GetButtonDown("Jump"))
-                    velocity.y += jumpVelocity * currentJumpTime;
-                inJump = false;
-            }
-
+            velocity.y += jumpVelocity * Time.deltaTime;
+            inJump = true;
+            currentJumpTime = jumpTime - Time.deltaTime;
         }
+        if (Input.GetButton("Jump") && inJump) //If the jump button is held, the player will jump higher. The player can jump as high as the the extraJumpTime var allows
+        {
+            if (currentJumpTime > 0)
+            {
+                if ((currentJumpTime - Time.deltaTime) < 0)
+                    velocity.y += jumpVelocity * (currentJumpTime % Time.deltaTime);
+                else
+                    velocity.y += jumpVelocity * Time.deltaTime;
+
+                currentJumpTime -= Time.deltaTime;
+            }
+            else
+                inJump = false;
+        }
+            
         /**
         if (Input.GetButtonDown("Jump") && grounded) //Applyes velocity once the jump button is pressed. Also prepares for the rest of the method with booleans
         {
