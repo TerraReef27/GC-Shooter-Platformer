@@ -8,7 +8,6 @@ public class AmmoUIScript : MonoBehaviour
     private GunHolder gunHolder = null;
     private RespawnSystem respawn = null;
 
-    //private AmmoUIObject[] ammoUIObjects;
     private GameObject[] ammoUIObjects;
     [SerializeField] GameObject ammoUITemplate = null;
     private int currentActiveAmmoUIObject = 0;
@@ -33,6 +32,7 @@ public class AmmoUIScript : MonoBehaviour
             SetActiveAmmo(0);
     }
 
+    //Fill the array of AmmoObjects with the repsective guns the player is holding
     private void PopulateAmmoArray(Gun[] guns)
     {
         ammoUIObjects = new GameObject[guns.Length];
@@ -44,6 +44,7 @@ public class AmmoUIScript : MonoBehaviour
         }
     }
 
+    //Set which gun's ammo is currently being displayed
     private void SetActiveAmmo(int activate)
     {
         if (ammoUIObjects != null && activate < ammoUIObjects.Length)
@@ -54,27 +55,32 @@ public class AmmoUIScript : MonoBehaviour
             currentActiveAmmoUIObject = activate;
         }
     }
-    
+
+    //Receive the OnWeaponSwitch event and set the active ammo accordingly
     private void Controller_OnWeaponSwitch(int gunNum, GameObject gunObject)
     {
         SetActiveAmmo(gunNum);
     }
 
+    //Receive the OnWeaponFire event and reduce set a bullet UI to be in the fired state
     private void Controller_OnWeaponFire()
     {
         ammoUIObjects[currentActiveAmmoUIObject].GetComponent<AmmoUIObject>().UseBullet();
     }
 
+    //Receive the OnPlayerRespawnEvent and reset the UI
     private void Respawn_OnPlayerRespawn(Vector3 respawnPoint)
     {
         ResetAmmo();
     }
 
+    //Receive the OnResetAmmo and reset the UI
     private void Respawn_OnResetAmmo()
     {
         ResetAmmo();
     }
 
+    //Receive the OnPlayerSetSpawn event and update the UI to the new guns
     private void Respawn_OnPlayerSetSpawn(GameObject[] guns)
     {
         for(int i=0; i<ammoUIObjects.Length; i++)
@@ -93,6 +99,7 @@ public class AmmoUIScript : MonoBehaviour
         SetActiveAmmo(0);
     }
 
+    //Reset the bullet UI for all of the guns
     private void ResetAmmo()
     {
         foreach (GameObject ammoObject in ammoUIObjects)
