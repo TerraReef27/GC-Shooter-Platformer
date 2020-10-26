@@ -103,6 +103,11 @@ public class GunHolder : MonoBehaviour
         return gunArray;
     }
     
+    public GameObject[] GetGunObjects()
+    {
+        return guns.ToArray();
+    }
+
     private void LoadNewGuns(GameObject[] newGuns)
     {
         foreach(GameObject gun in guns)
