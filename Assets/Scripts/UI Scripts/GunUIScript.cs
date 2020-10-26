@@ -37,6 +37,11 @@ public class GunUIScript : MonoBehaviour
 
     private void Respawn_OnPlayerSetSpawn(GameObject[] guns)
     {
+        for (int i = 0; i < gunUIObjects.Length; i++)
+        {
+            Destroy(gunUIObjects[i]);
+        }
+
         SetGunUI();
     }
 
@@ -48,7 +53,7 @@ public class GunUIScript : MonoBehaviour
         {
             GameObject gunUIObject = Instantiate(gunUIObjectTemplate, this.gameObject.transform, false);
             gunUIObjects[i] = gunUIObject.GetComponent<GunUIObject>();
-            gunUIObjects[i].SetValues(gunUIObject);
+            gunUIObjects[i].SetValues(gunHolder.GetGunObjects()[i]);
         }
     }
 }
