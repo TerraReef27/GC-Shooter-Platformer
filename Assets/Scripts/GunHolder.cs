@@ -25,8 +25,10 @@ public class GunHolder : MonoBehaviour
          KeyCode.Alpha0
     };
 
-    public event OnWeaponSwitchDelegate OnWeaponSwitch; //Create an event for when the player dies
-    public delegate void OnWeaponSwitchDelegate(int gunNum, GameObject gunObject); //Delegate to pass on respawn information
+    public event OnWeaponSwitchDelegate OnWeaponSwitch; //Create an event for when the gun is switched
+    public delegate void OnWeaponSwitchDelegate(int gunNum, GameObject gunObject); //Delegate to pass on gun switching information
+    public event OnGunsUpdatedDelegate OnGunsUpdated; //Create an event for when the player dies
+    public delegate void OnGunsUpdatedDelegate(int numOfGuns); //Delegate to pass on respawn information
 
     #endregion Variables
 
@@ -38,7 +40,7 @@ public class GunHolder : MonoBehaviour
         respawn.HandleOldCheckpoint += Respawn_OnPlayerResetAmmo;
     }
 
-    void Start()
+    void OnEnable()
     {
         GetGunsInChild();
         if (guns[0] != null)
@@ -77,6 +79,8 @@ public class GunHolder : MonoBehaviour
 
             activeGun = guns[newGun];
             activeGun.SetActive(true);
+
+            OnGunsUpdated?.Invoke(guns.Count);
 
             OnWeaponSwitch?.Invoke(newGun, activeGun);
 

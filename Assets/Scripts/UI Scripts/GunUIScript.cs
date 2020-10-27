@@ -10,36 +10,33 @@ public class GunUIScript : MonoBehaviour
     [SerializeField] private GameObject gunUIObjectTemplate = null;
 
     private GunHolder gunHolder = null;
-    private RespawnSystem respawn = null;
     
     void Awake()
     {
-        respawn = FindObjectOfType<RespawnSystem>();
         gunHolder = FindObjectOfType<GunHolder>();
 
         gunHolder.OnWeaponSwitch += Controller_OnWeaponSwitch;
-        respawn.HandleNewCheckpoint += Respawn_OnPlayerSetSpawn;
-    }
-
-    void Start()
-    {
-        SetGunUI();
-        
-        currentSelection = 0;
+        gunHolder.OnGunsUpdated += Holder_OnGunsUpdate;
     }
 
     private void Controller_OnWeaponSwitch(int gunNum, GameObject gun)
     {
-        gunUIObjects[currentSelection].SetDeselected();
-        currentSelection = gunNum;
-        gunUIObjects[currentSelection].SetSelected();
+        if (gunUIObjects != null)
+        {
+            gunUIObjects[currentSelection].SetDeselected();
+            currentSelection = gunNum;
+            gunUIObjects[currentSelection].SetSelected();
+        }
     }
 
-    private void Respawn_OnPlayerSetSpawn(GameObject[] guns)
+    private void Holder_OnGunsUpdate(int numGuns)
     {
-        for (int i = 0; i < gunUIObjects.Length; i++)
+        if (gunUIObjects != null)
         {
-            Destroy(gunUIObjects[i]);
+            for (int i = 0; i < gunUIObjects.Length; i++)
+            {
+                Destroy(gunUIObjects[i].gameObject);
+            }
         }
 
         SetGunUI();
@@ -47,7 +44,7 @@ public class GunUIScript : MonoBehaviour
 
     private void SetGunUI()
     {
-        gunUIObjects = new GunUIObject[gunHolder.GetGuns().Length];
+        gunUIObjects = new GunUIObject[gunHolder.GetGunObjects().Length];
 
         for(int i=0; i<gunUIObjects.Length; i++)
         {
@@ -55,5 +52,8 @@ public class GunUIScript : MonoBehaviour
             gunUIObjects[i] = gunUIObject.GetComponent<GunUIObject>();
             gunUIObjects[i].SetValues(gunHolder.GetGunObjects()[i]);
         }
+
+        currentSelection = 0;
+        gunUIObjects[currentSelection].SetSelected();
     }
 }
