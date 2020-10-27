@@ -22,7 +22,7 @@ public class GunUIObject : MonoBehaviour
     public void SetDeselected()
     {
         isSelected = false;
-        pannel.color = selectedPannelColor;
+        pannel.color = regularPannelColor;
     }
 
     public void SetValues(GameObject gunObject)

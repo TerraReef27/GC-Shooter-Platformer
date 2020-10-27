@@ -79,9 +79,7 @@ public class GunHolder : MonoBehaviour
 
             activeGun = guns[newGun];
             activeGun.SetActive(true);
-
-            OnGunsUpdated?.Invoke(guns.Count);
-
+            
             OnWeaponSwitch?.Invoke(newGun, activeGun);
 
             Debug.Log("Switching to gun: " + newGun);
@@ -128,6 +126,8 @@ public class GunHolder : MonoBehaviour
 
         guns = new List<GameObject>(checkpointGuns);
         SwitchGuns(0);
+
+        OnGunsUpdated?.Invoke(guns.Count);
     }
 
     private void ReloadGuns()

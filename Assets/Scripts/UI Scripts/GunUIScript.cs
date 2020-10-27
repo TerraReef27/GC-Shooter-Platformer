@@ -19,6 +19,11 @@ public class GunUIScript : MonoBehaviour
         gunHolder.OnGunsUpdated += Holder_OnGunsUpdate;
     }
 
+    private void Start()
+    {
+        SetGunUI();
+    }
+
     private void Controller_OnWeaponSwitch(int gunNum, GameObject gun)
     {
         if (gunUIObjects != null)
