@@ -16,6 +16,7 @@ public class AmmoUIObject : MonoBehaviour
         grid = GetComponent<GridLayoutGroup>();
     }
 
+    //Populate the UI with the respective bullets for each gun
     public void PopulateUI()
     {
         for(int i=0; i<ammoArray.Length; i++)
@@ -24,6 +25,7 @@ public class AmmoUIObject : MonoBehaviour
         }
     }
 
+    //Set the values for the ammo UI container
     public void SetValues(int ammoAmount, string newGunName)
     {
         ammoArray = new GameObject[ammoAmount];
@@ -33,6 +35,7 @@ public class AmmoUIObject : MonoBehaviour
         PopulateUI();
     }
 
+    //Change the visual of the current bullet to show a fired state
     public void UseBullet()
     {
         ammoArray[ammoLeft].GetComponent<Image>().color = new Color(1f, 1f, 1f, .2f);
@@ -43,6 +46,7 @@ public class AmmoUIObject : MonoBehaviour
             Debug.Log("UI Ammo Attempts to go under 0");
     }
 
+    //Reset the UI back to the full, unfired state
     public void ResetAmmo()
     {
         foreach(GameObject ammo in ammoArray)
