@@ -41,9 +41,12 @@ public class Gun : MonoBehaviour
 
     public void Shoot(Vector2 shootDir) //Should be called when the object fires the gun. Handles ammo and effects
     {
-        GameObject bull = Instantiate(bullet, firePoint.position, Quaternion.Euler(0, 0, 0), bulletCollecter.transform);
-        bull.GetComponent<Projectile>().Shot(projectileSpeed, shootDir.normalized);
-        currentAmmo--;
+        if (!PauseMenu.isGamePaused)
+        {
+            GameObject bull = Instantiate(bullet, firePoint.position, Quaternion.Euler(0, 0, 0), bulletCollecter.transform);
+            bull.GetComponent<Projectile>().Shot(projectileSpeed, shootDir.normalized);
+            currentAmmo--;
+        }
     }
     
     public void RefillAmmo()

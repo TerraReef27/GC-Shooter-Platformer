@@ -34,17 +34,17 @@ public class PlayerController : PhysicsObject
 
     #endregion Variables
 
-    private void Update()                                                                 //|
-    {                                                                             //|
-        if (Input.GetButtonDown("Cancel"))        //Check if Escape if pressed    //|
-        {                                         //If true, call PauseGame()     //|
-            PauseGame();                                                          //|
-        }                             //Somehow this breaks the player controller //|
-    }                                                                             //|
-    public void PauseGame()                                                       //|
-    {                                                                             //|
-        SceneManager.LoadScene("PauseMenu");     //Load Pause Menu               //|
-    }                                                                             //|
+    //private void Update()                                                                 //|
+    //{                                                                             //|
+    //    if (Input.GetButtonDown("Cancel"))        //Check if Escape if pressed    //|
+    //    {                                         //If true, call PauseGame()     //|
+    //        PauseGame();                                                          //|
+    //    }                             //Somehow this breaks the player controller //|
+    //}                                                                             //|
+    //public void PauseGame()                                                       //|
+    //{                                                                             //|
+    //    SceneManager.LoadScene("PauseMenu");     //Load Pause Menu               //|
+    //}                                                                             //|
 
     protected override void SetStartValues()
     {

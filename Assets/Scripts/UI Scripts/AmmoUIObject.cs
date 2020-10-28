@@ -38,12 +38,15 @@ public class AmmoUIObject : MonoBehaviour
     //Change the visual of the current bullet to show a fired state
     public void UseBullet()
     {
-        ammoArray[ammoLeft].GetComponent<Image>().color = new Color(1f, 1f, 1f, .2f);
+        if (!PauseMenu.isGamePaused)
+        {
+            ammoArray[ammoLeft].GetComponent<Image>().color = new Color(1f, 1f, 1f, .2f);
 
-        if (ammoLeft >= 0)
-            ammoLeft--;
-        else
-            Debug.Log("UI Ammo Attempts to go under 0");
+            if (ammoLeft >= 0)
+                ammoLeft--;
+            else
+                Debug.Log("UI Ammo Attempts to go under 0");
+        }
     }
 
     //Reset the UI back to the full, unfired state
