@@ -54,34 +54,37 @@ public class PlayerController : PhysicsObject
 
     protected override void ComputeVelocity()
     {
-        Vector2 moveTo = Vector2.zero;
-
-        float moveInputDirection = Input.GetAxisRaw("Horizontal");
-        animationXMovement = moveInputDirection; //Used for the animator to determine input direction
-
-        if (moveInputDirection != 0 && state != playerState.sliding) //Move by values when inputing on the x-axis (change acceleration when in the air vs on the ground)
+        if (!PauseMenu.isGamePaused)
         {
-            if (grounded)
+            Vector2 moveTo = Vector2.zero;
+
+            float moveInputDirection = Input.GetAxisRaw("Horizontal");
+            animationXMovement = moveInputDirection; //Used for the animator to determine input direction
+
+            if (moveInputDirection != 0 && state != playerState.sliding) //Move by values when inputing on the x-axis (change acceleration when in the air vs on the ground)
             {
-                if (Math.Sign(velocity.x) != Math.Sign(moveInputDirection))
-                    moveTo.x = Mathf.MoveTowards(moveTo.x, moveSpeed * moveInputDirection, (runDecelerationRate + runAccelerationRate) * Time.deltaTime);
+                if (grounded)
+                {
+                    if (Math.Sign(velocity.x) != Math.Sign(moveInputDirection))
+                        moveTo.x = Mathf.MoveTowards(moveTo.x, moveSpeed * moveInputDirection, (runDecelerationRate + runAccelerationRate) * Time.deltaTime);
+                    else
+                        moveTo.x = Mathf.MoveTowards(moveTo.x, moveSpeed * moveInputDirection, runAccelerationRate * Time.deltaTime);
+                }
                 else
-                    moveTo.x = Mathf.MoveTowards(moveTo.x, moveSpeed * moveInputDirection, runAccelerationRate * Time.deltaTime);
+                    moveTo.x = Mathf.MoveTowards(moveTo.x * airMovementMultiplyer, moveSpeed * moveInputDirection, runAccelerationRate * Time.deltaTime);
             }
-            else
-                moveTo.x = Mathf.MoveTowards(moveTo.x * airMovementMultiplyer, moveSpeed * moveInputDirection, runAccelerationRate * Time.deltaTime);
+            else if (grounded) //When not inputing on ground, slow by decelerationRate
+            {
+                velocity.x = Mathf.MoveTowards(velocity.x, 0, runDecelerationRate * Time.deltaTime);
+            }
+
+            HandleJumping();
+            HandleInput();
+
+            ApplyForce(ref moveTo, ref outsideMoveInfluence);
+
+            targetVelocity = moveTo;
         }
-        else if(grounded) //When not inputing on ground, slow by decelerationRate
-        {
-            velocity.x = Mathf.MoveTowards(velocity.x, 0, runDecelerationRate * Time.deltaTime);
-        }
-
-        HandleJumping();
-        HandleInput();
-
-        ApplyForce(ref moveTo, ref outsideMoveInfluence);
-
-        targetVelocity = moveTo;
     }
 
     private void HandleJumping()

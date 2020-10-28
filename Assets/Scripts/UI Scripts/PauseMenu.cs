@@ -31,7 +31,7 @@ public class PauseMenu : MonoBehaviour
         isGamePaused = true;
     }
 
-    void Resume()
+    public void Resume()
     {
         pauseMenu.SetActive(false);
         Time.timeScale = 1f;
