@@ -7,6 +7,7 @@ TagManager:
   - Killer
   - Projectile
   - Collecter
+  - OneWayPlatform
   layers:
   - Default
   - TransparentFX
