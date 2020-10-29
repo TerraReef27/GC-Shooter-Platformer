@@ -7,7 +7,8 @@ public class MainMenu : MonoBehaviour
     {
         
     }
-
+    public GameObject mainMenu;
+    public GameObject optionsMenu;
     //public void PlayButton()
     //{
     //    SceneManager.LoadScene(1);
@@ -42,6 +43,26 @@ public class MainMenu : MonoBehaviour
     public void MainMenuButton()
     {
         SceneManager.LoadScene("MainMenu");
+    }
+    public void MainMenuOptions()
+    {
+        float time = 2f;
+        time -= Time.deltaTime;
+        if (time > 0)
+        {
+            SceneManager.LoadScene("MainMenu");
+
+            Debug.Log("MainMenuOptions - Loaded Scene - Time:" /*+ time*/);
+
+        }
+        else
+        {
+            mainMenu.SetActive(false);
+            optionsMenu.SetActive(true);
+            time = .5f;
+            Debug.Log("MainMenuOptions - SetActive Statements");
+        }
+        Debug.Log(time);
     }
     public void QuitButton()
     {

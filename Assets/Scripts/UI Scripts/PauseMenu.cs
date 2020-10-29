@@ -7,8 +7,12 @@ public class PauseMenu : MonoBehaviour
 {
     public static bool isGamePaused = false;
 
+    RespawnSystem respawn;
+    MainMenu mainMenu;
     public GameObject pauseMenu;
     
+
+
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.Escape))
@@ -16,10 +20,12 @@ public class PauseMenu : MonoBehaviour
             if(isGamePaused)
             {
                 Resume();
+                Debug.Log("Resuming");
             }
             else
             {
                 Pause();
+                Debug.Log("Game is paused");
             }
         }
     }
@@ -37,5 +43,14 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1f;
         isGamePaused = false;
     }
-    
+
+    public void Options()
+    {
+        mainMenu.MainMenuOptions();
+
+    }
+    public void LastCheckPoint()
+    {
+        respawn.Respawn();
+    }
 }

@@ -25,6 +25,8 @@ public class CharacterGunController : MonoBehaviour
     public delegate void OnWeaponFireDelegate(); //Delegate to pass on respawn information
     #endregion Variables
 
+    //public GameObject rightArmSolverTarget;
+
     void Awake()
     {
         if (cam == null) cam = FindObjectOfType<Camera>();
@@ -96,7 +98,7 @@ public class CharacterGunController : MonoBehaviour
     private void RotateSprites() //Rotate the player and gun sprites according to the mouse position
     {
         Vector3 facing = GetCurrentMousePosition() - transform.position;
-        
+
         angle = Mathf.Atan2(facing.y, facing.x) * Mathf.Rad2Deg;
 
         if (angle > 90)
@@ -110,7 +112,7 @@ public class CharacterGunController : MonoBehaviour
                 isFlipped = true;
             }
         }
-        else if(angle < -90)
+        else if (angle < -90)
         {
             sprite.flipX = true;
             gun.Sprite.flipX = true;
@@ -131,8 +133,8 @@ public class CharacterGunController : MonoBehaviour
                 isFlipped = false;
             }
         }
-
         gun.transform.rotation = Quaternion.Euler(0, 0, angle);
+        //gun.transform.position = rightArmSolverTarget.transform.position; //Clay
     }
 
     //Function for translating the mouse position into a 2d vector

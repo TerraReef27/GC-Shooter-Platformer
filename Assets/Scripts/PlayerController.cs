@@ -33,19 +33,6 @@ public class PlayerController : PhysicsObject
     public playerState state = playerState.neutral;
 
     #endregion Variables
-
-    //private void Update()                                                                 //|
-    //{                                                                             //|
-    //    if (Input.GetButtonDown("Cancel"))        //Check if Escape if pressed    //|
-    //    {                                         //If true, call PauseGame()     //|
-    //        PauseGame();                                                          //|
-    //    }                             //Somehow this breaks the player controller //|
-    //}                                                                             //|
-    //public void PauseGame()                                                       //|
-    //{                                                                             //|
-    //    SceneManager.LoadScene("PauseMenu");     //Load Pause Menu               //|
-    //}                                                                             //|
-
     protected override void SetStartValues()
     {
         runDecelerationRate = baseRunDecelerationRate;

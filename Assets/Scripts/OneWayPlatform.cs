@@ -33,7 +33,7 @@ public class OneWayPlatform : MonoBehaviour
             platform.tag = "Untagged";
             time = 2f;
         }
-        Debug.Log(time);
+        //Debug.Log(time);
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
