@@ -73,18 +73,23 @@ public class CharacterGunController : MonoBehaviour
 
     private void HandleFiring()
     {
-        if (Input.GetButtonDown("Fire1") && gun != null && gun.CurrentAmmo > 0) //Gets the mouse postion and adds a force to the player in the opposite direction of the mouse relative to the player. Amount of force is determined by the recoilForce
+        if (!PauseMenu.isGamePaused)
         {
-            //Debug.DrawLine(transform.position, mousePos, Color.red, 1f);
-            Vector2 forceTo = new Vector2(transform.position.x - mousePos.x, transform.position.y - mousePos.y);
-            playerMove.AddForce(forceTo.normalized * gun.RecoilForce);
-            //gun.Shoot(Vector2.Angle(mousePos.normalized, transform.position.normalized));
-            //Vector2 shotAngle = new Vector2(mousePos.x - transform.position.x, mousePos.y - transform.position.y);
-            Vector3 facing = mousePos - transform.position;
-            angle = Mathf.Atan2(facing.y, facing.x) * Mathf.Rad2Deg;
-            gun.Shoot(-forceTo);
 
-            OnWeaponFire?.Invoke();
+
+            if (Input.GetButtonDown("Fire1") && gun != null && gun.CurrentAmmo > 0) //Gets the mouse postion and adds a force to the player in the opposite direction of the mouse relative to the player. Amount of force is determined by the recoilForce
+            {
+                //Debug.DrawLine(transform.position, mousePos, Color.red, 1f);
+                Vector2 forceTo = new Vector2(transform.position.x - mousePos.x, transform.position.y - mousePos.y);
+                playerMove.AddForce(forceTo.normalized * gun.RecoilForce);
+                //gun.Shoot(Vector2.Angle(mousePos.normalized, transform.position.normalized));
+                //Vector2 shotAngle = new Vector2(mousePos.x - transform.position.x, mousePos.y - transform.position.y);
+                Vector3 facing = mousePos - transform.position;
+                angle = Mathf.Atan2(facing.y, facing.x) * Mathf.Rad2Deg;
+                gun.Shoot(-forceTo);
+
+                OnWeaponFire?.Invoke();
+            }
         }
     }
 

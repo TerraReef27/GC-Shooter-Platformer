@@ -45,6 +45,7 @@ public class MainMenu : MonoBehaviour
     }
     public void QuitButton()
     {
+        Debug.Log("Quitting...");
         Application.Quit();
     }
 }
