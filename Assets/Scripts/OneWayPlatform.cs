@@ -7,7 +7,9 @@ public class OneWayPlatform : MonoBehaviour
 {
     public bool isAbove;
     public bool isBelow;
+    //public bool Stuck;
     bool isGrounded;
+    //bool isStuck;
     //public bool isGrounded;
 
     public GameObject groundCheck;
@@ -33,6 +35,16 @@ public class OneWayPlatform : MonoBehaviour
             platform.tag = "Untagged";
             time = 2f;
         }
+        //if(isStuck && time > 0)
+        //{
+        //    time -= Time.fixedDeltaTime;
+        //    platform.tag = "OneWayPlatform";
+        //}
+        //else
+        //{
+        //    platform.tag = "Untagged";
+        //    time = 2f;
+        //}
         //Debug.Log(time);
     }
     private void OnTriggerEnter2D(Collider2D collision)
@@ -53,6 +65,9 @@ public class OneWayPlatform : MonoBehaviour
         {
             isGrounded = false;
         }
+        //if(Stuck)
+        //{
+        //    isStuck = true;
+        //}
     }
-
 }

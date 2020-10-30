@@ -10,7 +10,10 @@ public class PauseMenu : MonoBehaviour
     RespawnSystem respawn;
     MainMenu mainMenu;
     public GameObject pauseMenu;
-    
+    private void Awake()
+    {
+        respawn = FindObjectOfType<RespawnSystem>();
+    }
 
 
     void Update()
