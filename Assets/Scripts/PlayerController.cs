@@ -17,7 +17,7 @@ public class PlayerController : PhysicsObject
     [Tooltip("How much less the movement inputs affect the player when in the air")]
     [SerializeField] private float airMovementMultiplyer = .5f;
 
-    [SerializeField] private CapsuleCollider2D playerCollider = null;
+    [SerializeField] private BoxCollider2D playerCollider = null;
     [SerializeField] private BoxCollider2D slideCollider = null;
 
     private Vector2 outsideMoveInfluence; //Force coming from outside influences
@@ -96,25 +96,6 @@ public class PlayerController : PhysicsObject
             else
                 inJump = false;
         }
-            
-        /**
-        if (Input.GetButtonDown("Jump") && grounded) //Applyes velocity once the jump button is pressed. Also prepares for the rest of the method with booleans
-        {
-            velocity.y += jumpVelocity * Time.deltaTime;
-            inJump = true;
-            currentJumpTime = jumpTime;
-        }
-        else if (Input.GetButton("Jump") && inJump) //If the jump button is held, the player will jump higher. The player can jump as high as the the extraJumpTime var allows
-        {
-            if (currentJumpTime > 0)
-            {
-                velocity.y += jumpVelocity * Time.deltaTime;
-                currentJumpTime -= Time.deltaTime;
-            }
-            else
-                inJump = false;
-        }
-        */
     }
     
     public void AddForce(Vector2 newForce) //Used to add a force to the object from outside of the script
@@ -136,29 +117,27 @@ public class PlayerController : PhysicsObject
         {
             runDecelerationRate = slideDeceleration;
             state = playerState.sliding;
-            //ToggleActiveHitbox(slideCollider, playerCollider);
+            ToggleActiveHitbox(slideCollider, playerCollider);
         }
         else if(runDecelerationRate <= 1 && state == playerState.sliding)
         {
-            //ToggleActiveHitbox(playerCollider, slideCollider);
+            ToggleActiveHitbox(playerCollider, slideCollider);
 
             runDecelerationRate = baseRunDecelerationRate;
             state = playerState.neutral;             
         }
     }
-
-    /*
-     * TODO: Fix this!
+    
     private void ToggleActiveHitbox(Collider2D activate, Collider2D disable)
     {
-        
+        /*
         float activateSize = activate.bounds.size.y;
         float disableSize = disable.bounds.size.y;
         float offset = (activateSize - disableSize)/2;
         Debug.Log(offset);
         gameObject.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + offset, gameObject.transform.position.z);
+        */
         disable.enabled = false;
         activate.enabled = true;
     }
-    */
 }
