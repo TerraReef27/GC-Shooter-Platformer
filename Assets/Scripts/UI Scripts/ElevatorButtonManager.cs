@@ -10,11 +10,11 @@ public class ElevatorButtonManager : MonoBehaviour
 
     void Start()
     {
-        buttons = new ElevatorButton[SceneTransitioner.GetNumLevels()];
+        buttons = new ElevatorButton[SceneTransitioner.NumberOfLevels];
         for(int i=0; i<buttons.Length; i++) //Create a button for each level and assign them to the array
         {
             buttons[i] = Instantiate(buttonTemplate, this.transform, false).GetComponent<ElevatorButton>();
-            buttons[i].SetNumber(i);
+            buttons[i].SetNumber(i+1);
         }
     }
 }

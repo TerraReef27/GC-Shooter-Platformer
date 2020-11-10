@@ -13,12 +13,19 @@ public class ElevatorButton : MonoBehaviour
     void Awake()
     {
         button = FindObjectOfType<Button>();
+        button.onClick.AddListener(TaskOnClick);
+    }
+
+    void TaskOnClick()
+    {
+        Debug.Log("Going to level " + buttonNumber);
+        ChageToScene();
     }
 
     public void SetNumber(int num)
     {
         buttonNumber = num;
-        GetComponent<TextMeshPro>().text = buttonNumber.ToString();
+        GetComponentInChildren<TextMeshProUGUI>().text = buttonNumber.ToString();
     }
 
     private void ChageToScene()
