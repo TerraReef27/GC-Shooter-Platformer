@@ -15,7 +15,6 @@ public class PauseMenu : MonoBehaviour
         respawn = FindObjectOfType<RespawnSystem>();
     }
 
-
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.Escape))
@@ -34,11 +33,11 @@ public class PauseMenu : MonoBehaviour
     }
 
      void Pause()
-    {
+     {
         pauseMenu.SetActive(true);
         Time.timeScale = 0f;
         isGamePaused = true;
-    }
+     }
 
     public void Resume()
     {

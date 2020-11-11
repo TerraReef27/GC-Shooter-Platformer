@@ -25,7 +25,7 @@ public class CharacterGunController : MonoBehaviour
     public delegate void OnWeaponFireDelegate(); //Delegate to pass on respawn information
     #endregion Variables
 
-    public GameObject rightArmSolverTarget;
+    //public GameObject rightArmSolverTarget;
 
     void Awake()
     {
@@ -134,7 +134,7 @@ public class CharacterGunController : MonoBehaviour
             }
         }
         gun.transform.rotation = Quaternion.Euler(0, 0, angle);
-        gun.transform.position = rightArmSolverTarget.transform.position; //Clay
+        //gun.transform.position = rightArmSolverTarget.transform.position; //Clay
     }
 
     //Function for translating the mouse position into a 2d vector
