@@ -6,6 +6,7 @@ using UnityEngine;
 [RequireComponent(typeof (BoxCollider2D))]
 public class PhysicsController : MonoBehaviour
 {
+    #region Variables
     private float skinSize = 0.01f;
     private int numHorizontalRays = 5;
     private int numVerticalRays = 3;
@@ -14,9 +15,20 @@ public class PhysicsController : MonoBehaviour
 
     struct RayOrigins { public Vector2 topLeft, topRight, bottomLeft, bottomRight; }
     private RayOrigins rayOrigins;
+    public struct CollisionInfo
+    {
+        public bool isAbove, isBelow, isLeft, isRight;
+        public void ResetInfo()
+        {
+            isAbove = isBelow = isLeft = isRight = false;
+        }
+    }
+    private CollisionInfo info;
+    public CollisionInfo Info { get { return info; } }
     [SerializeField] LayerMask collisionMask;
 
     private BoxCollider2D mainCollider = new BoxCollider2D();
+    #endregion
 
     void Awake()
     {
@@ -30,6 +42,7 @@ public class PhysicsController : MonoBehaviour
     
     public void Move(Vector3 moveVelocity)
     {
+        info.ResetInfo();
         UpdateRayOrigin();
         
         if(moveVelocity.x != 0)
@@ -57,6 +70,9 @@ public class PhysicsController : MonoBehaviour
             {
                 moveVelocity.x = (hit.distance - skinSize) * direction;
                 length = hit.distance;
+
+                info.isRight = direction == 1;
+                info.isLeft = direction == -1;
             }
         }
     }
@@ -77,6 +93,9 @@ public class PhysicsController : MonoBehaviour
             {
                 moveVelocity.y = (hit.distance - skinSize) * direction;
                 length = hit.distance;
+
+                info.isAbove = direction == 1;
+                info.isBelow = direction == -1;
             }
         }
     }
