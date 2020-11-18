@@ -7,10 +7,14 @@ public class PlayerMover : MonoBehaviour
 {
     [SerializeField] private float jumpHeight = 2f;
     [SerializeField] private float jumpTime = 0.3f;
+
     [SerializeField] private float moveSpeed = 5f;
+    [SerializeField] private float groundAcceleration = .2f;
+    [SerializeField] private float airAcceleration = .1f;
 
     private float gravity;
     private float jumpVelocity;
+    private float moveSmoothing;
 
     private PhysicsController physicsController;
     private Vector3 velocity;
@@ -36,15 +40,11 @@ public class PlayerMover : MonoBehaviour
         }
 
         horizontalInput = Input.GetAxisRaw("Horizontal");
-        if (horizontalInput != 0)
-        {
-            Debug.Log(physicsController.Info);
-            velocity.x += moveSpeed * horizontalInput * Time.deltaTime;
-        }
+        float targetMoveSpeed = moveSpeed * horizontalInput;
+        velocity.x = Mathf.SmoothDamp(velocity.x, targetMoveSpeed, ref moveSmoothing, (physicsController.Info.isBelow) ? groundAcceleration : airAcceleration); //Accelerate with smoothing according to if the character is grounded or not
 
         if(Input.GetButtonDown("Jump") && physicsController.Info.isBelow)
         {
-            Debug.Log("Jumping");
             velocity.y = jumpVelocity;
         }
 

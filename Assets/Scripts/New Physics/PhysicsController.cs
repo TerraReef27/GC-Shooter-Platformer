@@ -7,7 +7,7 @@ using UnityEngine;
 public class PhysicsController : MonoBehaviour
 {
     #region Variables
-    private float skinSize = 0.01f;
+    private float skinSize = 0.0125f;
     private int numHorizontalRays = 5;
     private int numVerticalRays = 3;
     
@@ -18,14 +18,22 @@ public class PhysicsController : MonoBehaviour
     public struct CollisionInfo
     {
         public bool isAbove, isBelow, isLeft, isRight;
+        public bool isClimbingSlope;
+        public float slopeAngle, oldSlopeAngle;
+
         public void ResetInfo()
         {
             isAbove = isBelow = isLeft = isRight = false;
+            isClimbingSlope = false;
+            oldSlopeAngle = slopeAngle;
+            slopeAngle = 0;
         }
     }
     private CollisionInfo info;
     public CollisionInfo Info { get { return info; } }
     [SerializeField] LayerMask collisionMask;
+
+    [SerializeField] private int maxClimbAngle = 45;
 
     private BoxCollider2D mainCollider = new BoxCollider2D();
     #endregion
@@ -63,16 +71,34 @@ public class PhysicsController : MonoBehaviour
             Vector2 origin = (direction == -1) ? rayOrigins.bottomLeft : rayOrigins.bottomRight; //Determine which rays to check
             origin += Vector2.up * (horizontalRaySpace * i); //Check the rays for the projected movement
             RaycastHit2D hit = Physics2D.Raycast(origin, Vector2.right * direction, length, collisionMask); //Generate a hit to see if the ray collided with anything on the collisionMask
-
+            
             Debug.DrawRay(origin, direction * Vector2.right * length, Color.green);
 
             if (hit) //If the ray collides, change the collision so that it stops at the collision point
             {
-                moveVelocity.x = (hit.distance - skinSize) * direction;
-                length = hit.distance;
+                if (i == 0) //Only check slope if its the first raycast
+                {
+                    float angle = Vector2.Angle(hit.normal, Vector2.up); //Change velocity if on a shallow enough slope
+                    if (angle <= maxClimbAngle)
+                    {
+                        float distanceToSlope = 0;
+                        if (angle != info.oldSlopeAngle) //Check if walking on a new slope
+                        {
+                            distanceToSlope = hit.distance - skinSize;
+                            moveVelocity.x -= distanceToSlope * direction;
+                        }
+                        ClimbSlope(ref moveVelocity, angle);
+                        moveVelocity.x += distanceToSlope * direction; //Add back on removed velocity from moving on slope
+                    }
+                }
+                if (!info.isClimbingSlope)
+                {
+                    moveVelocity.x = (hit.distance - skinSize) * direction;
+                    length = hit.distance;
 
-                info.isRight = direction == 1;
-                info.isLeft = direction == -1;
+                    info.isRight = direction == 1;
+                    info.isLeft = direction == -1;
+                }
             }
         }
     }
@@ -100,6 +126,21 @@ public class PhysicsController : MonoBehaviour
         }
     }
     
+    private void ClimbSlope(ref Vector3 moveVelocity, float angle) //Use basic trig to calculate the new xy values according to our slope angle
+    {
+        float moveDist = Math.Abs(moveVelocity.x);
+        float climbY = (float)Math.Sin(angle * Mathf.Deg2Rad) * moveDist;
+
+        if (moveVelocity.y <= climbY)
+        {
+            moveVelocity.y = climbY;
+            moveVelocity.x = (float)Math.Cos(angle * Mathf.Deg2Rad) * moveDist * Mathf.Sign(moveVelocity.x);
+            info.isBelow = true;
+            info.isClimbingSlope = true;
+            info.slopeAngle = angle;
+        }
+    }
+
     private void UpdateRayOrigin()
     {
         Bounds bounds = mainCollider.bounds;
