@@ -76,25 +76,27 @@ public class PhysicsController : MonoBehaviour
 
             if (hit) //If the ray collides, change the collision so that it stops at the collision point
             {
-                if (i == 0) //Only check slope if its the first raycast
+                float angle = Vector2.Angle(hit.normal, Vector2.up);
+                if (i == 0 && angle <= maxClimbAngle) //Only check slope if its the first raycast and change velocity if on a shallow enough slope
                 {
-                    float angle = Vector2.Angle(hit.normal, Vector2.up); //Change velocity if on a shallow enough slope
-                    if (angle <= maxClimbAngle)
+                    float distanceToSlope = 0;
+                    if (angle != info.oldSlopeAngle) //Check if walking on a new slope
                     {
-                        float distanceToSlope = 0;
-                        if (angle != info.oldSlopeAngle) //Check if walking on a new slope
-                        {
-                            distanceToSlope = hit.distance - skinSize;
-                            moveVelocity.x -= distanceToSlope * direction;
-                        }
-                        ClimbSlope(ref moveVelocity, angle);
-                        moveVelocity.x += distanceToSlope * direction; //Add back on removed velocity from moving on slope
+                        distanceToSlope = hit.distance - skinSize;
+                        moveVelocity.x -= distanceToSlope * direction;
                     }
+                    ClimbSlope(ref moveVelocity, angle);
+                    moveVelocity.x += distanceToSlope * direction; //Add back on removed velocity from moving on slope
                 }
-                if (!info.isClimbingSlope)
+                if (!info.isClimbingSlope || angle > maxClimbAngle)
                 {
                     moveVelocity.x = (hit.distance - skinSize) * direction;
                     length = hit.distance;
+
+                    if(info.isClimbingSlope)
+                    {
+                        moveVelocity.y = Mathf.Tan(info.slopeAngle * Mathf.Rad2Deg) * moveVelocity.x; //Use unchanged angle to adjust y value
+                    }
 
                     info.isRight = direction == 1;
                     info.isLeft = direction == -1;
