@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8dfeb7f30c049b428ffa61f18039f96, type: 3}
+  m_Name: Enemy3
+  m_EditorClassIdentifier: 
+  enemyName: Spec Ops
+  movementSpeed: 75
+  spawnDuplicates: 1
+  isGrounded: 0
+  canFly: 0
+  canJump: 1
+  canHoldWeapon: 1
+  patrols: 0
+  chases: 0
+  spawnDuringRunTime: 0
+  enemyPrefab: {fileID: 1464352952621607873, guid: df5b17e098ae97646b3b6309f9ffebfe,
+    type: 3}
+  weapon: {fileID: 3058546187120983853, guid: b727d1e46a170db42b95da4a45d09ee7, type: 3}
+  spawnLocation:
+  - {x: 5, y: 3, z: 0}
+  spawnTime: 0
