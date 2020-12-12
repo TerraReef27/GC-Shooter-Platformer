@@ -42,7 +42,10 @@ public class CharacterGunController : MonoBehaviour
     void Start()
     {
         if (holder.activeGun != null)
+        {
             gunObject = holder.activeGun;
+            gun = gunObject.GetComponent<Gun>();
+        }
     }
 
     private void Holder_OnWeaponChange(int gunNumber, GameObject gunObj)

@@ -38,6 +38,11 @@ public class Enemy : ScriptableObject
     public Vector3[] spawnLocation = new Vector3[1];
     [Tooltip("The amount of time to pass before the enemy spawns.")]
     public float spawnTime;
+
+    [Header("Notes")]
+    [Tooltip("Space to add notes about enemy characteristics and future ideas for the enemy.")]
+    [TextArea(3,10)]
+    [SerializeField] private string notePad = "Can Fly & Can Jump, should not be checked at the same time. Same with Patrols & Chases. (Either one, or none at all)";
 }
 //[CustomEditor(typeof(Enemy))]
 //public class EnemyScriptEditor : Editor

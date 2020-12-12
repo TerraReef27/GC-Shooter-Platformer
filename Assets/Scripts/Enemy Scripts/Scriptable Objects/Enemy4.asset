@@ -28,3 +28,5 @@ MonoBehaviour:
   spawnLocation:
   - {x: 1, y: 1, z: 0}
   spawnTime: 0
+  notePad: Can Fly & Can Jump, should not be checked at the same time. Same with
+    Patrols & Chases. (Either one, or none at all)
