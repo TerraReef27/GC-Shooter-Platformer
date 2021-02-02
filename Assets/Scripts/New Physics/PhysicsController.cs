@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof (BoxCollider2D))]
@@ -18,13 +16,13 @@ public class PhysicsController : MonoBehaviour
     public struct CollisionInfo
     {
         public bool isAbove, isBelow, isLeft, isRight;
-        public bool isClimbingSlope;
+        public bool isClimbingSlope, isDecendingSlope;
         public float slopeAngle, oldSlopeAngle;
 
         public void ResetInfo()
         {
             isAbove = isBelow = isLeft = isRight = false;
-            isClimbingSlope = false;
+            isClimbingSlope = isDecendingSlope = false;
             oldSlopeAngle = slopeAngle;
             slopeAngle = 0;
         }
@@ -34,6 +32,7 @@ public class PhysicsController : MonoBehaviour
     [SerializeField] LayerMask collisionMask;
 
     [SerializeField] private int maxClimbAngle = 45;
+    [SerializeField] private int maxDecendAngle = 80;
 
     private BoxCollider2D mainCollider = new BoxCollider2D();
     #endregion
@@ -52,7 +51,9 @@ public class PhysicsController : MonoBehaviour
     {
         info.ResetInfo();
         UpdateRayOrigin();
-        
+
+        if (moveVelocity.y < 0)
+            DecendSlope(ref moveVelocity);
         if(moveVelocity.x != 0)
             HandleHorizontalCollisions(ref moveVelocity);
         if(moveVelocity.y != 0)
@@ -122,8 +123,29 @@ public class PhysicsController : MonoBehaviour
                 moveVelocity.y = (hit.distance - skinSize) * direction;
                 length = hit.distance;
 
+                if (info.isClimbingSlope)
+                    moveVelocity.x = moveVelocity.y / Mathf.Tan(info.slopeAngle * Mathf.Deg2Rad) * Mathf.Sign(moveVelocity.x);
+
                 info.isAbove = direction == 1;
                 info.isBelow = direction == -1;
+            }
+        }
+
+        if(info.isClimbingSlope) //Check to see if there is a change to a new slope. If there is adjust the velocity accordingly
+        {
+            float directionX = Mathf.Sign(moveVelocity.x);
+            length = Mathf.Abs(moveVelocity.x) + skinSize;
+            Vector2 origin = ((directionX == -1) ? rayOrigins.bottomLeft : rayOrigins.bottomRight) + Vector2.up * moveVelocity.y;
+            RaycastHit2D hit = Physics2D.Raycast(origin, Vector2.right * directionX, length, collisionMask);
+
+            if(hit)
+            {
+                float slopeAngle = Vector2.Angle(hit.normal, Vector2.up);
+                if(slopeAngle != info.slopeAngle)
+                {
+                    moveVelocity.x = (hit.distance - skinSize) * directionX;
+                    info.slopeAngle = slopeAngle;
+                }
             }
         }
     }
@@ -131,15 +153,46 @@ public class PhysicsController : MonoBehaviour
     private void ClimbSlope(ref Vector3 moveVelocity, float angle) //Use basic trig to calculate the new xy values according to our slope angle
     {
         float moveDist = Math.Abs(moveVelocity.x);
-        float climbY = (float)Math.Sin(angle * Mathf.Deg2Rad) * moveDist;
+        float climbY = Mathf.Sin(angle * Mathf.Deg2Rad) * moveDist;
 
-        if (moveVelocity.y <= climbY)
+        if (moveVelocity.y <= climbY) //Check if jumping so that the y is not changed
         {
             moveVelocity.y = climbY;
-            moveVelocity.x = (float)Math.Cos(angle * Mathf.Deg2Rad) * moveDist * Mathf.Sign(moveVelocity.x);
+            moveVelocity.x = Mathf.Cos(angle * Mathf.Deg2Rad) * moveDist * Mathf.Sign(moveVelocity.x);
             info.isBelow = true;
             info.isClimbingSlope = true;
             info.slopeAngle = angle;
+        }
+    }
+    
+    private void DecendSlope(ref Vector3 moveVelocity)
+    {
+        float xDirection = Mathf.Sign(moveVelocity.x);
+        Vector2 origin = (xDirection == -1) ? rayOrigins.bottomRight : rayOrigins.bottomLeft;
+
+        RaycastHit2D hit = Physics2D.Raycast(origin, -Vector2.up, Mathf.Infinity, collisionMask);
+        if(hit) 
+        {
+            float slopeAngle = Vector2.Angle(hit.normal, Vector2.up);
+            if(slopeAngle != 0 && slopeAngle <= maxDecendAngle)
+            {
+                if(Mathf.Sign(hit.normal.x) == xDirection)
+                {
+                    if (hit.distance - skinSize <= Mathf.Tan(slopeAngle * Mathf.Deg2Rad) * Mathf.Abs(moveVelocity.x)) //Check if we will be close enough to the slope to move down it
+                    {
+                        float moveDistance = Mathf.Abs(moveVelocity.x);
+                        float decendY = Mathf.Sin(slopeAngle * Mathf.Deg2Rad) * moveDistance;
+                        moveVelocity.x = Mathf.Cos(slopeAngle * Mathf.Deg2Rad) * moveDistance * Mathf.Sign(moveVelocity.x);
+                        moveVelocity.y -= decendY;
+
+                        info.slopeAngle = slopeAngle;
+                        info.isDecendingSlope = true;
+                        info.isBelow = true;
+
+                        Debug.Log("Decending");
+                    }
+                }
+            }
         }
     }
 
