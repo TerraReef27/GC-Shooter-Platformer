@@ -1,52 +1,22 @@
 ﻿using System;
 using UnityEngine;
 
-[RequireComponent(typeof (BoxCollider2D))]
-public class PhysicsController : MonoBehaviour
+
+public class PhysicsController : RaycastController
 {
     #region Variables
-    private float skinSize = 0.0125f;
-    private int numHorizontalRays = 5;
-    private int numVerticalRays = 3;
-    
-    float horizontalRaySpace, verticalRaySpace;
-
-    struct RayOrigins { public Vector2 topLeft, topRight, bottomLeft, bottomRight; }
-    private RayOrigins rayOrigins;
-    public struct CollisionInfo
-    {
-        public bool isAbove, isBelow, isLeft, isRight;
-        public bool isClimbingSlope, isDecendingSlope;
-        public float slopeAngle, oldSlopeAngle;
-
-        public void ResetInfo()
-        {
-            isAbove = isBelow = isLeft = isRight = false;
-            isClimbingSlope = isDecendingSlope = false;
-            oldSlopeAngle = slopeAngle;
-            slopeAngle = 0;
-        }
-    }
     private CollisionInfo info;
     public CollisionInfo Info { get { return info; } }
-    [SerializeField] LayerMask collisionMask;
 
     [SerializeField] private int maxClimbAngle = 45;
     [SerializeField] private int maxDecendAngle = 80;
-
-    private BoxCollider2D mainCollider = new BoxCollider2D();
     #endregion
 
-    void Awake()
+    public override void Start()
     {
-        mainCollider = GetComponent<BoxCollider2D>();
+        base.Start();
     }
 
-    void Start()
-    {
-        CalculateSpacing();
-    }
-    
     public void Move(Vector3 moveVelocity)
     {
         info.ResetInfo();
@@ -171,7 +141,7 @@ public class PhysicsController : MonoBehaviour
         Vector2 origin = (xDirection == -1) ? rayOrigins.bottomRight : rayOrigins.bottomLeft;
 
         RaycastHit2D hit = Physics2D.Raycast(origin, -Vector2.up, Mathf.Infinity, collisionMask);
-        if(hit) 
+        if(hit)
         {
             float slopeAngle = Vector2.Angle(hit.normal, Vector2.up);
             if(slopeAngle != 0 && slopeAngle <= maxDecendAngle)
@@ -194,28 +164,5 @@ public class PhysicsController : MonoBehaviour
                 }
             }
         }
-    }
-
-    private void UpdateRayOrigin()
-    {
-        Bounds bounds = mainCollider.bounds;
-        bounds.Expand(-skinSize*2); //Add the skin to offset the bounds inwards
-
-        rayOrigins.topLeft = new Vector2(bounds.min.x, bounds.max.y); //Set the bounds of the collider
-        rayOrigins.topRight = new Vector2(bounds.max.x, bounds.max.y);
-        rayOrigins.bottomLeft = new Vector2(bounds.min.x, bounds.min.y);
-        rayOrigins.bottomRight = new Vector2(bounds.max.x, bounds.min.y);
-    }
-
-    private void CalculateSpacing()
-    {
-        Bounds bounds = mainCollider.bounds;
-        bounds.Expand(-skinSize*2); //Add the skin to offset the bounds
-
-        numHorizontalRays = Mathf.Clamp(numHorizontalRays, 2, int.MaxValue); //Set the number of rays. Must be at least two
-        numVerticalRays = Mathf.Clamp(numVerticalRays, 2, int.MaxValue);
-
-        horizontalRaySpace = bounds.size.y / (numHorizontalRays - 1); //Get the distance between the individual rays
-        verticalRaySpace = bounds.size.x / (numVerticalRays - 1);
     }
 }
