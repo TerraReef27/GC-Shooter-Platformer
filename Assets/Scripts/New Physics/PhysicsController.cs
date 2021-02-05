@@ -134,7 +134,6 @@ public class PhysicsController : RaycastController
             info.slopeAngle = angle;
         }
     }
-    
     private void DecendSlope(ref Vector3 moveVelocity)
     {
         float xDirection = Mathf.Sign(moveVelocity.x);

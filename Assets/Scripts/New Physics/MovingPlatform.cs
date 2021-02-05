@@ -21,12 +21,11 @@ public class MovingPlatform : RaycastController
         */
     }
 
-    void Update()
+    void FixedUpdate()
     {
-
         UpdateRayOrigin();
         
-        Vector3 velocity = move * Time.deltaTime;
+        Vector3 velocity = move * Time.fixedDeltaTime;
         MoveObjects(velocity);
         transform.Translate(velocity);
 
@@ -68,7 +67,7 @@ public class MovingPlatform : RaycastController
             }
         }
 
-        if (velocity.x != 0)
+        if (velocity.x != 0) //Push object horizontally
         {
             float rayLength = Mathf.Abs(velocity.x) + skinSize;
 
@@ -90,6 +89,27 @@ public class MovingPlatform : RaycastController
 
                         hit.transform.Translate(new Vector3(moveX, moveY));
                     }
+                }
+            }
+        }
+
+        if (directionY == -1 || velocity.y == 0 && velocity.x != 0) //Adjust objects if platform is moving down or only horizontally
+        {
+            float rayLength = mainCollider.bounds.size.x;
+
+            Vector2 origin = rayOrigins.topLeft + (Vector2.up * skinSize);
+            RaycastHit2D[] hits = Physics2D.RaycastAll(origin, Vector2.right, rayLength, movableMask); //Generate a hit to see if the ray collided with anything on the collisionMask
+
+            Debug.DrawRay(origin, Vector3.right * rayLength * directionY, Color.cyan);
+            foreach (RaycastHit2D hit in hits)
+            {
+                if (hit)
+                {
+                    float moveX = velocity.x;
+                    float moveY = velocity.y;
+
+                    hit.transform.Translate(new Vector3(moveX, moveY));
+                    Debug.Log("Decended");
                 }
             }
         }

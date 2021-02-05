@@ -20,6 +20,7 @@ public class PlayerMover : MonoBehaviour
     private Vector3 velocity;
     
     private float horizontalInput;
+    private float targetMoveSpeed;
 
     void Awake()
     {
@@ -34,21 +35,26 @@ public class PlayerMover : MonoBehaviour
 
     void Update()
     {
-        if(physicsController.Info.isBelow || physicsController.Info.isAbove)
+        
+        horizontalInput = Input.GetAxisRaw("Horizontal");
+        targetMoveSpeed = moveSpeed * horizontalInput;
+    }
+
+    void FixedUpdate()
+    {
+        if (physicsController.Info.isBelow || physicsController.Info.isAbove)
         {
             velocity.y = 0;
         }
 
-        horizontalInput = Input.GetAxisRaw("Horizontal");
-        float targetMoveSpeed = moveSpeed * horizontalInput;
         velocity.x = Mathf.SmoothDamp(velocity.x, targetMoveSpeed, ref moveSmoothing, (physicsController.Info.isBelow) ? groundAcceleration : airAcceleration); //Accelerate with smoothing according to if the character is grounded or not
 
-        if(Input.GetButtonDown("Jump") && physicsController.Info.isBelow)
+        if (Input.GetButtonDown("Jump") && physicsController.Info.isBelow)
         {
             velocity.y = jumpVelocity;
         }
 
-        velocity.y += gravity * Time.deltaTime;
-        physicsController.Move(velocity * Time.deltaTime);
+        velocity.y += gravity * Time.fixedDeltaTime;
+        physicsController.Move(velocity * Time.fixedDeltaTime);
     }
 }
