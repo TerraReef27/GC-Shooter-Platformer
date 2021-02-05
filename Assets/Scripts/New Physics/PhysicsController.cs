@@ -17,7 +17,7 @@ public class PhysicsController : RaycastController
         base.Start();
     }
 
-    public void Move(Vector3 moveVelocity)
+    public void Move(Vector3 moveVelocity, bool isOnPlatform)
     {
         info.ResetInfo();
         UpdateRayOrigin();
@@ -30,6 +30,10 @@ public class PhysicsController : RaycastController
             HandleVerticalCollisions(ref moveVelocity);
 
         transform.Translate(moveVelocity);
+
+        if (isOnPlatform)
+            info.isBelow = true;
+
     }
 
     private void HandleHorizontalCollisions(ref Vector3 moveVelocity)
@@ -47,6 +51,9 @@ public class PhysicsController : RaycastController
 
             if (hit) //If the ray collides, change the collision so that it stops at the collision point
             {
+                if (hit.distance == 0) //Make it so objects can move inside of collider
+                    continue;
+
                 float angle = Vector2.Angle(hit.normal, Vector2.up);
                 if (i == 0 && angle <= maxClimbAngle) //Only check slope if its the first raycast and change velocity if on a shallow enough slope
                 {

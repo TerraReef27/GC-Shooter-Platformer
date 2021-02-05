@@ -35,26 +35,25 @@ public class PlayerMover : MonoBehaviour
 
     void Update()
     {
-        
         horizontalInput = Input.GetAxisRaw("Horizontal");
         targetMoveSpeed = moveSpeed * horizontalInput;
+
+        if (Input.GetButtonDown("Jump") && physicsController.Info.isBelow)
+        {
+            velocity.y += jumpVelocity;
+        }
     }
 
     void FixedUpdate()
     {
+        velocity.x = Mathf.SmoothDamp(velocity.x, targetMoveSpeed, ref moveSmoothing, (physicsController.Info.isBelow) ? groundAcceleration : airAcceleration); //Accelerate with smoothing according to if the character is grounded or not
+        
+        velocity.y += gravity * Time.fixedDeltaTime;
+        physicsController.Move(velocity * Time.fixedDeltaTime, false);
+
         if (physicsController.Info.isBelow || physicsController.Info.isAbove)
         {
             velocity.y = 0;
         }
-
-        velocity.x = Mathf.SmoothDamp(velocity.x, targetMoveSpeed, ref moveSmoothing, (physicsController.Info.isBelow) ? groundAcceleration : airAcceleration); //Accelerate with smoothing according to if the character is grounded or not
-
-        if (Input.GetButtonDown("Jump") && physicsController.Info.isBelow)
-        {
-            velocity.y = jumpVelocity;
-        }
-
-        velocity.y += gravity * Time.fixedDeltaTime;
-        physicsController.Move(velocity * Time.fixedDeltaTime);
     }
 }

@@ -9,6 +9,9 @@ public class MovingPlatform : RaycastController
     private float startTime;
     private float totalDistance;
     */
+    private List<ObjectData> objectList;
+    private Dictionary<Transform, PhysicsController> objectDictionary = new Dictionary<Transform, PhysicsController>();
+
     [SerializeField] LayerMask movableMask;
     [SerializeField] Vector3 move;
 
@@ -26,9 +29,11 @@ public class MovingPlatform : RaycastController
         UpdateRayOrigin();
         
         Vector3 velocity = move * Time.fixedDeltaTime;
-        MoveObjects(velocity);
-        transform.Translate(velocity);
+        CalculateObjectMovement(velocity);
 
+        MoveObjects(true);
+        transform.Translate(velocity);
+        MoveObjects(false);
         /*
         float distanceTraveled = (Time.time - startTime) * speed;
         float currentMovement = distanceTraveled / totalDistance;
@@ -36,8 +41,41 @@ public class MovingPlatform : RaycastController
         */
     }
 
-    private void MoveObjects(Vector3 velocity)
+    struct ObjectData
     {
+        public Transform transform;
+        public Vector3 velocity;
+        public bool isMovedBefore;
+        public bool onPlatform;
+
+        public ObjectData(Transform pTransform, Vector3 pVelocity, bool pMoveBefore, bool pOnPlatform)
+        {
+            transform = pTransform;
+            velocity = pVelocity;
+            isMovedBefore = pMoveBefore;
+            onPlatform = pOnPlatform;
+        }
+    }
+
+    private void MoveObjects(bool isBeforePlatformMove)
+    {
+        foreach(ObjectData obj in objectList)
+        {
+            if(!objectDictionary.ContainsKey(obj.transform))
+            {
+                objectDictionary.Add(obj.transform, obj.transform.GetComponent<PhysicsController>());
+            }
+
+            if (obj.isMovedBefore == isBeforePlatformMove)
+            {
+                objectDictionary[obj.transform].Move(obj.velocity, obj.onPlatform);
+            }
+        }
+    }
+
+    private void CalculateObjectMovement(Vector3 velocity)
+    {
+        objectList = new List<ObjectData>();
         HashSet<Transform> movedObjects = new HashSet<Transform>(); //use a hash table to find out which objects have already been adjusted
 
         float directionX = Mathf.Sign(velocity.x);
@@ -61,7 +99,8 @@ public class MovingPlatform : RaycastController
                         float moveX = (directionY == 1) ? velocity.x : 0;
                         float moveY = velocity.y - (hit.distance - skinSize) * directionY;
 
-                        hit.transform.Translate(new Vector3(moveX, moveY));
+                        //hit.transform.Translate(new Vector3(moveX, moveY));
+                        objectList.Add(new ObjectData(hit.transform, new Vector3(moveX, moveY), (directionY) == 1, true));
                     }
                 }
             }
@@ -85,9 +124,10 @@ public class MovingPlatform : RaycastController
                     {
                         movedObjects.Add(hit.transform);
                         float moveX = velocity.x - (hit.distance - skinSize) * directionX;
-                        float moveY = 0;
+                        float moveY = -skinSize; //Ensure that the object will still check for downwards collision
 
-                        hit.transform.Translate(new Vector3(moveX, moveY));
+                        //hit.transform.Translate(new Vector3(moveX, moveY));
+                        objectList.Add(new ObjectData(hit.transform, new Vector3(moveX, moveY), false, true));
                     }
                 }
             }
@@ -97,10 +137,10 @@ public class MovingPlatform : RaycastController
         {
             float rayLength = mainCollider.bounds.size.x;
 
-            Vector2 origin = rayOrigins.topLeft + (Vector2.up * skinSize);
+            Vector2 origin = rayOrigins.topLeft + (Vector2.up * skinSize * 2);
             RaycastHit2D[] hits = Physics2D.RaycastAll(origin, Vector2.right, rayLength, movableMask); //Generate a hit to see if the ray collided with anything on the collisionMask
 
-            Debug.DrawRay(origin, Vector3.right * rayLength * directionY, Color.cyan);
+            Debug.DrawRay(origin, Vector3.right * rayLength, Color.cyan);
             foreach (RaycastHit2D hit in hits)
             {
                 if (hit)
@@ -108,10 +148,11 @@ public class MovingPlatform : RaycastController
                     float moveX = velocity.x;
                     float moveY = velocity.y;
 
-                    hit.transform.Translate(new Vector3(moveX, moveY));
-                    Debug.Log("Decended");
+                    //hit.transform.Translate(new Vector3(moveX, moveY));
+                    objectList.Add(new ObjectData(hit.transform, new Vector3(moveX, moveY), true, false));
                 }
             }
+            
         }
     }
 }
