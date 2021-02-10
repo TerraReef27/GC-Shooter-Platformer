@@ -5,7 +5,8 @@ using UnityEngine;
 [RequireComponent(typeof(PhysicsController))]
 public class PlayerMover : MonoBehaviour
 {
-    [SerializeField] private float jumpHeight = 2f;
+    [SerializeField] private float minJumpHeight = 1f;
+    [SerializeField] private float maxJumpHeight = 2f;
     [SerializeField] private float jumpTime = 0.3f;
 
     [SerializeField] private float moveSpeed = 5f;
@@ -13,7 +14,8 @@ public class PlayerMover : MonoBehaviour
     [SerializeField] private float airAcceleration = .1f;
 
     private float gravity;
-    private float jumpVelocity;
+    private float minJumpVelocity;
+    private float maxJumpVelocity;
     private float moveSmoothing;
 
     private PhysicsController physicsController;
@@ -29,8 +31,9 @@ public class PlayerMover : MonoBehaviour
 
     void Start()
     {
-        gravity = -(2 * jumpHeight) / Mathf.Pow(jumpTime, 2); //Based off of the equation deltaMove = initialVelocity * time + (acceleration * time^2)/2
-        jumpVelocity = Mathf.Abs(gravity) * jumpTime; //Based off of the equation finalVelocity = initialVelocity + acceleration * time
+        gravity = -(2 * maxJumpHeight) / Mathf.Pow(jumpTime, 2); //Based off of the equation deltaMove = initialVelocity * time + (acceleration * time^2)/2
+        maxJumpVelocity = Mathf.Abs(gravity) * jumpTime; //Based off of the equation finalVelocity = initialVelocity + acceleration * time
+        minJumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(gravity + minJumpHeight)); //based off the euqation minJumpForce = sqrt(2 * gravity * minJumpHeight)
     }
 
     void Update()
@@ -38,9 +41,14 @@ public class PlayerMover : MonoBehaviour
         horizontalInput = Input.GetAxisRaw("Horizontal");
         targetMoveSpeed = moveSpeed * horizontalInput;
 
-        if (Input.GetButtonDown("Jump") && physicsController.Info.isBelow)
+        if(Input.GetButtonDown("Jump") && physicsController.Info.isBelow)
         {
-            velocity.y += jumpVelocity;
+            velocity.y = maxJumpVelocity;
+        }
+        if(Input.GetButtonUp("Jump"))
+        {
+            if (velocity.y > minJumpVelocity)
+                velocity.y = minJumpVelocity;
         }
     }
 

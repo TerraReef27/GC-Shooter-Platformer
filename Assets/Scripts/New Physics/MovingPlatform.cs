@@ -123,6 +123,7 @@ public class MovingPlatform : RaycastController
                 {
                     if (!movedObjects.Contains(hit.transform))
                     {
+                        Debug.Log("Object is on ground (Vertical)");
                         movedObjects.Add(hit.transform);
                         float moveX = (directionY == 1) ? velocity.x : 0;
                         float moveY = velocity.y - (hit.distance - skinSize) * directionY;
@@ -155,7 +156,7 @@ public class MovingPlatform : RaycastController
                         float moveY = -skinSize; //Ensure that the object will still check for downwards collision
 
                         //hit.transform.Translate(new Vector3(moveX, moveY));
-                        objectList.Add(new ObjectData(hit.transform, new Vector3(moveX, moveY), false, true));
+                        objectList.Add(new ObjectData(hit.transform, new Vector3(moveX, moveY), true, false));
                     }
                 }
             }
@@ -165,7 +166,7 @@ public class MovingPlatform : RaycastController
         {
             float rayLength = mainCollider.bounds.size.x;
 
-            Vector2 origin = rayOrigins.topLeft + (Vector2.up * skinSize * 2);
+            Vector2 origin = rayOrigins.topLeft + (Vector2.up * skinSize);
             RaycastHit2D[] hits = Physics2D.RaycastAll(origin, Vector2.right, rayLength, movableMask); //Generate a hit to see if the ray collided with anything on the collisionMask
 
             Debug.DrawRay(origin, Vector3.right * rayLength, Color.cyan);
@@ -173,14 +174,14 @@ public class MovingPlatform : RaycastController
             {
                 if (hit)
                 {
+                    Debug.Log("Object is on ground");
                     float moveX = velocity.x;
                     float moveY = velocity.y;
 
                     //hit.transform.Translate(new Vector3(moveX, moveY));
-                    objectList.Add(new ObjectData(hit.transform, new Vector3(moveX, moveY), true, false));
+                    objectList.Add(new ObjectData(hit.transform, new Vector3(moveX, moveY), false, true));
                 }
             }
-
         }
     }
 
