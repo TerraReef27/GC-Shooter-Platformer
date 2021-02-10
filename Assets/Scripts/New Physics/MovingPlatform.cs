@@ -3,42 +3,86 @@ using UnityEngine;
 
 public class MovingPlatform : RaycastController
 {
-    /*
-    public float speed = 1f;
-    public Vector3 moveFrom, moveTo;
+    [SerializeField] private float speed = 1f;
+    [SerializeField] private float waitTime = .5f;
+    [SerializeField] private Vector3[] localPoints;
+    [SerializeField] private float lineSize = 1;
+    [Range(0, 4)]
+    [SerializeField] private float smoothingValue = 0f;
+
+    private Vector3 moveFrom, moveTo;
     private float startTime;
     private float totalDistance;
-    */
+    private Vector3[] globalPoints;
+    private int currentPathLocation = 0;
+    private float progressToNextPoint = 0;
+    private float currentWaitTime;
+
     private List<ObjectData> objectList;
     private Dictionary<Transform, PhysicsController> objectDictionary = new Dictionary<Transform, PhysicsController>();
 
     [SerializeField] LayerMask movableMask;
-    [SerializeField] Vector3 move;
+
+    //[SerializeField] Vector3 move;
 
     public override void Start()
     {
         base.Start();
-        /*
+
+        globalPoints = new Vector3[localPoints.Length];
+        for(int i=0; i<globalPoints.Length; i++)
+        {
+            globalPoints[i] = localPoints[i] + transform.position;
+        }
+
         startTime = Time.time;
         totalDistance = Vector3.Distance(moveFrom, moveTo);
-        */
     }
 
     void FixedUpdate()
     {
         UpdateRayOrigin();
         
-        Vector3 velocity = move * Time.fixedDeltaTime;
+        Vector3 velocity = CalculateBetweenAlongPoints();
         CalculateObjectMovement(velocity);
 
         MoveObjects(true);
         transform.Translate(velocity);
         MoveObjects(false);
-        /*
-        float distanceTraveled = (Time.time - startTime) * speed;
-        float currentMovement = distanceTraveled / totalDistance;
-        transform.position = Vector3.Lerp(moveFrom, moveTo, currentMovement);
-        */
+    }
+
+    private Vector3 CalculateBetweenAlongPoints()
+    {
+        if (Time.time < currentWaitTime)
+            return Vector3.zero;
+
+        float distanceToBetweenPath = Vector3.Distance(globalPoints[currentPathLocation], globalPoints[currentPathLocation + 1]);
+        progressToNextPoint += Time.fixedDeltaTime * speed / distanceToBetweenPath;
+        progressToNextPoint = Mathf.Clamp01(progressToNextPoint);
+        float smoothedProgressToNextPoint = Smooth(progressToNextPoint);
+
+        Vector3 platformPos = Vector3.Lerp(globalPoints[currentPathLocation], globalPoints[currentPathLocation + 1], smoothedProgressToNextPoint);
+
+        if(progressToNextPoint >= 1)
+        {
+            currentPathLocation++;
+            progressToNextPoint = 0;
+
+            if(currentPathLocation >= globalPoints.Length - 1)
+            {
+                currentPathLocation = 0;
+                System.Array.Reverse(globalPoints);
+            }
+            currentWaitTime = Time.time + waitTime;
+        }
+
+        return platformPos - transform.position;
+    }
+
+    private float Smooth(float x)
+    {
+        float a = smoothingValue + 1;
+        return Mathf.Pow(x, a) / (Mathf.Pow(x, a) + Mathf.Pow(1 - x, a));
     }
 
     struct ObjectData
@@ -54,22 +98,6 @@ public class MovingPlatform : RaycastController
             velocity = pVelocity;
             isMovedBefore = pMoveBefore;
             onPlatform = pOnPlatform;
-        }
-    }
-
-    private void MoveObjects(bool isBeforePlatformMove)
-    {
-        foreach(ObjectData obj in objectList)
-        {
-            if(!objectDictionary.ContainsKey(obj.transform))
-            {
-                objectDictionary.Add(obj.transform, obj.transform.GetComponent<PhysicsController>());
-            }
-
-            if (obj.isMovedBefore == isBeforePlatformMove)
-            {
-                objectDictionary[obj.transform].Move(obj.velocity, obj.onPlatform);
-            }
         }
     }
 
@@ -152,7 +180,37 @@ public class MovingPlatform : RaycastController
                     objectList.Add(new ObjectData(hit.transform, new Vector3(moveX, moveY), true, false));
                 }
             }
-            
+
+        }
+    }
+
+    private void MoveObjects(bool isBeforePlatformMove)
+    {
+        foreach(ObjectData obj in objectList)
+        {
+            if(!objectDictionary.ContainsKey(obj.transform))
+            {
+                objectDictionary.Add(obj.transform, obj.transform.GetComponent<PhysicsController>());
+            }
+
+            if (obj.isMovedBefore == isBeforePlatformMove)
+            {
+                objectDictionary[obj.transform].Move(obj.velocity, obj.onPlatform);
+            }
+        }
+    }
+
+    private void OnDrawGizmos()
+    {
+        if(localPoints != null)
+        {
+            Gizmos.color = Color.green;
+            for(int i=0; i<localPoints.Length; i++)
+            {
+                Vector3 pointPos = (Application.isPlaying) ? globalPoints[i] : localPoints[i] + transform.position;
+                Gizmos.DrawLine(pointPos - Vector3.up * lineSize, pointPos + Vector3.up * lineSize);
+                Gizmos.DrawLine(pointPos - Vector3.left * lineSize, pointPos + Vector3.left * lineSize);
+            }
         }
     }
 }
