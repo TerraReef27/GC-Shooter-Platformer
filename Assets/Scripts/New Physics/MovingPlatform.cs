@@ -162,7 +162,7 @@ public class MovingPlatform : RaycastController
             }
         }
 
-        if (directionY == -1 || velocity.y == 0 && velocity.x != 0) //Adjust objects if platform is moving down or only horizontally
+        if (directionY == -1 || (velocity.y == 0 && velocity.x != 0)) //Adjust objects if platform is moving down or only horizontally
         {
             float rayLength = mainCollider.bounds.size.x;
 

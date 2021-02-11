@@ -5,8 +5,9 @@ public class RaycastController : MonoBehaviour
 {
     #region Variables
     protected float skinSize = 0.0125f;
-    [SerializeField] protected int numHorizontalRays = 5;
-    [SerializeField] protected int numVerticalRays = 3;
+    const float rayDistance = .1f;
+    protected int numHorizontalRays;
+    protected int numVerticalRays;
 
     [HideInInspector]
     protected float horizontalRaySpace, verticalRaySpace;
@@ -62,10 +63,13 @@ public class RaycastController : MonoBehaviour
         Bounds bounds = mainCollider.bounds;
         bounds.Expand(-skinSize * 2); //Add the skin to offset the bounds
 
-        numHorizontalRays = Mathf.Clamp(numHorizontalRays, 2, int.MaxValue); //Set the number of rays. Must be at least two
-        numVerticalRays = Mathf.Clamp(numVerticalRays, 2, int.MaxValue);
+        float boundsX = bounds.size.x;
+        float boundsY = bounds.size.y;
+        
+        numHorizontalRays = Mathf.RoundToInt(boundsY / rayDistance); //Set the number of rays. Must be at least two
+        numVerticalRays = Mathf.RoundToInt(boundsX / rayDistance);
 
-        horizontalRaySpace = bounds.size.y / (numHorizontalRays - 1); //Get the distance between the individual rays
-        verticalRaySpace = bounds.size.x / (numVerticalRays - 1);
+        horizontalRaySpace = boundsY / (numHorizontalRays - 1); //Get the distance between the individual rays
+        verticalRaySpace = boundsX / (numVerticalRays - 1);
     }
 }

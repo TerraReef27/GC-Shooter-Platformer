@@ -1,7 +1,6 @@
 ﻿using System;
 using UnityEngine;
 
-
 public class PhysicsController : RaycastController
 {
     #region Variables
@@ -18,12 +17,12 @@ public class PhysicsController : RaycastController
         base.Start();
     }
 
-    public void Move(Vector3 moveVelocity, bool isOnPlatform)
+    public void Move(Vector2 moveVelocity, bool isOnPlatform)
     {
         Move(moveVelocity, isOnPlatform, Vector2.zero);
     }
 
-    public void Move(Vector3 moveVelocity, bool isOnPlatform, Vector2 input)
+    public void Move(Vector2 moveVelocity, bool isOnPlatform, Vector2 input)
     {
         playerInput = input;
 
@@ -44,7 +43,7 @@ public class PhysicsController : RaycastController
 
     }
 
-    private void HandleHorizontalCollisions(ref Vector3 moveVelocity)
+    private void HandleHorizontalCollisions(ref Vector2 moveVelocity)
     {
         int direction = Math.Sign(moveVelocity.x);
         float length = Mathf.Abs(moveVelocity.x) + skinSize;
@@ -59,7 +58,7 @@ public class PhysicsController : RaycastController
 
             if (hit) //If the ray collides, change the collision so that it stops at the collision point
             {
-                if (hit.distance == 0) //Make it so objects can move inside of collider
+                if (hit.distance == 0 || hit.collider.tag == "OneWayPlatform") //Make it so objects can move inside of collider
                     continue;
 
                 float angle = Vector2.Angle(hit.normal, Vector2.up);
@@ -90,7 +89,7 @@ public class PhysicsController : RaycastController
             }
         }
     }
-    private void HandleVerticalCollisions(ref Vector3 moveVelocity)
+    private void HandleVerticalCollisions(ref Vector2 moveVelocity)
     {
         int direction = Math.Sign(moveVelocity.y);
         float length = Mathf.Abs(moveVelocity.y) + skinSize;
@@ -107,8 +106,16 @@ public class PhysicsController : RaycastController
             {
                 if(hit.collider.tag == "OneWayPlatform")
                 {
-                    if (direction == 1 || hit.distance == 0 || hit.collider == info.fallThrough)
+                    if(moveVelocity.y > 0 || hit.distance == 0 || hit.collider == info.fallThrough)
+                    {
+                        if(hit.collider == info.fallThrough)
+                            Debug.Log("passing through top");
+                        if (hit.distance == 0)
+                            Debug.Log("in collider");
+                        if (moveVelocity.y > 0)
+                            Debug.Log("passing through bottom");
                         continue;
+                    }
                 }
                 if (hit.collider != info.fallThrough)
                 {
@@ -145,7 +152,7 @@ public class PhysicsController : RaycastController
         }
     }
     
-    private void ClimbSlope(ref Vector3 moveVelocity, float angle) //Use basic trig to calculate the new xy values according to our slope angle
+    private void ClimbSlope(ref Vector2 moveVelocity, float angle) //Use basic trig to calculate the new xy values according to our slope angle
     {
         float moveDist = Math.Abs(moveVelocity.x);
         float climbY = Mathf.Sin(angle * Mathf.Deg2Rad) * moveDist;
@@ -159,7 +166,7 @@ public class PhysicsController : RaycastController
             info.slopeAngle = angle;
         }
     }
-    private void DecendSlope(ref Vector3 moveVelocity)
+    private void DecendSlope(ref Vector2 moveVelocity)
     {
         float xDirection = Mathf.Sign(moveVelocity.x);
         Vector2 origin = (xDirection == -1) ? rayOrigins.bottomRight : rayOrigins.bottomLeft;
