@@ -50,6 +50,10 @@ public class PlayerMover : MonoBehaviour
             if (velocity.y > minJumpVelocity)
                 velocity.y = minJumpVelocity;
         }
+        if(Input.GetAxis("Vertical") < -.75f)
+        {
+            physicsController.FallThroughPlatform();
+        }
     }
 
     void FixedUpdate()

@@ -19,6 +19,9 @@ public class RaycastController : MonoBehaviour
         public bool isClimbingSlope, isDecendingSlope;
         public float slopeAngle, oldSlopeAngle;
 
+        public Collider2D fallThrough;
+        public bool isFallingThrough;
+
         public void ResetInfo()
         {
             isAbove = isBelow = isLeft = isRight = false;

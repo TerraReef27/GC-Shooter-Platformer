@@ -10,6 +10,7 @@ public class PhysicsController : RaycastController
 
     [SerializeField] private int maxClimbAngle = 45;
     [SerializeField] private int maxDecendAngle = 80;
+    private Vector2 playerInput = Vector2.zero;
     #endregion
 
     public override void Start()
@@ -19,6 +20,13 @@ public class PhysicsController : RaycastController
 
     public void Move(Vector3 moveVelocity, bool isOnPlatform)
     {
+        Move(moveVelocity, isOnPlatform, Vector2.zero);
+    }
+
+    public void Move(Vector3 moveVelocity, bool isOnPlatform, Vector2 input)
+    {
+        playerInput = input;
+
         info.ResetInfo();
         UpdateRayOrigin();
 
@@ -97,6 +105,16 @@ public class PhysicsController : RaycastController
 
             if (hit) //If the ray collides, change the collision so that it stops at the collision point
             {
+                if(hit.collider.tag == "OneWayPlatform")
+                {
+                    if (direction == 1 || hit.distance == 0 || hit.collider == info.fallThrough)
+                        continue;
+                }
+                if (hit.collider != info.fallThrough)
+                {
+                    info.fallThrough = null;
+                }
+
                 moveVelocity.y = (hit.distance - skinSize) * direction;
                 length = hit.distance;
 
@@ -167,6 +185,24 @@ public class PhysicsController : RaycastController
 
                         Debug.Log("Decending");
                     }
+                }
+            }
+        }
+    }
+
+    public void FallThroughPlatform()
+    {
+        for (int i = 0; i < numVerticalRays; i++)
+        {
+            Vector2 origin = rayOrigins.bottomLeft;
+            origin += Vector2.right * (verticalRaySpace * i); //Check the rays for the projected movement
+            RaycastHit2D hit = Physics2D.Raycast(origin, Vector2.up * -1, skinSize*2, collisionMask); //Generate a hit to see if the ray collided with anything on the collisionMask
+
+            if (hit) //If the ray collides, change the collision so that it stops at the collision point
+            {
+                if (hit.collider.tag == "OneWayPlatform")
+                {
+                    info.fallThrough = hit.collider;
                 }
             }
         }

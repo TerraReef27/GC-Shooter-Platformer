@@ -119,7 +119,7 @@ public class MovingPlatform : RaycastController
                 origin += Vector2.right * (verticalRaySpace * i); //Check the rays for the projected movement
                 RaycastHit2D hit = Physics2D.Raycast(origin, Vector2.up * directionY, rayLength, movableMask); //Generate a hit to see if the ray collided with anything on the collisionMask
                 Debug.DrawRay(origin, Vector3.up * rayLength * directionY, Color.red);
-                if (hit)
+                if (hit && hit.distance != 0)
                 {
                     if (!movedObjects.Contains(hit.transform))
                     {
@@ -147,7 +147,7 @@ public class MovingPlatform : RaycastController
 
                 Debug.DrawRay(origin, directionX * Vector2.right * rayLength, Color.red);
 
-                if (hit)
+                if (hit && hit.distance != 0)
                 {
                     if (!movedObjects.Contains(hit.transform))
                     {
@@ -172,7 +172,7 @@ public class MovingPlatform : RaycastController
             Debug.DrawRay(origin, Vector3.right * rayLength, Color.cyan);
             foreach (RaycastHit2D hit in hits)
             {
-                if (hit)
+                if (hit && hit.distance != 0)
                 {
                     Debug.Log("Object is on ground");
                     float moveX = velocity.x;
