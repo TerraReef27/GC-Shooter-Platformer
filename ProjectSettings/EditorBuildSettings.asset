@@ -27,7 +27,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Levels/Level 5.unity
     guid: 7e7e45c24619c58419e3e47d18fbb0ed
   - enabled: 1
-    path: Assets/Scenes/Levels/Level 6.unity
+    path: Assets/Scenes/Levels/PhysicsTest.unity
     guid: 8877da19b76c51d49afb45b78d60d78a
   - enabled: 1
     path: Assets/Scenes/Elevator.unity
