@@ -12,6 +12,8 @@ public class PlayerMover : MonoBehaviour
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float groundAcceleration = .2f;
     [SerializeField] private float airAcceleration = .1f;
+    [SerializeField] private float airDeceleration = .1f;
+    [SerializeField] private float groundDecleration = .2f;
 
     private float gravity;
     private float minJumpVelocity;
@@ -58,7 +60,34 @@ public class PlayerMover : MonoBehaviour
 
     void FixedUpdate()
     {
-        velocity.x = Mathf.SmoothDamp(velocity.x, targetMoveSpeed, ref moveSmoothing, (physicsController.Info.isBelow) ? groundAcceleration : airAcceleration); //Accelerate with smoothing according to if the character is grounded or not
+        //velocity.x = Mathf.SmoothDamp(velocity.x, targetMoveSpeed, ref moveSmoothing, (physicsController.Info.isBelow) ? groundAcceleration : airAcceleration); //Accelerate with smoothing according to if the character is grounded or not 
+
+        if(horizontalInput != 0 && Mathf.Abs(velocity.x) <= moveSpeed)
+        {
+            if(Mathf.Sign(velocity.x) != Mathf.Sign(horizontalInput))
+            {
+                velocity.x = Mathf.MoveTowards(velocity.x, moveSpeed * horizontalInput, (physicsController.Info.isBelow) ? groundAcceleration*2 : airAcceleration*2);
+            }
+            else
+            {
+                velocity.x = Mathf.MoveTowards(velocity.x, moveSpeed * horizontalInput, (physicsController.Info.isBelow) ? groundAcceleration : airAcceleration);
+            }
+            /*
+            if (physicsController.Info.isBelow)
+            {
+                if (Mathf.Sign(velocity.x) != Mathf.Sign(horizontalInput))
+                    velocity.x = Mathf.MoveTowards(velocity.x, moveSpeed * horizontalInput, (groundDecleration + groundAcceleration) * Time.fixedDeltaTime);
+                else
+                    velocity.x = Mathf.MoveTowards(velocity.x, moveSpeed * horizontalInput, groundDecleration * Time.fixedDeltaTime);
+            }
+            else
+                velocity.x = Mathf.MoveTowards(velocity.x, moveSpeed * horizontalInput, airAcceleration * Time.fixedDeltaTime);
+            */
+        }
+        else
+        {
+            velocity.x = Mathf.MoveTowards(velocity.x, 0, (physicsController.Info.isBelow) ? groundDecleration : airDeceleration);
+        }
         
         velocity.y += gravity * Time.fixedDeltaTime;
         physicsController.Move(velocity * Time.fixedDeltaTime, false);
@@ -67,5 +96,14 @@ public class PlayerMover : MonoBehaviour
         {
             velocity.y = 0;
         }
+        if (physicsController.Info.isLeft || physicsController.Info.isRight)
+        {
+            velocity.x = 0;
+        }
+    }
+
+    public void AddForce(Vector3 force)
+    {
+        velocity += force;
     }
 }

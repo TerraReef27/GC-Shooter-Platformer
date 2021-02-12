@@ -5,7 +5,7 @@ public class RaycastController : MonoBehaviour
 {
     #region Variables
     protected float skinSize = 0.0125f;
-    const float rayDistance = .1f;
+    const float rayDistance = .2f;
     protected int numHorizontalRays;
     protected int numVerticalRays;
 
@@ -66,8 +66,8 @@ public class RaycastController : MonoBehaviour
         float boundsX = bounds.size.x;
         float boundsY = bounds.size.y;
         
-        numHorizontalRays = Mathf.RoundToInt(boundsY / rayDistance); //Set the number of rays. Must be at least two
-        numVerticalRays = Mathf.RoundToInt(boundsX / rayDistance);
+        numHorizontalRays = (int)Mathf.Ceil(boundsY / rayDistance); //Set the number of rays. Must be at least two
+        numVerticalRays = (int)Mathf.Ceil(boundsX / rayDistance);
 
         horizontalRaySpace = boundsY / (numHorizontalRays - 1); //Get the distance between the individual rays
         verticalRaySpace = boundsX / (numVerticalRays - 1);
