@@ -40,7 +40,7 @@ public class GunHolder : MonoBehaviour
         respawn.HandleOldCheckpoint += Respawn_OnPlayerResetAmmo;
     }
 
-    void OnEnable()
+    void Start()
     {
         GetGunsInChild();
         if (guns[0] != null)
