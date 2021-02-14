@@ -30,7 +30,11 @@ SpriteAtlas:
       enableTightPacking: 1
     variantMultiplier: 1
     packables: []
+<<<<<<< HEAD
     totalSpriteSurfaceArea: 0
+=======
+    totalSpriteSurfaceArea: 346769
+>>>>>>> parent of 96b0748 (Revert "Walk and Idle Animations Added")
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites: []

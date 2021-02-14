@@ -1,0 +1,655 @@
+fileFormatVersion: 2
+guid: 73523726348fa8545802596e15c70375
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -1051061266769629616
+    second: Pillow Man 64x64 Idle Bouncing_0
+  - first:
+      213: -3259143015431599436
+    second: Pillow Man 64x64 Idle Bouncing_1
+  - first:
+      213: 401974721063272875
+    second: Pillow Man 64x64 Idle Bouncing_2
+  - first:
+      213: -4820435262143809594
+    second: Pillow Man 64x64 Idle Bouncing_3
+  - first:
+      213: 5871450825044993477
+    second: Pillow Man 64x64 Idle Bouncing_4
+  - first:
+      213: 4257180180437541050
+    second: Pillow Man 64x64 Idle Bouncing_5
+  - first:
+      213: 5479313802729010236
+    second: Pillow Man 64x64 Idle Bouncing_6
+  - first:
+      213: -1726579014065269329
+    second: Pillow Man 64x64 Idle Bouncing_7
+  - first:
+      213: -3781197887128363103
+    second: Pillow Man 64x64 Idle Bouncing_8
+  - first:
+      213: -4012509435233565359
+    second: Pillow Man 64x64 Idle Bouncing_9
+  - first:
+      213: 4403656891579500264
+    second: Pillow Man 64x64 Idle Bouncing_10
+  - first:
+      213: -7838977876377731103
+    second: Pillow Man 64x64 Idle Bouncing_11
+  - first:
+      213: -1754417432514147017
+    second: Pillow Man 64x64 Idle Bouncing_12
+  - first:
+      213: 5859486620033501967
+    second: Pillow Man 64x64 Idle Bouncing_13
+  - first:
+      213: 5760581971017924148
+    second: Pillow Man 64x64 Idle Bouncing_14
+  - first:
+      213: 709521166907647967
+    second: Pillow Man 64x64 Idle Bouncing_15
+  - first:
+      213: 1850121939304993847
+    second: Pillow Man 64x64 Idle Bouncing_16
+  - first:
+      213: 5724086183820842693
+    second: Pillow Man 64x64 Idle Bouncing_17
+  - first:
+      213: 7066533896355564750
+    second: Pillow Man 64x64 Idle Bouncing_18
+  - first:
+      213: -6833748955159641991
+    second: Pillow Man 64x64 Idle Bouncing_19
+  - first:
+      213: 8028773290927708917
+    second: Pillow Man 64x64 Idle Bouncing_20
+  - first:
+      213: 7238152818935642582
+    second: Pillow Man 64x64 Idle Bouncing_21
+  - first:
+      213: -9150651048093286649
+    second: Pillow Man 64x64 Idle Bouncing_22
+  externalObjects: {}
+  serializedVersion: 10
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 64
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Pillow Man 64x64 Idle Bouncing_0
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 17
+        width: 26
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 05e260db851e961f0800000000000000
+      internalID: -1051061266769629616
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pillow Man 64x64 Idle Bouncing_1
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 17
+        width: 26
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4ba0105f1b235c2d0800000000000000
+      internalID: -3259143015431599436
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pillow Man 64x64 Idle Bouncing_2
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 17
+        width: 26
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ba1c9a901e9149500800000000000000
+      internalID: 401974721063272875
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pillow Man 64x64 Idle Bouncing_3
+      rect:
+        serializedVersion: 2
+        x: 209
+        y: 17
+        width: 26
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6c7b6293baf5a1db0800000000000000
+      internalID: -4820435262143809594
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pillow Man 64x64 Idle Bouncing_4
+      rect:
+        serializedVersion: 2
+        x: 273
+        y: 17
+        width: 26
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5c52bf6ca659b7150800000000000000
+      internalID: 5871450825044993477
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pillow Man 64x64 Idle Bouncing_5
+      rect:
+        serializedVersion: 2
+        x: 337
+        y: 17
+        width: 26
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ab020df81da841b30800000000000000
+      internalID: 4257180180437541050
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pillow Man 64x64 Idle Bouncing_6
+      rect:
+        serializedVersion: 2
+        x: 401
+        y: 17
+        width: 26
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c34be887fde6a0c40800000000000000
+      internalID: 5479313802729010236
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pillow Man 64x64 Idle Bouncing_7
+      rect:
+        serializedVersion: 2
+        x: 465
+        y: 17
+        width: 26
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fa5def5d885f908e0800000000000000
+      internalID: -1726579014065269329
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pillow Man 64x64 Idle Bouncing_8
+      rect:
+        serializedVersion: 2
+        x: 529
+        y: 17
+        width: 26
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1af91482e8c768bc0800000000000000
+      internalID: -3781197887128363103
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pillow Man 64x64 Idle Bouncing_9
+      rect:
+        serializedVersion: 2
+        x: 593
+        y: 17
+        width: 26
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 15500078de3b058c0800000000000000
+      internalID: -4012509435233565359
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pillow Man 64x64 Idle Bouncing_10
+      rect:
+        serializedVersion: 2
+        x: 657
+        y: 17
+        width: 26
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8e60c4f7c9eec1d30800000000000000
+      internalID: 4403656891579500264
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pillow Man 64x64 Idle Bouncing_11
+      rect:
+        serializedVersion: 2
+        x: 721
+        y: 17
+        width: 26
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1effb54772b563390800000000000000
+      internalID: -7838977876377731103
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pillow Man 64x64 Idle Bouncing_12
+      rect:
+        serializedVersion: 2
+        x: 785
+        y: 17
+        width: 26
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 73dcd33f3ae07a7e0800000000000000
+      internalID: -1754417432514147017
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pillow Man 64x64 Idle Bouncing_13
+      rect:
+        serializedVersion: 2
+        x: 849
+        y: 17
+        width: 26
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f0b40493904115150800000000000000
+      internalID: 5859486620033501967
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pillow Man 64x64 Idle Bouncing_14
+      rect:
+        serializedVersion: 2
+        x: 913
+        y: 17
+        width: 26
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 43efa0228c2b1ff40800000000000000
+      internalID: 5760581971017924148
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pillow Man 64x64 Idle Bouncing_15
+      rect:
+        serializedVersion: 2
+        x: 977
+        y: 17
+        width: 26
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fd7a62afdb9b8d900800000000000000
+      internalID: 709521166907647967
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pillow Man 64x64 Idle Bouncing_16
+      rect:
+        serializedVersion: 2
+        x: 1041
+        y: 17
+        width: 26
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7345e67f914fca910800000000000000
+      internalID: 1850121939304993847
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pillow Man 64x64 Idle Bouncing_17
+      rect:
+        serializedVersion: 2
+        x: 1105
+        y: 17
+        width: 26
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5c6dc528e0a007f40800000000000000
+      internalID: 5724086183820842693
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pillow Man 64x64 Idle Bouncing_18
+      rect:
+        serializedVersion: 2
+        x: 1169
+        y: 17
+        width: 26
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eccc78d732f511260800000000000000
+      internalID: 7066533896355564750
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pillow Man 64x64 Idle Bouncing_19
+      rect:
+        serializedVersion: 2
+        x: 1233
+        y: 17
+        width: 26
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 97043833885a921a0800000000000000
+      internalID: -6833748955159641991
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pillow Man 64x64 Idle Bouncing_20
+      rect:
+        serializedVersion: 2
+        x: 1297
+        y: 17
+        width: 26
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5fad3e315ceeb6f60800000000000000
+      internalID: 8028773290927708917
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pillow Man 64x64 Idle Bouncing_21
+      rect:
+        serializedVersion: 2
+        x: 1361
+        y: 17
+        width: 26
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6d9b6a2b3a5137460800000000000000
+      internalID: 7238152818935642582
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pillow Man 64x64 Idle Bouncing_22
+      rect:
+        serializedVersion: 2
+        x: 1425
+        y: 17
+        width: 26
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 70ff7de9a5b520180800000000000000
+      internalID: -9150651048093286649
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,487 @@
+fileFormatVersion: 2
+guid: 11230f98bfa6b8b4ca55ac59ffd19b0c
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 4630460881656657372
+    second: Pillow Man 64x64 Idle Wave_0
+  - first:
+      213: -1677416654997606143
+    second: Pillow Man 64x64 Idle Wave_1
+  - first:
+      213: -6752746574678899575
+    second: Pillow Man 64x64 Idle Wave_2
+  - first:
+      213: -9198167267767265080
+    second: Pillow Man 64x64 Idle Wave_3
+  - first:
+      213: -6089857019267458234
+    second: Pillow Man 64x64 Idle Wave_4
+  - first:
+      213: -5862984786468262472
+    second: Pillow Man 64x64 Idle Wave_5
+  - first:
+      213: -4948264375188960710
+    second: Pillow Man 64x64 Idle Wave_6
+  - first:
+      213: 1253988072288318254
+    second: Pillow Man 64x64 Idle Wave_7
+  - first:
+      213: 143246419449123128
+    second: Pillow Man 64x64 Idle Wave_8
+  - first:
+      213: 2682109427381706831
+    second: Pillow Man 64x64 Idle Wave_9
+  - first:
+      213: -1275785477452902587
+    second: Pillow Man 64x64 Idle Wave_10
+  - first:
+      213: -4963566593061285659
+    second: Pillow Man 64x64 Idle Wave_11
+  - first:
+      213: 3136250301180630608
+    second: Pillow Man 64x64 Idle Wave_12
+  - first:
+      213: 750553961324736926
+    second: Pillow Man 64x64 Idle Wave_13
+  - first:
+      213: 5097411236584859120
+    second: Pillow Man 64x64 Idle Wave_14
+  - first:
+      213: -4150068036089369724
+    second: Pillow Man 64x64 Idle Wave_15
+  externalObjects: {}
+  serializedVersion: 10
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 64
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Pillow Man 64x64 Idle Wave_0
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 17
+        width: 26
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cd5bc7d73a3b24040800000000000000
+      internalID: 4630460881656657372
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pillow Man 64x64 Idle Wave_1
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 17
+        width: 26
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1013b8a807e98b8e0800000000000000
+      internalID: -1677416654997606143
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pillow Man 64x64 Idle Wave_2
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 17
+        width: 26
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 984470694cc6942a0800000000000000
+      internalID: -6752746574678899575
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pillow Man 64x64 Idle Wave_3
+      rect:
+        serializedVersion: 2
+        x: 209
+        y: 17
+        width: 26
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8c85b1c9a9b895080800000000000000
+      internalID: -9198167267767265080
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pillow Man 64x64 Idle Wave_4
+      rect:
+        serializedVersion: 2
+        x: 273
+        y: 17
+        width: 26
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 64bd4a17e4b7c7ba0800000000000000
+      internalID: -6089857019267458234
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pillow Man 64x64 Idle Wave_5
+      rect:
+        serializedVersion: 2
+        x: 337
+        y: 17
+        width: 26
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8bd2a0f666e72aea0800000000000000
+      internalID: -5862984786468262472
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pillow Man 64x64 Idle Wave_6
+      rect:
+        serializedVersion: 2
+        x: 401
+        y: 17
+        width: 26
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a3a442e84cb345bb0800000000000000
+      internalID: -4948264375188960710
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pillow Man 64x64 Idle Wave_7
+      rect:
+        serializedVersion: 2
+        x: 465
+        y: 17
+        width: 26
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e237251028f076110800000000000000
+      internalID: 1253988072288318254
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pillow Man 64x64 Idle Wave_8
+      rect:
+        serializedVersion: 2
+        x: 529
+        y: 17
+        width: 26
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8319c9a0cd9ecf100800000000000000
+      internalID: 143246419449123128
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pillow Man 64x64 Idle Wave_9
+      rect:
+        serializedVersion: 2
+        x: 593
+        y: 17
+        width: 26
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f4020d35054c83520800000000000000
+      internalID: 2682109427381706831
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pillow Man 64x64 Idle Wave_10
+      rect:
+        serializedVersion: 2
+        x: 657
+        y: 17
+        width: 26
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 54f41de1edf7b4ee0800000000000000
+      internalID: -1275785477452902587
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pillow Man 64x64 Idle Wave_11
+      rect:
+        serializedVersion: 2
+        x: 721
+        y: 17
+        width: 26
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5e016915b7edd1bb0800000000000000
+      internalID: -4963566593061285659
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pillow Man 64x64 Idle Wave_12
+      rect:
+        serializedVersion: 2
+        x: 785
+        y: 17
+        width: 26
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 05655984803368b20800000000000000
+      internalID: 3136250301180630608
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pillow Man 64x64 Idle Wave_13
+      rect:
+        serializedVersion: 2
+        x: 849
+        y: 17
+        width: 26
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e91f589e9d08a6a00800000000000000
+      internalID: 750553961324736926
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pillow Man 64x64 Idle Wave_14
+      rect:
+        serializedVersion: 2
+        x: 913
+        y: 17
+        width: 26
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0f5a9be2384adb640800000000000000
+      internalID: 5097411236584859120
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pillow Man 64x64 Idle Wave_15
+      rect:
+        serializedVersion: 2
+        x: 977
+        y: 17
+        width: 26
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 48ba033fb1ff766c0800000000000000
+      internalID: -4150068036089369724
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
