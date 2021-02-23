@@ -26,7 +26,7 @@ public class NewCollisionResponses : MonoBehaviour
         {
             if (MaskContains(killList[i], layer))
             {
-                Debug.Log("Die");
+                respawn.Respawn();
             }
         }
     }

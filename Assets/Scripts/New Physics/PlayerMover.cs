@@ -29,6 +29,8 @@ public class PlayerMover : MonoBehaviour
     public enum playerState { neutral, sliding, airborne };
     public playerState state = playerState.neutral;
 
+    private RespawnSystem respawn = null;
+
     void Awake()
     {
         physicsController = GetComponent<PhysicsController>();
@@ -41,6 +43,9 @@ public class PlayerMover : MonoBehaviour
         minJumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(gravity + minJumpHeight)); //based off the euqation minJumpForce = sqrt(2 * gravity * minJumpHeight)
 
         state = playerState.neutral;
+
+        respawn = FindObjectOfType<RespawnSystem>();
+        respawn.OnPlayerRespawn += Respawn_OnPlayerRespawn; //Subscribe object to the OnPlayerRespawn event
     }
 
     void Update()
@@ -116,5 +121,11 @@ public class PlayerMover : MonoBehaviour
         {
             state = playerState.neutral;
         }
+    }
+
+    private void Respawn_OnPlayerRespawn(Vector3 respawnPos) //Sets position to respawn point and velocity to 0
+    {
+        transform.position = respawnPos;
+        velocity = Vector2.zero;
     }
 }
