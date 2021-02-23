@@ -34,6 +34,9 @@ public class PlayerMover : MonoBehaviour
     void Awake()
     {
         physicsController = GetComponent<PhysicsController>();
+
+        respawn = FindObjectOfType<RespawnSystem>();
+        respawn.OnPlayerRespawn += Respawn_OnPlayerRespawn; //Subscribe object to the OnPlayerRespawn event
     }
 
     void Start()
@@ -43,9 +46,6 @@ public class PlayerMover : MonoBehaviour
         minJumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(gravity + minJumpHeight)); //based off the euqation minJumpForce = sqrt(2 * gravity * minJumpHeight)
 
         state = playerState.neutral;
-
-        respawn = FindObjectOfType<RespawnSystem>();
-        respawn.OnPlayerRespawn += Respawn_OnPlayerRespawn; //Subscribe object to the OnPlayerRespawn event
     }
 
     void Update()
@@ -120,6 +120,11 @@ public class PlayerMover : MonoBehaviour
         if(state == playerState.sliding && (Input.GetButtonUp("Slide") || !physicsController.Info.isBelow))
         {
             state = playerState.neutral;
+        }
+
+        if(Input.GetKeyDown(KeyCode.F))
+        {
+            respawn.Respawn();
         }
     }
 
