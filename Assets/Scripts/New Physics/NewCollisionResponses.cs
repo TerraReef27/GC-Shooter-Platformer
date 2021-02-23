@@ -18,27 +18,21 @@ public class NewCollisionResponses : MonoBehaviour
         if (respawn == null) respawn = FindObjectOfType<RespawnSystem>();
         playerCollider = GetComponent<Collider2D>();
     }
-    /*
-    //Checks if the object should ignore collisions. Returns true if the collision should be ignored
-    public bool CheckIfIgnore(string collisionTag)
+
+    public void CheckReaction(Collider2D collision)
     {
-        if (ignoreList.Contains(collisionTag))
+        int layer = collision.gameObject.layer;
+        for (int i = 0; i < killList.Count; i++)
         {
-            return false;
+            if (MaskContains(killList[i], layer))
+            {
+                Debug.Log("Die");
+            }
         }
-
-        return true;
     }
-
-    //Checks collision to see if it should kill the object
-    public bool CheckIfKill(string collisionTag)
+    
+    private bool MaskContains(LayerMask mask, int layer)
     {
-        if (killList.Contains(collisionTag))
-        {
-            return false;
-        }
-
-        return true;
+        return mask == (mask | (1 << layer)); //Check the bits of the layermask to see if the collision it true or false on that layer
     }
-    */
 }

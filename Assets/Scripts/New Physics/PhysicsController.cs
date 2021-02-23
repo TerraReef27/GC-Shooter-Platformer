@@ -10,7 +10,18 @@ public class PhysicsController : RaycastController
     [SerializeField] private int maxClimbAngle = 45;
     [SerializeField] private int maxDecendAngle = 80;
     private Vector2 playerInput = Vector2.zero;
+
+    NewCollisionResponses collisionResponses = null;
     #endregion
+
+    public override void Awake()
+    {
+        base.Awake();
+        if (GetComponent<NewCollisionResponses>())
+            collisionResponses = GetComponent<NewCollisionResponses>();
+        else
+            collisionResponses = null;
+    }
 
     public override void Start()
     {
@@ -52,22 +63,27 @@ public class PhysicsController : RaycastController
         {
             Vector2 origin = (direction == -1) ? rayOrigins.bottomLeft : rayOrigins.bottomRight; //Determine which rays to check
             origin += Vector2.up * (horizontalRaySpace * i); //Check the rays for the projected movement
-            RaycastHit2D hit = Physics2D.Raycast(origin, Vector2.right * direction, length, collisionMask); //Generate a hit to see if the ray collided with anything on the collisionMask
-            
+            RaycastHit2D solidHit = Physics2D.Raycast(origin, Vector2.right * direction, length, solidColisionMask); //Generate a hit to see if the ray collided with anything on the collisionMask
+            RaycastHit2D interactHit = Physics2D.Raycast(origin, Vector2.right * direction, length, interactionMask);
             Debug.DrawRay(origin, direction * Vector2.right * length, Color.green);
 
-            if (hit) //If the ray collides, change the collision so that it stops at the collision point
+            if(interactHit)
             {
-                if (hit.distance == 0 || hit.collider.tag == "OneWayPlatform") //Make it so objects can move inside of collider
+                collisionResponses.CheckReaction(interactHit.collider);
+            }
+
+            if (solidHit) //If the ray collides, change the collision so that it stops at the collision point
+            {
+                if (solidHit.distance == 0 || solidHit.collider.tag == "OneWayPlatform") //Make it so objects can move inside of collider
                     continue;
 
-                float angle = Vector2.Angle(hit.normal, Vector2.up);
+                float angle = Vector2.Angle(solidHit.normal, Vector2.up);
                 if (i == 0 && angle <= maxClimbAngle) //Only check slope if its the first raycast and change velocity if on a shallow enough slope
                 {
                     float distanceToSlope = 0;
                     if (angle != info.oldSlopeAngle) //Check if walking on a new slope
                     {
-                        distanceToSlope = hit.distance - skinSize;
+                        distanceToSlope = solidHit.distance - skinSize;
                         moveVelocity.x -= distanceToSlope * direction;
                     }
                     ClimbSlope(ref moveVelocity, angle);
@@ -75,8 +91,8 @@ public class PhysicsController : RaycastController
                 }
                 if (!info.isClimbingSlope || angle > maxClimbAngle)
                 {
-                    moveVelocity.x = (hit.distance - skinSize) * direction;
-                    length = hit.distance;
+                    moveVelocity.x = (solidHit.distance - skinSize) * direction;
+                    length = solidHit.distance;
 
                     if(info.isClimbingSlope)
                     {
@@ -98,32 +114,38 @@ public class PhysicsController : RaycastController
         {
             Vector2 origin = (direction == -1) ? rayOrigins.bottomLeft : rayOrigins.topLeft; //Determine which rays to check
             origin += Vector2.right * (verticalRaySpace * i + moveVelocity.x); //Check the rays for the projected movement
-            RaycastHit2D hit = Physics2D.Raycast(origin, Vector2.up * direction, length, collisionMask); //Generate a hit to see if the ray collided with anything on the collisionMask
+            RaycastHit2D solidHit = Physics2D.Raycast(origin, Vector2.up * direction, length, solidColisionMask); //Generate a hit to see if the ray collided with anything on the collisionMask
+            RaycastHit2D interactHit = Physics2D.Raycast(origin, Vector2.up * direction, length, interactionMask);
 
             Debug.DrawRay(origin, direction * Vector2.up * length, Color.green);
 
-            if (hit) //If the ray collides, change the collision so that it stops at the collision point
+            if (interactHit)
+            {                
+                collisionResponses.CheckReaction(interactHit.collider);
+            }
+
+            if (solidHit) //If the ray collides, change the collision so that it stops at the collision point
             {
-                if(hit.collider.tag == "OneWayPlatform")
+                if (solidHit.collider.tag == "OneWayPlatform")
                 {
-                    if(moveVelocity.y > 0 || hit.distance == 0 || hit.collider == info.fallThrough)
+                    if(moveVelocity.y > 0 || solidHit.distance == 0 || solidHit.collider == info.fallThrough)
                     {
-                        if(hit.collider == info.fallThrough)
+                        if(solidHit.collider == info.fallThrough)
                             Debug.Log("passing through top");
-                        if (hit.distance == 0)
+                        if (solidHit.distance == 0)
                             Debug.Log("in collider");
                         if (moveVelocity.y > 0)
                             Debug.Log("passing through bottom");
                         continue;
                     }
                 }
-                if (hit.collider != info.fallThrough)
+                if (solidHit.collider != info.fallThrough)
                 {
                     info.fallThrough = null;
                 }
 
-                moveVelocity.y = (hit.distance - skinSize) * direction;
-                length = hit.distance;
+                moveVelocity.y = (solidHit.distance - skinSize) * direction;
+                length = solidHit.distance;
 
                 if (info.isClimbingSlope)
                     moveVelocity.x = moveVelocity.y / Mathf.Tan(info.slopeAngle * Mathf.Deg2Rad) * Mathf.Sign(moveVelocity.x);
@@ -138,7 +160,7 @@ public class PhysicsController : RaycastController
             float directionX = Mathf.Sign(moveVelocity.x);
             length = Mathf.Abs(moveVelocity.x) + skinSize;
             Vector2 origin = ((directionX == -1) ? rayOrigins.bottomLeft : rayOrigins.bottomRight) + Vector2.up * moveVelocity.y;
-            RaycastHit2D hit = Physics2D.Raycast(origin, Vector2.right * directionX, length, collisionMask);
+            RaycastHit2D hit = Physics2D.Raycast(origin, Vector2.right * directionX, length, solidColisionMask);
 
             if(hit)
             {
@@ -171,7 +193,7 @@ public class PhysicsController : RaycastController
         float xDirection = Mathf.Sign(moveVelocity.x);
         Vector2 origin = (xDirection == -1) ? rayOrigins.bottomRight : rayOrigins.bottomLeft;
 
-        RaycastHit2D hit = Physics2D.Raycast(origin, -Vector2.up, Mathf.Infinity, collisionMask);
+        RaycastHit2D hit = Physics2D.Raycast(origin, -Vector2.up, Mathf.Infinity, solidColisionMask);
         if(hit)
         {
             float slopeAngle = Vector2.Angle(hit.normal, Vector2.up);
@@ -203,7 +225,7 @@ public class PhysicsController : RaycastController
         {
             Vector2 origin = rayOrigins.bottomLeft;
             origin += Vector2.right * (verticalRaySpace * i); //Check the rays for the projected movement
-            RaycastHit2D hit = Physics2D.Raycast(origin, Vector2.up * -1, skinSize*2, collisionMask); //Generate a hit to see if the ray collided with anything on the collisionMask
+            RaycastHit2D hit = Physics2D.Raycast(origin, Vector2.up * -1, skinSize*2, solidColisionMask); //Generate a hit to see if the ray collided with anything on the collisionMask
 
             if (hit) //If the ray collides, change the collision so that it stops at the collision point
             {

@@ -34,10 +34,11 @@ public class RaycastController : MonoBehaviour
 
     [HideInInspector]
     protected BoxCollider2D mainCollider = new BoxCollider2D();
-    [SerializeField] protected LayerMask collisionMask;
+    [SerializeField] protected LayerMask solidColisionMask;
+    [SerializeField] protected LayerMask interactionMask;
     #endregion
 
-    void Awake()
+    public virtual void Awake()
     {
         mainCollider = GetComponent<BoxCollider2D>();
     }
