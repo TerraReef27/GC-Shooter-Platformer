@@ -1,0 +1,775 @@
+fileFormatVersion: 2
+guid: 89764e2db4151be4bad1bfd5c5360ee9
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 845776542358698725
+    second: Pillow Man 64x64 Idle Tug_0
+  - first:
+      213: -4241645442000211161
+    second: Pillow Man 64x64 Idle Tug_1
+  - first:
+      213: -8293295563709507524
+    second: Pillow Man 64x64 Idle Tug_2
+  - first:
+      213: 832904663786833583
+    second: Pillow Man 64x64 Idle Tug_3
+  - first:
+      213: -3431472504909917405
+    second: Pillow Man 64x64 Idle Tug_4
+  - first:
+      213: -766194378148058401
+    second: Pillow Man 64x64 Idle Tug_5
+  - first:
+      213: -8965158933496239298
+    second: Pillow Man 64x64 Idle Tug_6
+  - first:
+      213: -7969717422325444973
+    second: Pillow Man 64x64 Idle Tug_7
+  - first:
+      213: 2779776133317818711
+    second: Pillow Man 64x64 Idle Tug_8
+  - first:
+      213: 4930216215902217077
+    second: Pillow Man 64x64 Idle Tug_9
+  - first:
+      213: 2908157793994419952
+    second: Pillow Man 64x64 Idle Tug_10
+  - first:
+      213: 6999183549392822412
+    second: Pillow Man 64x64 Idle Tug_11
+  - first:
+      213: 8272568050485175235
+    second: Pillow Man 64x64 Idle Tug_12
+  - first:
+      213: 2646232478642035313
+    second: Pillow Man 64x64 Idle Tug_13
+  - first:
+      213: -8459136915909798282
+    second: Pillow Man 64x64 Idle Tug_14
+  - first:
+      213: -7350615772954706347
+    second: Pillow Man 64x64 Idle Tug_15
+  - first:
+      213: 6522878189783651027
+    second: Pillow Man 64x64 Idle Tug_16
+  - first:
+      213: 1991569776582857868
+    second: Pillow Man 64x64 Idle Tug_17
+  - first:
+      213: -7074902026046674703
+    second: Pillow Man 64x64 Idle Tug_18
+  - first:
+      213: -8724302065928595480
+    second: Pillow Man 64x64 Idle Tug_19
+  - first:
+      213: -4490399557549518613
+    second: Pillow Man 64x64 Idle Tug_20
+  - first:
+      213: 5661921355044405571
+    second: Pillow Man 64x64 Idle Tug_21
+  - first:
+      213: 2225616334596168131
+    second: Pillow Man 64x64 Idle Tug_22
+  - first:
+      213: -2465256816595735626
+    second: Pillow Man 64x64 Idle Tug_23
+  - first:
+      213: 2317360784234719768
+    second: Pillow Man 64x64 Idle Tug_24
+  - first:
+      213: -6575313573179235194
+    second: Pillow Man 64x64 Idle Tug_25
+  - first:
+      213: 2588567804974292348
+    second: Pillow Man 64x64 Idle Tug_26
+  - first:
+      213: -1376869250486881536
+    second: Pillow Man 64x64 Idle Tug_27
+  externalObjects: {}
+  serializedVersion: 10
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 64
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Pillow Man 64x64 Idle Tug_0
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 17
+        width: 26
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5eaf5aeb84dccbb00800000000000000
+      internalID: 845776542358698725
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pillow Man 64x64 Idle Tug_1
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 17
+        width: 26
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7233c6691f5a225c0800000000000000
+      internalID: -4241645442000211161
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pillow Man 64x64 Idle Tug_2
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 17
+        width: 26
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c3895c3ef9b48ec80800000000000000
+      internalID: -8293295563709507524
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pillow Man 64x64 Idle Tug_3
+      rect:
+        serializedVersion: 2
+        x: 210
+        y: 17
+        width: 25
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fa6c7c8f0621f8b00800000000000000
+      internalID: 832904663786833583
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pillow Man 64x64 Idle Tug_4
+      rect:
+        serializedVersion: 2
+        x: 274
+        y: 17
+        width: 25
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 323135000f5f060d0800000000000000
+      internalID: -3431472504909917405
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pillow Man 64x64 Idle Tug_5
+      rect:
+        serializedVersion: 2
+        x: 339
+        y: 17
+        width: 24
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fda6595c54eed55f0800000000000000
+      internalID: -766194378148058401
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pillow Man 64x64 Idle Tug_6
+      rect:
+        serializedVersion: 2
+        x: 403
+        y: 17
+        width: 24
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e3b690e037b559380800000000000000
+      internalID: -8965158933496239298
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pillow Man 64x64 Idle Tug_7
+      rect:
+        serializedVersion: 2
+        x: 468
+        y: 17
+        width: 23
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 39ecc02da30e56190800000000000000
+      internalID: -7969717422325444973
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pillow Man 64x64 Idle Tug_8
+      rect:
+        serializedVersion: 2
+        x: 531
+        y: 17
+        width: 24
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 75974855aafb39620800000000000000
+      internalID: 2779776133317818711
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pillow Man 64x64 Idle Tug_9
+      rect:
+        serializedVersion: 2
+        x: 593
+        y: 17
+        width: 25
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 573e8b6e685ab6440800000000000000
+      internalID: 4930216215902217077
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pillow Man 64x64 Idle Tug_10
+      rect:
+        serializedVersion: 2
+        x: 656
+        y: 17
+        width: 26
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0fe22d50b1adb5820800000000000000
+      internalID: 2908157793994419952
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pillow Man 64x64 Idle Tug_11
+      rect:
+        serializedVersion: 2
+        x: 718
+        y: 17
+        width: 28
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c80215bda58122160800000000000000
+      internalID: 6999183549392822412
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pillow Man 64x64 Idle Tug_12
+      rect:
+        serializedVersion: 2
+        x: 792
+        y: 17
+        width: 31
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3c32a6ddfc01ec270800000000000000
+      internalID: 8272568050485175235
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pillow Man 64x64 Idle Tug_13
+      rect:
+        serializedVersion: 2
+        x: 855
+        y: 17
+        width: 31
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 17a5f824b6e49b420800000000000000
+      internalID: 2646232478642035313
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pillow Man 64x64 Idle Tug_14
+      rect:
+        serializedVersion: 2
+        x: 919
+        y: 17
+        width: 31
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6769dcc1bcb1b9a80800000000000000
+      internalID: -8459136915909798282
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pillow Man 64x64 Idle Tug_15
+      rect:
+        serializedVersion: 2
+        x: 967
+        y: 17
+        width: 34
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 55eb6a456ed5df990800000000000000
+      internalID: -7350615772954706347
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pillow Man 64x64 Idle Tug_16
+      rect:
+        serializedVersion: 2
+        x: 1031
+        y: 17
+        width: 36
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3d29237672be58a50800000000000000
+      internalID: 6522878189783651027
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pillow Man 64x64 Idle Tug_17
+      rect:
+        serializedVersion: 2
+        x: 1095
+        y: 17
+        width: 36
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c8410a6f82a73ab10800000000000000
+      internalID: 1991569776582857868
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pillow Man 64x64 Idle Tug_18
+      rect:
+        serializedVersion: 2
+        x: 1164
+        y: 17
+        width: 31
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1f8ebcc7716e0dd90800000000000000
+      internalID: -7074902026046674703
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pillow Man 64x64 Idle Tug_19
+      rect:
+        serializedVersion: 2
+        x: 1233
+        y: 17
+        width: 27
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8e79e1f8e7d0de680800000000000000
+      internalID: -8724302065928595480
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pillow Man 64x64 Idle Tug_20
+      rect:
+        serializedVersion: 2
+        x: 1299
+        y: 17
+        width: 28
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: be090b0c465eea1c0800000000000000
+      internalID: -4490399557549518613
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pillow Man 64x64 Idle Tug_21
+      rect:
+        serializedVersion: 2
+        x: 1363
+        y: 17
+        width: 27
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 341ce99697f239e40800000000000000
+      internalID: 5661921355044405571
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pillow Man 64x64 Idle Tug_22
+      rect:
+        serializedVersion: 2
+        x: 1426
+        y: 17
+        width: 25
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3c959e5b34af2ee10800000000000000
+      internalID: 2225616334596168131
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pillow Man 64x64 Idle Tug_23
+      rect:
+        serializedVersion: 2
+        x: 1489
+        y: 17
+        width: 26
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6bb63be9cf5a9cdd0800000000000000
+      internalID: -2465256816595735626
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pillow Man 64x64 Idle Tug_24
+      rect:
+        serializedVersion: 2
+        x: 1553
+        y: 17
+        width: 26
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 81a2bb8fa5be82020800000000000000
+      internalID: 2317360784234719768
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pillow Man 64x64 Idle Tug_25
+      rect:
+        serializedVersion: 2
+        x: 1617
+        y: 17
+        width: 26
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 684e8d7842bcfb4a0800000000000000
+      internalID: -6575313573179235194
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pillow Man 64x64 Idle Tug_26
+      rect:
+        serializedVersion: 2
+        x: 1681
+        y: 17
+        width: 26
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c7d518c24b07ce320800000000000000
+      internalID: 2588567804974292348
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pillow Man 64x64 Idle Tug_27
+      rect:
+        serializedVersion: 2
+        x: 1745
+        y: 17
+        width: 26
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 003329e26b064ece0800000000000000
+      internalID: -1376869250486881536
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
