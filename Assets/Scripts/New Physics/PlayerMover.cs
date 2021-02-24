@@ -22,6 +22,7 @@ public class PlayerMover : MonoBehaviour
 
     private PhysicsController physicsController;
     private Vector3 velocity;
+    public Vector3 Velocity { get { return velocity; } private set { velocity = Velocity; } }
     
     private float horizontalInput;
     private float targetMoveSpeed;
