@@ -29,6 +29,7 @@ public class PlayerMover : MonoBehaviour
 
     public enum playerState { neutral, sliding, airborne };
     public playerState state = playerState.neutral;
+    public bool grounded;
 
     private RespawnSystem respawn = null;
 
@@ -51,6 +52,8 @@ public class PlayerMover : MonoBehaviour
 
     void Update()
     {
+        grounded = physicsController.Info.isBelow;
+
         horizontalInput = Input.GetAxisRaw("Horizontal");
         targetMoveSpeed = moveSpeed * horizontalInput;
 

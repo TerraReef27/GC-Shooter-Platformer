@@ -9,6 +9,7 @@ public class AnimationController : MonoBehaviour
     private SpriteRenderer spriteRend = null; //Reference to the sprite renderer
 
     private int facing = 1;
+    private bool isGrounded = true;
 
     void Awake()
     {
@@ -22,7 +23,10 @@ public class AnimationController : MonoBehaviour
 
     void Update()
     {
+        isGrounded = playerMove.grounded;
+
         animator.SetFloat("horizontalMove", playerMove.Velocity.x); //Set the X and Y values in the animator to be the movement values
+        animator.SetBool("isGrounded", isGrounded);
         //animator.SetFloat("verticalMove", player.Movement.y);
 
         if (playerMove.Velocity.x != 0) //Set the direction the sprite is facing to the last player input in the X direction

@@ -29,6 +29,10 @@ public class Checkpoint : MonoBehaviour
                 guns[i].SetActive(false);
             }
         }
+        else
+        {
+            guns = null;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

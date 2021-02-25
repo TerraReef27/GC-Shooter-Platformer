@@ -43,7 +43,7 @@ public class GunHolder : MonoBehaviour
     void Start()
     {
         GetGunsInChild();
-        if (guns[0] != null)
+        if (guns != null)
         {
             foreach(GameObject gun in guns)
             {
@@ -112,22 +112,28 @@ public class GunHolder : MonoBehaviour
 
     private void LoadNewGuns(GameObject[] newGuns)
     {
-        foreach(GameObject gun in guns)
+        if (guns != null)
         {
-            Destroy(gun);
+            foreach (GameObject gun in guns)
+            {
+                Destroy(gun);
+            }
         }
 
-        GameObject[] checkpointGuns = new GameObject[newGuns.Length];
-
-        for(int i=0; i<checkpointGuns.Length; i++)
+        if (newGuns != null)
         {
-            checkpointGuns[i] = Instantiate(newGuns[i], this.transform, false);
+            GameObject[] checkpointGuns = new GameObject[newGuns.Length];
+
+            for (int i = 0; i < checkpointGuns.Length; i++)
+            {
+                checkpointGuns[i] = Instantiate(newGuns[i], this.transform, false);
+            }
+
+            guns = new List<GameObject>(checkpointGuns);
+            SwitchGuns(0);
+
+            OnGunsUpdated?.Invoke(guns.Count);
         }
-
-        guns = new List<GameObject>(checkpointGuns);
-        SwitchGuns(0);
-
-        OnGunsUpdated?.Invoke(guns.Count);
     }
 
     private void ReloadGuns()

@@ -77,8 +77,6 @@ public class NewPlayerGunController : MonoBehaviour
     {
         if (!PauseMenu.isGamePaused)
         {
-
-
             if (Input.GetButtonDown("Fire1") && gun != null && gun.CurrentAmmo > 0) //Gets the mouse postion and adds a force to the player in the opposite direction of the mouse relative to the player. Amount of force is determined by the recoilForce
             {
                 //Debug.DrawLine(transform.position, mousePos, Color.red, 1f);
@@ -88,7 +86,7 @@ public class NewPlayerGunController : MonoBehaviour
                 //Vector2 shotAngle = new Vector2(mousePos.x - transform.position.x, mousePos.y - transform.position.y);
                 Vector3 facing = mousePos - transform.position;
                 angle = Mathf.Atan2(facing.y, facing.x) * Mathf.Rad2Deg;
-                gun.Shoot(-forceTo);
+                if (gun != null) gun.Shoot(-forceTo);
 
                 OnWeaponFire?.Invoke();
             }
@@ -97,44 +95,47 @@ public class NewPlayerGunController : MonoBehaviour
 
     private void RotateSprites() //Rotate the player and gun sprites according to the mouse position
     {
-        Vector3 facing = GetCurrentMousePosition() - transform.position;
+        if (gun != null)
+        {
+            Vector3 facing = GetCurrentMousePosition() - transform.position;
 
-        angle = Mathf.Atan2(facing.y, facing.x) * Mathf.Rad2Deg;
+            angle = Mathf.Atan2(facing.y, facing.x) * Mathf.Rad2Deg;
 
-        if (angle > 90)
-        {
-            sprite.flipX = true;
-            if (gun != null) gun.Sprite.flipX = true;
-            angle += 180;
-            if (!isFlipped)
+            if (angle > 90)
             {
-                gun.InvertFirePoint();
-                isFlipped = true;
+                sprite.flipX = true;
+                gun.Sprite.flipX = true;
+                angle += 180;
+                if (!isFlipped)
+                {
+                    gun.InvertFirePoint();
+                    isFlipped = true;
+                }
             }
-        }
-        else if (angle < -90)
-        {
-            sprite.flipX = true;
-            if (gun != null) gun.Sprite.flipX = true;
-            angle -= 180;
-            if (!isFlipped)
+            else if (angle < -90)
             {
-                gun.InvertFirePoint();
-                isFlipped = true;
+                sprite.flipX = true;
+                gun.Sprite.flipX = true;
+                angle -= 180;
+                if (!isFlipped)
+                {
+                    gun.InvertFirePoint();
+                    isFlipped = true;
+                }
             }
-        }
-        else
-        {
-            sprite.flipX = false;
-            if(gun != null) gun.Sprite.flipX = false;
-            if (isFlipped)
+            else
             {
-                gun.InvertFirePoint();
-                isFlipped = false;
+                sprite.flipX = false;
+                gun.Sprite.flipX = false;
+                if (isFlipped)
+                {
+                    gun.InvertFirePoint();
+                    isFlipped = false;
+                }
             }
+            gun.transform.rotation = Quaternion.Euler(0, 0, angle);
+            //gun.transform.position = rightArmSolverTarget.transform.position; //Clay
         }
-        if (gun != null) gun.transform.rotation = Quaternion.Euler(0, 0, angle);
-        //gun.transform.position = rightArmSolverTarget.transform.position; //Clay
     }
 
     //Function for translating the mouse position into a 2d vector
