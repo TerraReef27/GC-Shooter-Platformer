@@ -25,6 +25,7 @@ public class PlayerMover : MonoBehaviour
     public Vector3 Velocity { get { return velocity; } private set { velocity = Velocity; } }
     
     private float horizontalInput;
+    public float HorizontalInput { get { return horizontalInput; } private set { horizontalInput = HorizontalInput; } }
     private float targetMoveSpeed;
 
     public enum playerState { neutral, sliding, airborne };

@@ -31,10 +31,10 @@ public class AnimationController : MonoBehaviour
 
         if (playerMove.Velocity.x != 0) //Set the direction the sprite is facing to the last player input in the X direction
         {
-            facing = Mathf.FloorToInt(playerMove.Velocity.x);
+            facing = Mathf.FloorToInt(playerMove.HorizontalInput);
             if (facing > 0)
                 spriteRend.flipX = false;
-            else
+            else if(facing < 0)
                 spriteRend.flipX = true;
         }
 
