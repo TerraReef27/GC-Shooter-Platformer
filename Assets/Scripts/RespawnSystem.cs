@@ -10,10 +10,10 @@ public class RespawnSystem : MonoBehaviour
     public event OnPlayerRespawnDelegate OnPlayerRespawn; //Create an event for when the player dies
     public delegate void OnPlayerRespawnDelegate(Vector3 respawnPos); //Delegate to pass on respawn information
 
-    public event OnActivateNewCheckpointDelegate HandleNewCheckpoint; //Create an event for when the player dies
+    public event OnActivateNewCheckpointDelegate HandleNewCheckpoint; //Create an event for when the player activates a new checkpoint
     public delegate void OnActivateNewCheckpointDelegate(GameObject[] guns); //Delegate to pass on respawn information
 
-    public event OnActivateOldCheckpointDelegate HandleOldCheckpoint; //Create an event for when the player dies
+    public event OnActivateOldCheckpointDelegate HandleOldCheckpoint; //Create an event for when the player enters an old checkpoint
     public delegate void OnActivateOldCheckpointDelegate(); //Delegate to pass on respawn information
 
     void Start()

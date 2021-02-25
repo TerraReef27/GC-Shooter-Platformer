@@ -8,6 +8,7 @@ public class Checkpoint : MonoBehaviour
     RespawnSystem respawner = null;
     [SerializeField] Collider2D trigger = null;
     private bool newTrigger = true;
+    private float ybuffer = .5f;
 
     void Awake()
     {
@@ -44,7 +45,7 @@ public class Checkpoint : MonoBehaviour
     private void ActivateCheckpoint(GameObject[] guns)
     {
         newTrigger = false;
-        respawner.SetNewSpawnpoint(this.transform.position, guns);
+        respawner.SetNewSpawnpoint(this.transform.position + new Vector3(0, ybuffer), guns);
     }
 
     private void RefillAmmo()

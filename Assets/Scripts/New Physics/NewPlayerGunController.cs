@@ -104,7 +104,7 @@ public class NewPlayerGunController : MonoBehaviour
         if (angle > 90)
         {
             sprite.flipX = true;
-            gun.Sprite.flipX = true;
+            if (gun != null) gun.Sprite.flipX = true;
             angle += 180;
             if (!isFlipped)
             {
@@ -115,7 +115,7 @@ public class NewPlayerGunController : MonoBehaviour
         else if (angle < -90)
         {
             sprite.flipX = true;
-            gun.Sprite.flipX = true;
+            if (gun != null) gun.Sprite.flipX = true;
             angle -= 180;
             if (!isFlipped)
             {
@@ -126,14 +126,14 @@ public class NewPlayerGunController : MonoBehaviour
         else
         {
             sprite.flipX = false;
-            gun.Sprite.flipX = false;
+            if(gun != null) gun.Sprite.flipX = false;
             if (isFlipped)
             {
                 gun.InvertFirePoint();
                 isFlipped = false;
             }
         }
-        gun.transform.rotation = Quaternion.Euler(0, 0, angle);
+        if (gun != null) gun.transform.rotation = Quaternion.Euler(0, 0, angle);
         //gun.transform.position = rightArmSolverTarget.transform.position; //Clay
     }
 
