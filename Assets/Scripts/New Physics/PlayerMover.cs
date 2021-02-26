@@ -15,12 +15,14 @@ public class PlayerMover : MonoBehaviour
     [SerializeField] private float airDeceleration = .1f;
     [SerializeField] private float groundDecleration = .2f;
     [SerializeField] private float slideDeceleration = .01f;
-
+    [SerializeField] private float wallSlideSpeed = 1f;
+    [SerializeField] private Vector2 wallJump = Vector2.zero;
+    private int wallDirection;
     private float gravity;
     private float minJumpVelocity;
     private float maxJumpVelocity;
 
-    private PhysicsController physicsController;
+    private PhysicsController physics;
     private Vector3 velocity;
     public Vector3 Velocity { get { return velocity; } private set { velocity = Velocity; } }
     
@@ -28,7 +30,7 @@ public class PlayerMover : MonoBehaviour
     public float HorizontalInput { get { return horizontalInput; } private set { horizontalInput = HorizontalInput; } }
     private float targetMoveSpeed;
 
-    public enum playerState { neutral, sliding, airborne };
+    public enum playerState { neutral, sliding, airborne, wallSliding };
     public playerState state = playerState.neutral;
     public bool grounded;
 
@@ -36,7 +38,7 @@ public class PlayerMover : MonoBehaviour
 
     void Awake()
     {
-        physicsController = GetComponent<PhysicsController>();
+        physics = GetComponent<PhysicsController>();
 
         respawn = FindObjectOfType<RespawnSystem>();
         respawn.OnPlayerRespawn += Respawn_OnPlayerRespawn; //Subscribe object to the OnPlayerRespawn event
@@ -53,26 +55,18 @@ public class PlayerMover : MonoBehaviour
 
     void Update()
     {
-        grounded = physicsController.Info.isBelow;
+        grounded = physics.Info.isBelow;
+        wallDirection = (physics.Info.isLeft) ? -1 : 1;
 
         horizontalInput = Input.GetAxisRaw("Horizontal");
         targetMoveSpeed = moveSpeed * horizontalInput;
 
-        if(Input.GetButtonDown("Jump") && physicsController.Info.isBelow)
-        {
-            velocity.y = maxJumpVelocity;
-        }
-        if(Input.GetButtonUp("Jump"))
-        {
-            if (velocity.y > minJumpVelocity)
-                velocity.y = minJumpVelocity;
-        }
-        if(Input.GetAxis("Vertical") < 0f)
-        {
-            physicsController.FallThroughPlatform();
-        }
-
+        HandleWallSlide();
+        HandleJumping();
         HandleInput();
+
+        if (state == playerState.airborne && physics.Info.isBelow)
+            state = playerState.neutral;
     }
 
     void FixedUpdate()
@@ -83,29 +77,29 @@ public class PlayerMover : MonoBehaviour
         {
             if(Mathf.Sign(velocity.x) != Mathf.Sign(horizontalInput))
             {
-                velocity.x = Mathf.MoveTowards(velocity.x, moveSpeed * horizontalInput, (physicsController.Info.isBelow) ? groundAcceleration*2 : airAcceleration*2);
+                velocity.x = Mathf.MoveTowards(velocity.x, moveSpeed * horizontalInput, (physics.Info.isBelow) ? groundAcceleration*2 : airAcceleration*2);
             }
             else
             {
-                velocity.x = Mathf.MoveTowards(velocity.x, moveSpeed * horizontalInput, (physicsController.Info.isBelow) ? groundAcceleration : airAcceleration);
+                velocity.x = Mathf.MoveTowards(velocity.x, moveSpeed * horizontalInput, (physics.Info.isBelow) ? groundAcceleration : airAcceleration);
             }
         }
         else
         {
             if(state != playerState.sliding)
-                velocity.x = Mathf.MoveTowards(velocity.x, 0, (physicsController.Info.isBelow) ? groundDecleration : airDeceleration);
+                velocity.x = Mathf.MoveTowards(velocity.x, 0, (physics.Info.isBelow) ? groundDecleration : airDeceleration);
             else
-                velocity.x = Mathf.MoveTowards(velocity.x, 0, (physicsController.Info.isBelow) ? slideDeceleration : airDeceleration);
+                velocity.x = Mathf.MoveTowards(velocity.x, 0, (physics.Info.isBelow) ? slideDeceleration : airDeceleration);
         }
         
         velocity.y += gravity * Time.fixedDeltaTime;
-        physicsController.Move(velocity * Time.fixedDeltaTime, false);
+        physics.Move(velocity * Time.fixedDeltaTime, false);
 
-        if (physicsController.Info.isBelow || physicsController.Info.isAbove)
+        if (physics.Info.isBelow || physics.Info.isAbove)
         {
             velocity.y = 0;
         }
-        if (physicsController.Info.isLeft || physicsController.Info.isRight)
+        if (physics.Info.isLeft || physics.Info.isRight)
         {
             velocity.x = 0;
         }
@@ -118,18 +112,62 @@ public class PlayerMover : MonoBehaviour
 
     private void HandleInput()
     {
-        if (Input.GetButtonDown("Slide") && physicsController.Info.isBelow && Mathf.Abs(velocity.x) > 1) //Slide
+        if (Input.GetButtonDown("Slide") && physics.Info.isBelow && Mathf.Abs(velocity.x) > 1) //Slide
         {
             state = playerState.sliding;
         }
-        if(state == playerState.sliding && (Input.GetButtonUp("Slide") || !physicsController.Info.isBelow))
+        if(state == playerState.sliding && (Input.GetButtonUp("Slide") || !physics.Info.isBelow))
         {
             state = playerState.neutral;
         }
 
-        if(Input.GetKeyDown(KeyCode.F))
+        if (Input.GetAxis("Vertical") < 0f)
+        {
+            physics.FallThroughPlatform();
+        }
+
+        if (Input.GetKeyDown(KeyCode.F))
         {
             respawn.Respawn();
+        }
+    }
+
+    private void HandleJumping()
+    {
+        if (Input.GetButtonDown("Jump"))
+        {
+            if(state == playerState.wallSliding)
+            {
+                AddForce(new Vector2(wallJump.x * -wallDirection, wallJump.y));
+                //velocity.x = wallJump.x * wallDirection;
+                //velocity.y = wallJump.y;
+            }
+            if (physics.Info.isBelow)
+            {
+                velocity.y = maxJumpVelocity;
+            }
+            if (Input.GetButtonUp("Jump"))
+            {
+                if (velocity.y > minJumpVelocity)
+                    velocity.y = minJumpVelocity;
+            }
+        }
+    }
+
+    private void HandleWallSlide()
+    {
+        if (((physics.Info.isLeft && horizontalInput < -.1) || (physics.Info.isRight && horizontalInput > .1)) && !physics.Info.isBelow)
+        {
+            state = playerState.wallSliding;
+            if (velocity.y < -wallSlideSpeed)
+                velocity.y = -wallSlideSpeed;
+        }
+        else if (state == playerState.wallSliding)
+        {
+            if (physics.Info.isBelow)
+                state = playerState.neutral;
+            else
+                state = playerState.airborne;
         }
     }
 
