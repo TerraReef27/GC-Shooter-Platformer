@@ -63,7 +63,7 @@ GameObject:
   - component: {fileID: 9212911883719005628}
   - component: {fileID: 9212911883719005631}
   m_Layer: 9
-  m_Name: Player 1
+  m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -202,6 +202,8 @@ MonoBehaviour:
   airDeceleration: 0.1
   groundDecleration: 1
   slideDeceleration: 0.1
+  wallSlideSpeed: 2
+  wallJump: {x: 8, y: 12}
   state: 0
   grounded: 0
 --- !u!114 &9212911883719005639

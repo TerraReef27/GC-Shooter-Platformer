@@ -112,7 +112,7 @@ public class PlayerMover : MonoBehaviour
 
     private void HandleInput()
     {
-        if (Input.GetButtonDown("Slide") && physics.Info.isBelow && Mathf.Abs(velocity.x) > 1) //Slide
+        if (Input.GetButtonDown("Slide") && physics.Info.isBelow) //&& Mathf.Abs(velocity.x) > 1) //Slide
         {
             state = playerState.sliding;
         }
@@ -145,12 +145,12 @@ public class PlayerMover : MonoBehaviour
             if (physics.Info.isBelow)
             {
                 velocity.y = maxJumpVelocity;
-            }
-            if (Input.GetButtonUp("Jump"))
-            {
-                if (velocity.y > minJumpVelocity)
-                    velocity.y = minJumpVelocity;
-            }
+            }    
+        }
+        if (Input.GetButtonUp("Jump"))
+        {
+            if (velocity.y > minJumpVelocity)
+                velocity.y = minJumpVelocity;
         }
     }
 
