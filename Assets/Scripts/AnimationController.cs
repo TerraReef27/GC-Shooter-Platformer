@@ -9,6 +9,7 @@ public class AnimationController : MonoBehaviour
     private SpriteRenderer spriteRend = null; //Reference to the sprite renderer
 
     private int facing = 1;
+    private int wasFacing = 1;
     private bool isGrounded = true;
 
     void Awake()
@@ -32,10 +33,21 @@ public class AnimationController : MonoBehaviour
         if (playerMove.Velocity.x != 0) //Set the direction the sprite is facing to the last player input in the X direction
         {
             facing = Mathf.FloorToInt(playerMove.HorizontalInput);
-            if (facing > 0)
-                spriteRend.flipX = false;
-            else if(facing < 0)
-                spriteRend.flipX = true;
+            Debug.Log(Mathf.FloorToInt(playerMove.HorizontalInput));
+            if (facing > 0 && wasFacing < 0)
+            {
+                wasFacing = 1;
+                Vector3 scale = this.transform.localScale;
+                this.transform.localScale = new Vector3(-scale.x, scale.y, scale.z);
+                //spriteRend.flipX = false;
+            }
+            else if (facing < 0 && wasFacing > 0)
+            {
+                wasFacing = -1;
+                Vector3 scale = this.transform.localScale;
+                this.transform.localScale = new Vector3(-scale.x, scale.y, scale.z);
+                //spriteRend.flipX = true
+            }
         }
 
         if (playerMove.state == PlayerMover.playerState.sliding)
