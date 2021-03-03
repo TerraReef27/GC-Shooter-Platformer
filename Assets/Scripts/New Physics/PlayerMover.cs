@@ -36,18 +36,12 @@ public class PlayerMover : MonoBehaviour
 
     private RespawnSystem respawn = null;
 
-    Vector2 normalBox = new Vector2(1, 1);
-    [SerializeField] Vector2 slideBox = new Vector2(1, 1);
-    BoxCollider2D playerCollider = null;
-
     void Awake()
     {
         physics = GetComponent<PhysicsController>();
 
         respawn = FindObjectOfType<RespawnSystem>();
         respawn.OnPlayerRespawn += Respawn_OnPlayerRespawn; //Subscribe object to the OnPlayerRespawn event
-
-        playerCollider = GetComponent<BoxCollider2D>();
     }
 
     void Start()
@@ -57,7 +51,6 @@ public class PlayerMover : MonoBehaviour
         minJumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(gravity + minJumpHeight)); //based off the euqation minJumpForce = sqrt(2 * gravity * minJumpHeight)
 
         state = playerState.neutral;
-        normalBox = playerCollider.size;
     }
 
     void Update()
@@ -119,19 +112,17 @@ public class PlayerMover : MonoBehaviour
 
     private void HandleInput()
     {
-        if (Input.GetButtonDown("Slide") && physics.Info.isBelow) //&& Mathf.Abs(velocity.x) > 1) //Slide
+        if (Input.GetButtonDown("Slide") && physics.Info.isBelow && state != playerState.sliding) //&& Mathf.Abs(velocity.x) > 1) //Slide
         {
             state = playerState.sliding;
-            playerCollider.size = new Vector2(slideBox.x, normalBox.y);
-            physics.CalculateSpacing();
-            physics.UpdateRayOrigin();
+            GetComponentInChildren<ColliderController>().SwitchActive();
+            physics.ChangeActiveCollider();
         }
         if(state == playerState.sliding && (Input.GetButtonUp("Slide") || !physics.Info.isBelow))
         {
             state = playerState.neutral;
-            playerCollider.size = normalBox;
-            physics.CalculateSpacing();
-            physics.UpdateRayOrigin();
+            GetComponentInChildren<ColliderController>().SwitchActive();
+            physics.ChangeActiveCollider();
         }
 
         if (Input.GetAxis("Vertical") < 0f)
@@ -139,7 +130,7 @@ public class PlayerMover : MonoBehaviour
             physics.FallThroughPlatform();
         }
 
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.K))
         {
             respawn.Respawn();
         }

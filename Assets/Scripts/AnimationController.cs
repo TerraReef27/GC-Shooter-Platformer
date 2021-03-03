@@ -21,7 +21,6 @@ public class AnimationController : MonoBehaviour
         playerMove = GetComponent<PlayerMover>();
     }
 
-
     void Update()
     {
         isGrounded = playerMove.grounded;
@@ -33,7 +32,6 @@ public class AnimationController : MonoBehaviour
         if (playerMove.Velocity.x != 0) //Set the direction the sprite is facing to the last player input in the X direction
         {
             facing = Mathf.FloorToInt(playerMove.HorizontalInput);
-            Debug.Log(Mathf.FloorToInt(playerMove.HorizontalInput));
             if (facing > 0 && wasFacing < 0)
             {
                 wasFacing = 1;
@@ -48,6 +46,7 @@ public class AnimationController : MonoBehaviour
                 this.transform.localScale = new Vector3(-scale.x, scale.y, scale.z);
                 //spriteRend.flipX = true
             }
+            
         }
 
         if (playerMove.state == PlayerMover.playerState.sliding)

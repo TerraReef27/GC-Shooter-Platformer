@@ -8,6 +8,12 @@ TextureImporter:
   - first:
       213: -3343824977680083392
     second: Pillow Man 64x64 Idle Blink (1)_1
+  - first:
+      213: 3082060820738851312
+    second: Pillow Man 64x64 Idle Blink (1)_0
+  - first:
+      213: -1604628537921969931
+    second: Pillow Man 64x64 Idle Blink (1)_1
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -106,8 +112,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a4726822694648830800000000000000
-      internalID: 4072490559036860234
+      spriteID: 0f1c94cacfda5ca20800000000000000
+      internalID: 3082060820738851312
       vertices: []
       indices: 
       edges: []
@@ -127,8 +133,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 046dc4e26e85891d0800000000000000
-      internalID: -3343824977680083392
+      spriteID: 5f0e4b0b8d63bb9e0800000000000000
+      internalID: -1604628537921969931
       vertices: []
       indices: 
       edges: []

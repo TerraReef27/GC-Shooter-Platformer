@@ -32,19 +32,19 @@ public class RaycastController : MonoBehaviour
         }
     }
 
-    [HideInInspector]
-    protected BoxCollider2D mainCollider = new BoxCollider2D();
+    protected BoxCollider2D mainCollider;
     [SerializeField] protected LayerMask solidColisionMask;
     [SerializeField] protected LayerMask interactionMask;
     #endregion
 
     public virtual void Awake()
     {
-        mainCollider = GetComponent<BoxCollider2D>();
+        
     }
 
     public virtual void Start()
     {
+        mainCollider = GetComponentInChildren<ColliderController>().ActiveCollider;
         CalculateSpacing();
     }
 
@@ -72,5 +72,12 @@ public class RaycastController : MonoBehaviour
 
         horizontalRaySpace = boundsY / (numHorizontalRays - 1); //Get the distance between the individual rays
         verticalRaySpace = boundsX / (numVerticalRays - 1);
+    }
+
+    public void ChangeActiveCollider()
+    {
+        mainCollider = GetComponentInChildren<ColliderController>().ActiveCollider;
+        CalculateSpacing();
+        UpdateRayOrigin();
     }
 }
