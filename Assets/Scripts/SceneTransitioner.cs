@@ -18,4 +18,8 @@ public static class SceneTransitioner
         if (levelNum <= numberOfLevels)
             SceneManager.LoadScene("Level " + levelNum);
     }
+    public static void LoadLevel(string levelName)
+    {
+        SceneManager.LoadScene(levelName);
+    }
 }
