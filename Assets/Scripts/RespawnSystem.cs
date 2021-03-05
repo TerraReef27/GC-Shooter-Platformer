@@ -20,13 +20,13 @@ public class RespawnSystem : MonoBehaviour
     {
         //resapwnPoints = FindObjectsOfType<Checkpoint>();
         currentRespawnPoint = targetObject.transform.position;
-        Debug.Log("Set spawn at: " + currentRespawnPoint);
+        //Debug.Log("Set spawn at: " + currentRespawnPoint);
     }
 
     //Respawns the object at the base position
     public void Respawn()
     {
-        Debug.Log("Respawning Player at: " + currentRespawnPoint);
+        //Debug.Log("Respawning Player at: " + currentRespawnPoint);
         OnPlayerRespawn?.Invoke(currentRespawnPoint); //Send out event to all subscribers
     }
 
@@ -34,7 +34,7 @@ public class RespawnSystem : MonoBehaviour
     {
         currentRespawnPoint = newRespawnPos;
         HandleNewCheckpoint?.Invoke(newGuns);
-        Debug.Log("Set spawn at: " + currentRespawnPoint);
+        //Debug.Log("Set spawn at: " + currentRespawnPoint);
     }
 
     public void ResetAmmo()

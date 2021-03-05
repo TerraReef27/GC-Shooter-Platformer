@@ -30,12 +30,14 @@ public class Checkpoint : MonoBehaviour
         if (gunNumber > 0)
         {
             guns = new GameObject[gunNumber];
-            for (int i = 0; i < guns.Length; i++)
+            int gunSelectionNum = 0;
+            foreach (Transform child in this.transform)
             {
-                if (this.transform.GetChild(i).gameObject.GetComponent<Gun>())
+                if (child.gameObject.GetComponent<Gun>())
                 {
-                    guns[i] = this.transform.GetChild(i).gameObject;
-                    guns[i].SetActive(false);
+                    guns[gunSelectionNum] = child.gameObject;
+                    guns[gunSelectionNum].SetActive(false);
+                    gunSelectionNum++;
                 }
             }
         }

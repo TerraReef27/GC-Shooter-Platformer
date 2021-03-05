@@ -26,7 +26,7 @@ public class GunUIScript : MonoBehaviour
 
     private void Controller_OnWeaponSwitch(int gunNum, GameObject gun)
     {
-        if (gunUIObjects != null)
+        if (gunUIObjects != null && gunUIObjects.Length > 0)
         {
             gunUIObjects[currentSelection].SetDeselected();
             currentSelection = gunNum;
@@ -36,7 +36,7 @@ public class GunUIScript : MonoBehaviour
 
     private void Holder_OnGunsUpdate(int numGuns)
     {
-        if (gunUIObjects != null)
+        if (gunUIObjects != null && gunUIObjects.Length > 0)
         {
             for (int i = 0; i < gunUIObjects.Length; i++)
             {
@@ -58,7 +58,10 @@ public class GunUIScript : MonoBehaviour
             gunUIObjects[i].SetValues(gunHolder.GetGunObjects()[i]);
         }
 
-        currentSelection = 0;
-        gunUIObjects[currentSelection].SetSelected();
+        if (gunUIObjects.Length > 0)
+        {
+            currentSelection = 0;
+            gunUIObjects[currentSelection].SetSelected();
+        }
     }
 }

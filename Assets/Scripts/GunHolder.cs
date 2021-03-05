@@ -134,13 +134,22 @@ public class GunHolder : MonoBehaviour
 
             OnGunsUpdated?.Invoke(guns.Count);
         }
+        else
+        {
+            guns = null;
+            Debug.Log("Emptied guns");
+            OnGunsUpdated?.Invoke(guns.Count);
+        }
     }
 
     private void ReloadGuns()
     {
-        foreach (GameObject gun in guns)
+        if (guns != null)
         {
-            gun.GetComponent<Gun>().RefillAmmo();
+            foreach (GameObject gun in guns)
+            {
+                gun.GetComponent<Gun>().RefillAmmo();
+            }
         }
     }
 

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AmmoUIScript : MonoBehaviour
 {
-    private CharacterGunController gunController = null;
+    private NewPlayerGunController gunController = null;
     private GunHolder gunHolder = null;
     private RespawnSystem respawn = null;
 
@@ -14,7 +14,7 @@ public class AmmoUIScript : MonoBehaviour
 
     void Awake()
     {
-        gunController = FindObjectOfType<CharacterGunController>();
+        gunController = FindObjectOfType<NewPlayerGunController>();
         gunHolder = FindObjectOfType<GunHolder>();
         respawn = FindObjectOfType<RespawnSystem>();
 

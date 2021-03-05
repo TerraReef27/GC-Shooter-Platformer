@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class NewPlayerGunController : MonoBehaviour
 {
@@ -64,13 +62,6 @@ public class NewPlayerGunController : MonoBehaviour
 
         HandleFiring();
         RotateSprites();
-
-
-        if (Input.GetKeyDown(KeyCode.F)) //For respawning. I didn't know where else to put this but this will do for now
-        {
-            respawn.Respawn();
-            Debug.Log("Respawning");
-        }
     }
 
     private void HandleFiring()

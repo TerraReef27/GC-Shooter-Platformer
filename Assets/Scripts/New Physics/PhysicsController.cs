@@ -130,12 +130,14 @@ public class PhysicsController : RaycastController
                 {
                     if(moveVelocity.y > 0 || solidHit.distance == 0 || solidHit.collider == info.fallThrough)
                     {
+                        /*
                         if(solidHit.collider == info.fallThrough)
                             Debug.Log("passing through top");
                         if (solidHit.distance == 0)
                             Debug.Log("in collider");
                         if (moveVelocity.y > 0)
                             Debug.Log("passing through bottom");
+                        */
                         continue;
                     }
                 }
