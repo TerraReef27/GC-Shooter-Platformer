@@ -336,7 +336,7 @@ MonoBehaviour:
   airAcceleration: 0.4
   airDeceleration: 0.1
   groundDecleration: 1
-  slideDeceleration: 0.1
+  slideDeceleration: 0.08
   wallSlideSpeed: 2
   wallJump: {x: 8, y: 12}
   state: 0
